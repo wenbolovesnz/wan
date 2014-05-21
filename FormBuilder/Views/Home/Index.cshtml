@@ -1,0 +1,37 @@
+﻿@model FormBuilder.Models.LoginModel
+@{
+    ViewBag.Title = "Angular FormBuilder";
+}
+@functions{
+    public string GetAntiForgeryToken()
+    {
+        string cookieToken, formToken;
+        AntiForgery.GetTokens(null, out cookieToken, out formToken);
+        return cookieToken + ":" + formToken;                
+    }
+}
+
+<header>
+    
+</header>
+<div id="main-content" data-ng-app="formBuilder">
+@if (@User.Identity.IsAuthenticated)
+{
+    @Html.Partial("_AfterLoginHeader")       
+}
+else
+{
+    @Html.Partial("_BeforeLoginHeader")
+}
+<div data-ng-view></div> <!-- The SPA Views go here -->
+</div>
+
+@if (@User.Identity.IsAuthenticated)
+{
+    <input id="antiForgeryToken" type="hidden" value="@GetAntiForgeryToken()" />      
+
+    @section scripts {
+        @Scripts.Render("~/bundles/angular")
+        @Scripts.Render("~/bundles/todo")
+    }
+}

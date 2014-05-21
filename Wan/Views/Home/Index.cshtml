@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "Join Me";
+}
+
+@if (@User.Identity.IsAuthenticated)
+{
+    @Html.Partial("_MenuAfterLogin")
+}
+else
+{
+    @Html.Partial("_MenuBeforeLogin")
+}
+<div class="container mainContainer" data-ng-view></div><!-- The SPA Views go here -->
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/angular")
+    @Scripts.Render("~/bundles/joinme")
+
+}
+

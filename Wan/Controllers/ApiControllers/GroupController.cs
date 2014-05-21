@@ -1,0 +1,63 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Http;
+using System.Web.Mvc;
+using FormBuilder.Business.Entities;
+using FormBuilder.Data.Contracts;
+
+namespace Wan.Controllers.ApiControllers
+{
+    public class GroupController : ApiController
+    {
+        private IApplicationUnit _applicationUnit;
+
+        public GroupController(IApplicationUnit applicationUnit)
+        {
+            _applicationUnit = applicationUnit;           
+        }
+
+        public List<GroupViewModel> Get()
+        {
+            var groups = _applicationUnit.GroupRepository.Get().ToList();
+
+            var groupViewModels = groups.Select(m => new GroupViewModel()
+                {
+                    Description = m.Description,
+                    CreatedDate = m.CreatedDate,
+                    GroupName = m.GroupName,
+                    Id = m.Id,
+                    Users = m.Users.Select(u => new UserViewModel()
+                        {
+                            Id = u.Id,
+                            UserName = u.UserName
+                        }).ToList()
+                }).ToList();
+
+            return groupViewModels;
+        }
+
+    }
+
+    public class UserViewModel
+    {
+        public int Id { get; set; }
+        public string UserName { get; set; }
+    }
+
+    public class GroupViewModel
+    {
+        public GroupViewModel()
+        {
+            Users = new List<UserViewModel>();
+        }
+
+        public ICollection<UserViewModel> Users { get; set; }
+        public int Id { get; set; }
+        public string GroupName { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public string Description { get; set; }
+
+    }
+}
