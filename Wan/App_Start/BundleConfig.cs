@@ -21,7 +21,8 @@ namespace Wan
             bundles.Add(new ScriptBundle("~/bundles/joinme").Include(
                                     "~/AppScripts/Main.js", // must be first   
                                     "~/AppScripts/DataContext.js",
-                                    "~/AppScripts/Controllers/Home.js"
+                                    "~/AppScripts/Controllers/Home.js",
+                                    "~/AppScripts/Controllers/CreateGroup.js"
                                     ));
 
 

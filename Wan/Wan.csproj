@@ -214,9 +214,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AppScripts\Controllers\CreateGroup.js" />
     <Content Include="AppScripts\Controllers\Home.js" />
     <Content Include="AppScripts\DataContext.js" />
     <Content Include="AppScripts\Main.js" />
+    <Content Include="AppScripts\Templates\CreateGroup.html" />
     <Content Include="AppScripts\Templates\Home.html" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />

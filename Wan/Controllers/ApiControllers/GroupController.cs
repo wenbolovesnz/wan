@@ -6,6 +6,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using FormBuilder.Business.Entities;
 using FormBuilder.Data.Contracts;
+using WebMatrix.WebData;
 
 namespace Wan.Controllers.ApiControllers
 {
@@ -36,6 +37,23 @@ namespace Wan.Controllers.ApiControllers
                 }).ToList();
 
             return groupViewModels;
+        }
+
+        public GroupViewModel Post([FromBody] GroupViewModel groupViewModel)
+        {
+            var group = new Group();
+
+            group.GroupName = groupViewModel.GroupName;
+            group.Description = groupViewModel.Description;
+            group.Users.Add(_applicationUnit.UserRepository.GetByID(WebSecurity.CurrentUserId));
+            group.CreatedDate = DateTime.Now;
+            
+            _applicationUnit.GroupRepository.Insert(group);
+            _applicationUnit.SaveChanges();
+
+            groupViewModel.Id = group.Id;
+            
+            return groupViewModel;
         }
 
     }

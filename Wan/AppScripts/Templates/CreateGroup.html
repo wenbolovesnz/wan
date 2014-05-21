@@ -1,0 +1,29 @@
+﻿<div class="well" style="margin-top: 10px;">
+    
+
+<form class="form-horizontal" name="createGroup" data-ng-submit="saveGroup()">
+    <fieldset>
+        <legend>Create Group</legend>
+        <div class="form-group">
+            <label for="groupName" class="col-lg-2 control-label">Group Name</label>
+            <div class="col-lg-10">
+                <input type="text" class="form-control" id="groupName" placeholder="Group Name" required="required"
+                       data-ng-model="groupName">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="textArea" class="col-lg-2 control-label">Description</label>
+            <div class="col-lg-10">
+                <textarea class="form-control" rows="3" id="textArea" required="required" data-ng-model="description"></textarea>
+                <span class="help-block">Write something about your group.</span>
+            </div>
+        </div> 
+        <div class="form-group">
+            <div class="col-lg-10 col-lg-offset-2">
+                <button class="btn btn-default">Cancel</button>
+                <button type="submit" data-ng-disabled="createGroup.$invalid" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </fieldset>
+</form>
+</div>

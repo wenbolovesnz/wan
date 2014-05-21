@@ -13,8 +13,17 @@ wan.factory('datacontext',
             });
         }
         
+        function createGroup() {
+            return $resource('api/Group', {}, {
+                create: { method: 'Post' }
+            });
+        }
+        
+        
+        
         return {
-            getAllGroups: getAllGroups
+            getAllGroups: getAllGroups,
+            createGroup: createGroup
         };
 
     }]);
