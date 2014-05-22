@@ -12,7 +12,7 @@ wan.controller('CreateGroupCtrl',
             var b = $scope.description;
             
             datacontext.createGroup().create({groupName: a, description: b}, function () {
-                window.location = '/#';
+                window.location = '';
             });
 
         };
