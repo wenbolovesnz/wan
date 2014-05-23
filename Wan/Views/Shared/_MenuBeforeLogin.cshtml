@@ -9,26 +9,25 @@
           </button>
         </div>
         <div class="navbar-collapse collapse" id="navbar-main">
-            <ul class="nav navbar-nav">
-                
-                <li>
-                    <a href="../help/">Sign in</a>
+            <ul class="nav navbar-nav">                
+                <li>                    
+                    @Html.ActionLink("Sign in","Login", "Account")
                 </li>
                 <li>
-                  <a href="../help/">Register</a>
+                  @Html.ActionLink("Sign up","Register", "Account")
                 </li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)" id="themes"> More <span class="caret"></span></a>
                     <ul class="dropdown-menu" aria-labelledby="themes">
-                        <li><a href="../default/">Default</a></li>
+                        <li><a href="../default/">something</a></li>
                         <li class="divider"></li>
-                        <li><a href="../amelia/">Amelia</a></li>
+                        <li><a href="../amelia/">something else</a></li>
                     </ul>
                 </li>
             </ul>
 
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="http://builtwithbootstrap.com/" target="_blank">What is on Now?</a></li>
+            <li><a href="/">What is on Now?</a></li>
             <li><a href="#/group/create">Start your Circle</a></li>
           </ul>
 

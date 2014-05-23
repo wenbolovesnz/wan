@@ -2,6 +2,11 @@
 
 window.wan = angular.module('wan', ['ngRoute', 'ngResource']);
 
+$.connection.hub.error(function(err) {
+    console.log('An error occurred: ' + err);
+});
+
+wan.value('hub', $.connection.joinmeHub);
 wan.value('Q', window.Q);
 
 // Configure routes

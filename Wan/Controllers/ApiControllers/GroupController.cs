@@ -52,7 +52,10 @@ namespace Wan.Controllers.ApiControllers
             _applicationUnit.SaveChanges();
 
             groupViewModel.Id = group.Id;
-            
+
+            groupViewModel.Users = group.Users.Select(m => new UserViewModel() {Id = m.Id, UserName = m.UserName}).ToList();
+            groupViewModel.CreatedDate = group.CreatedDate;
+
             return groupViewModel;
         }
 

@@ -20,8 +20,8 @@ namespace Wan
         protected void Application_Start()
         {
 
-            var context = new FormBuilderContext();
-            context.Database.Initialize(true);
+            //var context = new FormBuilderContext();
+            //context.Database.Initialize(true);
 
 
             WebSecurity.InitializeDatabaseConnection("FormBuilderDev", "Users", "Id", "UserName", autoCreateTables: true);

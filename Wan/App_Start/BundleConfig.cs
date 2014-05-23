@@ -8,11 +8,15 @@ namespace Wan
         // For more information on Bundling, visit http://go.microsoft.com/fwlink/?LinkId=254725
         public static void RegisterBundles(BundleCollection bundles)
         {
+
+
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js",
-                        "~/Scripts/bootstrap.js"
+                        "~/Scripts/jquery-1.9.0.js"
                         ));
 
+            bundles.Add(new ScriptBundle("~/bundles/signalr").Include(
+                        "~/Scripts/jquery.signalR-2.0.3.js"
+                        ));
             bundles.Add(new ScriptBundle("~/bundles/angular").Include(
             "~/Scripts/angular.js",
             "~/Scripts/angular-route.js",
@@ -22,7 +26,9 @@ namespace Wan
                                     "~/AppScripts/Main.js", // must be first   
                                     "~/AppScripts/DataContext.js",
                                     "~/AppScripts/Controllers/Home.js",
-                                    "~/AppScripts/Controllers/CreateGroup.js"
+                                    "~/AppScripts/Controllers/CreateGroup.js",
+                                    "~/AppScripts/startSignalR.js",
+                                    "~/Scripts/bootstrap.js"
                                     ));
 
 
