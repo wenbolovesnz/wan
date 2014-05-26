@@ -13,37 +13,38 @@ wan.value('Q', window.Q);
 wan.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.
         when('/', { templateUrl: 'AppScripts/Templates/Home.html', controller: 'HomeCtrl' }).
-        when('/group/create', { templateUrl: 'AppScripts/Templates/CreateGroup.html', controller: 'CreateGroupCtrl' }).
+        when('/createGroup', { templateUrl: 'AppScripts/Templates/CreateGroup.html', controller: 'CreateGroupCtrl' }).
+        when('/login/:returnUrl', { templateUrl: 'AppScripts/Templates/UserLogin.html', controller: 'UserLoginCtrl' }).
         otherwise({ redirectTo: '/' });
 }]);
 
 //#region Ng directives
 /*  We extend Angular with custom data bindings written as Ng directives */
-wan.directive('onFocus', function () {
+wan.directive('onFocus', function() {
     return {
         restrict: 'A',
-        link: function (scope, elm, attrs) {
-            elm.bind('focus', function () {
+        link: function(scope, elm, attrs) {
+            elm.bind('focus', function() {
                 scope.$apply(attrs.onFocus);
             });
         }
     };
 })
-    .directive('onBlur', function () {
+    .directive('onBlur', function() {
         return {
             restrict: 'A',
-            link: function (scope, elm, attrs) {
-                elm.bind('blur', function () {
+            link: function(scope, elm, attrs) {
+                elm.bind('blur', function() {
                     scope.$apply(attrs.onBlur);
                 });
             }
         };
     })
-    .directive('onEnter', function () {
-        return function (scope, element, attrs) {
-            element.bind("keydown keypress", function (event) {
+    .directive('onEnter', function() {
+        return function(scope, element, attrs) {
+            element.bind("keydown keypress", function(event) {
                 if (event.which === 13) {
-                    scope.$apply(function () {
+                    scope.$apply(function() {
                         scope.$eval(attrs.onEnter);
                     });
 
@@ -52,26 +53,16 @@ wan.directive('onFocus', function () {
             });
         };
     })
-    .directive('selectedWhen', function () {
-        return function (scope, elm, attrs) {
-            scope.$watch(attrs.selectedWhen, function (shouldBeSelected) {
+    .directive('selectedWhen', function() {
+        return function(scope, elm, attrs) {
+            scope.$watch(attrs.selectedWhen, function(shouldBeSelected) {
                 if (shouldBeSelected) {
                     elm.select();
                 }
             });
         };
-    })
-    .directive('normalString', function () {
-        return {
-            restrict: "C",
-            //replace: true,
-            scope: {
-                text: "@"
-            },
-            template: "<div class= 'col-md-6'>{{text}}</div>" +
-                      "<input class='col-md-6'/>"
-        }
     });
+
 if (!Modernizr.input.placeholder) {
     // this browser does not support HTML5 placeholders
     // see http://stackoverflow.com/questions/14777841/angularjs-inputplaceholder-directive-breaking-with-ng-model

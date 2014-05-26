@@ -240,11 +240,13 @@
   <ItemGroup>
     <Content Include="AppScripts\Controllers\CreateGroup.js" />
     <Content Include="AppScripts\Controllers\Home.js" />
+    <Content Include="AppScripts\Controllers\UserLogin.js" />
     <Content Include="AppScripts\DataContext.js" />
     <Content Include="AppScripts\Main.js" />
     <Content Include="AppScripts\startSignalR.js" />
     <Content Include="AppScripts\Templates\CreateGroup.html" />
     <Content Include="AppScripts\Templates\Home.html" />
+    <Content Include="AppScripts\Templates\UserLogin.html" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -615,7 +617,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

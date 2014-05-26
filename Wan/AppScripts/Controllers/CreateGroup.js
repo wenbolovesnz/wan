@@ -1,8 +1,12 @@
 ﻿
 wan.controller('CreateGroupCtrl',
-    ['$scope', 'datacontext', 'hub',
-    function ($scope, datacontext, hub) {
-
+    ['$scope', 'datacontext', 'hub','userService','$location',
+    function ($scope, datacontext, hub, userService, $location) {
+        
+        if (!userService.isLogged) {
+            var currentPath = $location.path();
+            window.location = '#/login' + currentPath;
+        }
         $scope.groupName = "";
 
         $scope.description = '';
