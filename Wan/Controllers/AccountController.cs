@@ -116,6 +116,34 @@ namespace Wan.Controllers
             return View(model);
         }
 
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult RegisterAjax(RegisterModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                // Attempt to register the user
+                try
+                {
+                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password, new
+                    {
+                        ForceChangePassword = false,
+                        CreatedDate = DateTime.Now
+                    });
+                    WebSecurity.Login(model.UserName, model.Password);
+                    return Json(new { status = true, userName = model.UserName });
+                }
+                catch (MembershipCreateUserException e)
+                {                    
+                    return Json(new { status = false, userName = model.UserName, message = ErrorCodeToString(e.StatusCode) });
+                }
+            }
+
+            // If we got this far, something failed, redisplay form
+            return Json(new { status = false, userName = model.UserName, message = "Please try again later." });
+        }
+
         //
         // POST: /Account/Disassociate
 

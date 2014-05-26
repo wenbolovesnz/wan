@@ -1,0 +1,46 @@
+﻿<div class="row">
+    <div class="well col-lg-5" style="margin-top: 10px;">    
+         Wilson, please find a nice picture, so I can put it here.
+    </div>
+    
+    <div class="well col-lg-6 col-lg-offset-1" style="margin-top: 10px;">    
+        <form class="form-horizontal" name="registerUser" data-ng-submit="register()">
+            <fieldset>
+                <legend>Create your account</legend>
+                <div class="form-group">
+                    <label for="emailRegister" class="col-lg-4 control-label">Email address</label>
+                    <div class="col-lg-8">
+                        <input type="email" class="form-control" id="emailRegister" name="emailRegister" placeholder="Email" required="required"
+                               data-ng-model="emailRegister">                                                                                          
+                        <span class="error" ng-show="registerUser.emailRegister.$error.required && !registerUser.emailRegister.$pristine">Required!</span>
+                        <span class="error" ng-show="registerUser.emailRegister.$error.email">Not valid email!</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="passwordRegister" class="col-lg-4 control-label">Password</label>
+                    <div class="col-lg-8">
+                        <input type="password" class="form-control" id="passwordRegister" name="passwordRegister" placeholder="Password" required="required"
+                               data-ng-model="passwordRegister">                        
+                        <span class="error" ng-show="registerUser.passwordRegister.$error.required && !registerUser.passwordRegister.$pristine">Required!</span>                        
+                    </div>
+                </div> 
+                
+                <div class="form-group">
+                    <label for="passwordRegister2" class="col-lg-4 control-label">Confirm Password</label>
+                    <div class="col-lg-8">
+                        <input type="password" class="form-control" id="passwordRegister2" name="passwordRegister2" placeholder="Confirm Password" required="required"
+                               data-ng-model="passwordRegister2">
+                        <span class="error" ng-show="registerUser.passwordRegister2.$error.required && !registerUser.passwordRegister2.$pristine">Required!</span>                        
+                    </div>
+                </div> 
+                <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                        <button class="btn btn-default">Cancel</button>
+                        <button type="submit" data-ng-disabled="registerUser.$invalid" class="btn btn-primary">Submit</button>
+                        <span class="error" data-ng-show="differentPasswordError">Password and Confirm Password are not same.</span>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>        
+</div>

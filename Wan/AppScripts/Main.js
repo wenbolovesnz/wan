@@ -13,9 +13,11 @@ wan.value('Q', window.Q);
 wan.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.
         when('/', { templateUrl: 'AppScripts/Templates/Home.html', controller: 'HomeCtrl' }).
+        when('/home', { templateUrl: 'AppScripts/Templates/Home.html', controller: 'HomeCtrl' }).
         when('/createGroup', { templateUrl: 'AppScripts/Templates/CreateGroup.html', controller: 'CreateGroupCtrl' }).
         when('/login/:returnUrl', { templateUrl: 'AppScripts/Templates/UserLogin.html', controller: 'UserLoginCtrl' }).
-        otherwise({ redirectTo: '/' });
+        when('/signup', { templateUrl: 'AppScripts/Templates/UserSignup.html', controller: 'UserSignupCtrl' }).
+        otherwise({ redirectTo: '/home' });
 }]);
 
 //#region Ng directives

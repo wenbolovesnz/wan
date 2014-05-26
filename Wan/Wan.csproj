@@ -241,12 +241,14 @@
     <Content Include="AppScripts\Controllers\CreateGroup.js" />
     <Content Include="AppScripts\Controllers\Home.js" />
     <Content Include="AppScripts\Controllers\UserLogin.js" />
+    <Content Include="AppScripts\Controllers\UserSignup.js" />
     <Content Include="AppScripts\DataContext.js" />
     <Content Include="AppScripts\Main.js" />
     <Content Include="AppScripts\startSignalR.js" />
     <Content Include="AppScripts\Templates\CreateGroup.html" />
     <Content Include="AppScripts\Templates\Home.html" />
     <Content Include="AppScripts\Templates\UserLogin.html" />
+    <Content Include="AppScripts\Templates\UserSignup.html" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -599,7 +601,9 @@
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\FontAwesome.otf" />
+    <None Include="Properties\PublishProfiles\wanban - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\wanban - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\wanban - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\wanban - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.9.0.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.0.js" />

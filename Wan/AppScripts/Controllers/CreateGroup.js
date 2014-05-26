@@ -5,7 +5,9 @@ wan.controller('CreateGroupCtrl',
         
         if (!userService.isLogged) {
             var currentPath = $location.path();
-            window.location = '#/login' + currentPath;
+            //window.location = '/login' + currentPath;
+            
+            $location.path('login' + currentPath);
         }
         $scope.groupName = "";
 
@@ -21,5 +23,7 @@ wan.controller('CreateGroupCtrl',
                 window.location = '';               
             });
         };
-                
+
+        
+
     }]);

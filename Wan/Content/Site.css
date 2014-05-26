@@ -1,3 +1,7 @@
 ﻿.mainContainer {
     margin-top: 51px;
 }
+
+.error {
+    color: red;
+}
