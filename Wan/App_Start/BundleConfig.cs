@@ -11,7 +11,8 @@ namespace Wan
 
 
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-1.9.0.js"
+                        "~/Scripts/jquery-1.9.0.js",
+                        "~/Scripts/underscore.js"
                         ));
 
             bundles.Add(new ScriptBundle("~/bundles/signalr").Include(
@@ -27,6 +28,7 @@ namespace Wan
                                     "~/AppScripts/DataContext.js",
                                     "~/AppScripts/Controllers/Home.js",
                                     "~/AppScripts/Controllers/CreateGroup.js",
+                                    "~/AppScripts/Controllers/GroupDetails.js",
                                     "~/AppScripts/Controllers/UserLogin.js",
                                     "~/AppScripts/Controllers/UserSignup.js",
                                     "~/AppScripts/startSignalR.js",

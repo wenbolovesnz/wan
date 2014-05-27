@@ -15,6 +15,7 @@ wan.config(['$routeProvider', function ($routeProvider) {
         when('/', { templateUrl: 'AppScripts/Templates/Home.html', controller: 'HomeCtrl' }).
         when('/home', { templateUrl: 'AppScripts/Templates/Home.html', controller: 'HomeCtrl' }).
         when('/createGroup', { templateUrl: 'AppScripts/Templates/CreateGroup.html', controller: 'CreateGroupCtrl' }).
+        when('/groupDetails/:groupId', { templateUrl: 'AppScripts/Templates/GroupDetails.html', controller: 'GroupDetailsCtrl' }).
         when('/login/:returnUrl', { templateUrl: 'AppScripts/Templates/UserLogin.html', controller: 'UserLoginCtrl' }).
         when('/signup', { templateUrl: 'AppScripts/Templates/UserSignup.html', controller: 'UserSignupCtrl' }).
         otherwise({ redirectTo: '/home' });

@@ -239,6 +239,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppScripts\Controllers\CreateGroup.js" />
+    <Content Include="AppScripts\Controllers\GroupDetails.js" />
     <Content Include="AppScripts\Controllers\Home.js" />
     <Content Include="AppScripts\Controllers\UserLogin.js" />
     <Content Include="AppScripts\Controllers\UserSignup.js" />
@@ -246,6 +247,7 @@
     <Content Include="AppScripts\Main.js" />
     <Content Include="AppScripts\startSignalR.js" />
     <Content Include="AppScripts\Templates\CreateGroup.html" />
+    <Content Include="AppScripts\Templates\GroupDetails.html" />
     <Content Include="AppScripts\Templates\Home.html" />
     <Content Include="AppScripts\Templates\UserLogin.html" />
     <Content Include="AppScripts\Templates\UserSignup.html" />
@@ -255,6 +257,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\images\p1.jpg" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -621,6 +624,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\underscore-min.js" />
+    <Content Include="Scripts\underscore.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -665,6 +670,7 @@
     <Content Include="Scripts\version.json" />
     <Content Include="Views\Shared\_MenuAfterLogin.cshtml" />
     <Content Include="Views\Shared\_MenuBeforeLogin.cshtml" />
+    <Content Include="Scripts\underscore-min.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

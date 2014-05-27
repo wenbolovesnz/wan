@@ -4,8 +4,12 @@
 // constructor function relies on Ng injector
 // to provide service dependencies
 wan.factory('datacontext',
-    ['Q', '$resource',
-    function (Q, $resource) {
+    ['Q', '$resource','$cacheFactory',
+    function (Q, $resource, $cacheFactory) {
+
+        var clientData = $cacheFactory('cachedData');
+
+        clientData.put('groups', []);
 
         function getAllGroups() {
             return $resource('api/Group', {}, {
@@ -23,7 +27,10 @@ wan.factory('datacontext',
         
         return {
             getAllGroups: getAllGroups,
-            createGroup: createGroup
+            createGroup: createGroup,
+            clientData: clientData
+            
+            
         };
 
     }]);
