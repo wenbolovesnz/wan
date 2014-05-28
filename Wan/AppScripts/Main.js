@@ -7,6 +7,7 @@ $.connection.hub.error(function(err) {
 });
 
 wan.value('hub', $.connection.joinmeHub);
+
 wan.value('Q', window.Q);
 
 // Configure routes

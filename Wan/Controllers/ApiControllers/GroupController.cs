@@ -60,6 +60,24 @@ namespace Wan.Controllers.ApiControllers
             return groupViewModel;
         }
 
+        [System.Web.Http.Authorize]
+        public GroupViewModel UpdateGroup([FromBody] GroupViewModel groupViewModel)
+        {
+
+            var currentUser = _applicationUnit.UserRepository.GetByID(WebSecurity.CurrentUserId);
+
+            var group = _applicationUnit.GroupRepository.GetByID(groupViewModel.Id);
+            if (!group.Users.Contains(currentUser))
+            {
+                group.Users.Add(currentUser);
+            }
+
+            _applicationUnit.GroupRepository.Update(group);
+            _applicationUnit.SaveChanges();    
+
+            return groupViewModel;
+        }
+
     }
 
     public class UserViewModel

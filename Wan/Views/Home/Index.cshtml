@@ -3,7 +3,7 @@
 }
 
 @if (@User.Identity.IsAuthenticated)
-{
+{    
     @Html.Partial("_MenuAfterLogin")
 }
 else
@@ -18,6 +18,18 @@ else
     <script src="signalr/hubs"></script>
     @Scripts.Render("~/bundles/angular")
     @Scripts.Render("~/bundles/joinme")
+    <script type="text/javascript">
+        $(function() {
+            var isUserLoged = '@User.Identity.IsAuthenticated';
 
+            if (isUserLoged !== 'False') {
+                var userSerivce = angular.element(document.body).injector().get('userService');
+                userSerivce.isLogged = true;
+                userSerivce.username = '@Html.ViewContext.HttpContext.User.Identity.Name';
+            }
+        });
+
+    </script>
 }
+
 

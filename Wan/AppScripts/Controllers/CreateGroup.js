@@ -20,10 +20,9 @@ wan.controller('CreateGroupCtrl',
             datacontext.createGroup().create({groupName: a, description: b}, function (data) {
                 var c = data;
                 hub.server.newGroup(c);
-                window.location = '';               
+                $location.path('home');
             });
         };
-
         
-
+       
     }]);

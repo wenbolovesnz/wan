@@ -23,14 +23,19 @@ wan.factory('datacontext',
             });
         }
         
+        function updateGroup() {
+            return $resource('api/Group/UpdateGroup', {}, {
+                update: { method: 'Post' }
+            });
+        }
+        
         
         
         return {
             getAllGroups: getAllGroups,
             createGroup: createGroup,
-            clientData: clientData
-            
-            
+            clientData: clientData,
+            updateGroup: updateGroup                        
         };
 
     }]);
@@ -42,3 +47,5 @@ wan.factory('userService', [function () {
     };
     return sdo;
 }]);
+
+

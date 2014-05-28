@@ -6,8 +6,8 @@ wan.controller('HomeCtrl',
         $scope.title = "Home";
 
         $scope.groups = [];
-        
-        $scope.groups = datacontext.getAllGroups().query(function() {
+
+        $scope.groups = datacontext.getAllGroups().query(function () {
             datacontext.clientData.put('groups', $scope.groups);
         });
 
@@ -18,7 +18,7 @@ wan.controller('HomeCtrl',
                 createdDate: group.CreatedDate,
                 users: group.Users,
                 id: group.Id
-            };            
+            };
             $scope.groups.push(newGroup);
             $scope.$apply();
         };
@@ -26,7 +26,7 @@ wan.controller('HomeCtrl',
         $scope.groupDetails = function (groupId) {
             $location.path("groupDetails/" + groupId);
         };
-
+        
 
         //$scope.refresh = function () {
         //    $scope.formDefinitionSets = datacontext.formDefinitionSets().query();
