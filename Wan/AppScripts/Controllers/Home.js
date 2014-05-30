@@ -27,6 +27,9 @@ wan.controller('HomeCtrl',
             $location.path("groupDetails/" + groupId);
         };
         
+        $.connection.hub.logging = true;
+        $.connection.hub.start();
+
 
         //$scope.refresh = function () {
         //    $scope.formDefinitionSets = datacontext.formDefinitionSets().query();

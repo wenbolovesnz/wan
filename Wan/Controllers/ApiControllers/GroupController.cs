@@ -40,7 +40,7 @@ namespace Wan.Controllers.ApiControllers
         }
 
         [System.Web.Http.Authorize]
-        public GroupViewModel Post([FromBody] GroupViewModel groupViewModel)
+        public GroupViewModel Create([FromBody] GroupViewModel groupViewModel)
         {
             var group = new Group();
 

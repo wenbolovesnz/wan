@@ -18,7 +18,8 @@
                     <ul class="dropdown-menu" aria-labelledby="themes">
                         <li><a href="../default/">Default</a></li>
                         <li class="divider"></li>
-                        <li>@Html.ActionLink("Log off","LogOff", "Account")</li>
+                        
+                        <li><a href="@Url.Action("LogOut", "Account")">Logout</a></li>
                     </ul>
                 </li>
             </ul>

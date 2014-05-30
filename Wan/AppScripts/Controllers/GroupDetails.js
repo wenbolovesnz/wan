@@ -40,9 +40,10 @@ wan.controller('GroupDetailsCtrl',
         
         $scope.joinGroup = function() {
             if (userService.isLogged) {
-                hub.server.joinGroup($scope.group);
-                $scope.showJoinBtn = false;
-                datacontext.updateGroup().update($scope.group);
+                datacontext.updateGroup().update($scope.group, function(data) {
+                    hub.server.joinGroup($scope.group);
+                });                
+                $scope.showJoinBtn = false;                
             } else {
                 var currentPath = $location.path();               
                 $location.path('login' + currentPath);

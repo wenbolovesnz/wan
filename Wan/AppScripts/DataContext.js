@@ -18,7 +18,7 @@ wan.factory('datacontext',
         }
         
         function createGroup() {
-            return $resource('api/Group', {}, {
+            return $resource('api/Group/Create', {}, {
                 create: { method: 'Post' }
             });
         }
