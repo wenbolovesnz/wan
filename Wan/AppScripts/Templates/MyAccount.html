@@ -1,0 +1,84 @@
+﻿<h3>My Account</h3>
+<div class="row">    
+    <div class="col-sm-3">
+        <div class="list-group">
+            <a href="javascript:void(0)"  
+               class="list-group-item"
+               data-ng-class="{active: mygroups}"
+               data-ng-click="showMyGroups()" >
+                My groups
+            </a>
+            <a href="javascript:void(0)" 
+               class="list-group-item"
+               data-ng-class="{active: changePassword}" 
+               data-ng-click="showChangePassword()">
+                Change password
+            </a>
+            <a href="javascript:void(0)" 
+               class="list-group-item"
+               data-ng-class="{active: editMydetails}"
+               data-ng-click="showEditMyDetails()" >
+                Edit My details
+            </a>
+        </div>   
+    </div>
+
+    <div class="col-sm-9" data-ng-show="mygroups">               
+        <div class="panel panel-primary" data-ng-repeat="group in groups">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{group.groupName}}</h3>
+            </div>
+            <div class="panel-body">
+                <p>{{group.description}}</p>
+                <p>Group created Date: {{group.createdDate | date:'d/M/yy'}}</p>
+                <p>{{group.users.length}} members</p>                                    
+                <a class="btn btn-default btn-sm" href="#/groupDetails/{{group.id}}">See more</a>                
+            </div>                
+        </div>
+    </div>
+
+    <div class="col-sm-9" data-ng-show="changePassword">
+        <form class="form-horizontal" name="changeUserPassword" data-ng-submit="savePasswordChange()">
+            <fieldset>
+                <legend>Change your password</legend>
+                <div class="form-group">
+                    <label for="currentPassword" class="col-lg-4 control-label">Current Password</label>
+                    <div class="col-lg-8">
+                        <input type="password" class="form-control" id="currentPassword" name="currentPassword" placeholder="Current Password" required="required"
+                               data-ng-model="currentPassword">                                                                                          
+                        <span class="error" ng-show="changeUserPassword.currentPassword.$error.required && !changeUserPassword.currentPassword.$pristine">Required!</span>                        
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="passwordRegister" class="col-lg-4 control-label">New Password</label>
+                    <div class="col-lg-8">
+                        <input type="password" class="form-control" id="passwordRegister" name="passwordRegister" placeholder="Password" required="required"
+                               data-ng-model="passwordRegister">                        
+                        <span class="error" ng-show="changeUserPassword.passwordRegister.$error.required && !changeUserPassword.passwordRegister.$pristine">Required!</span>                        
+                    </div>
+                </div> 
+                
+                <div class="form-group">
+                    <label for="passwordRegister2" class="col-lg-4 control-label">Confirm New Password</label>
+                    <div class="col-lg-8">
+                        <input type="password" class="form-control" id="passwordRegister2" name="passwordRegister2" placeholder="Confirm Password" required="required"
+                               data-ng-model="passwordRegister2">
+                        <span class="error" ng-show="changeUserPassword.passwordRegister2.$error.required && !changeUserPassword.passwordRegister2.$pristine">Required!</span>                        
+                    </div>
+                </div> 
+                <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">                       
+                        <button type="submit" data-ng-disabled="changeUserPassword.$invalid" class="btn btn-primary">Submit</button>
+                        <span class="error" data-ng-show="differentPasswordError">{{errorMessage}}</span>
+                        <span class="text-success" data-ng-show="changeSucceeded">Your password has been changed successfully.</span>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+        
+        
+
+    </div>
+    <div class="col-sm-9" data-ng-show="editMydetails"></div>
+</div>
+

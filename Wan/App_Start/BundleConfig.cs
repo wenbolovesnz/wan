@@ -31,6 +31,7 @@ namespace Wan
                                     "~/AppScripts/Controllers/GroupDetails.js",
                                     "~/AppScripts/Controllers/UserLogin.js",
                                     "~/AppScripts/Controllers/UserSignup.js",
+                                    "~/AppScripts/Controllers/MyAccount.js",
                                     "~/AppScripts/startSignalR.js",
                                     "~/Scripts/bootstrap.js"
                                     ));

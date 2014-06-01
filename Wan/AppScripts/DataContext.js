@@ -43,7 +43,8 @@ wan.factory('datacontext',
 wan.factory('userService', [function () {
     var sdo = {
         isLogged: false,
-        username: ''
+        username: '',
+        userId: 0
     };
     return sdo;
 }]);

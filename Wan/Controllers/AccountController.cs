@@ -258,6 +258,33 @@ namespace Wan.Controllers
             return View(model);
         }
 
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult ChangePassword(LocalPasswordModel model)
+        {
+            var changePasswordSucceeded = false;
+            
+                if (ModelState.IsValid)
+                {
+                    changePasswordSucceeded = WebSecurity.ChangePassword(User.Identity.Name, model.OldPassword,
+                                                                         model.NewPassword);
+
+                    if (changePasswordSucceeded)
+                    {
+                        return Json(new {succeeded = changePasswordSucceeded});
+                    }
+                    else
+                    {
+                        return Json(new { succeeded = changePasswordSucceeded, message = "Current password is wrong, or new password is invalid." });
+                    }
+                    
+                }
+
+            return Json(new {succeeded = false});
+
+        }
+
         //
         // POST: /Account/ExternalLogin
 

@@ -241,6 +241,7 @@
     <Content Include="AppScripts\Controllers\CreateGroup.js" />
     <Content Include="AppScripts\Controllers\GroupDetails.js" />
     <Content Include="AppScripts\Controllers\Home.js" />
+    <Content Include="AppScripts\Controllers\MyAccount.js" />
     <Content Include="AppScripts\Controllers\UserLogin.js" />
     <Content Include="AppScripts\Controllers\UserSignup.js" />
     <Content Include="AppScripts\DataContext.js" />
@@ -249,6 +250,7 @@
     <Content Include="AppScripts\Templates\CreateGroup.html" />
     <Content Include="AppScripts\Templates\GroupDetails.html" />
     <Content Include="AppScripts\Templates\Home.html" />
+    <Content Include="AppScripts\Templates\MyAccount.html" />
     <Content Include="AppScripts\Templates\UserLogin.html" />
     <Content Include="AppScripts\Templates\UserSignup.html" />
     <Content Include="Content\bootstrap-theme.css" />
