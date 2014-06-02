@@ -25,6 +25,11 @@ namespace FormBuilder.Business.Entities
         public bool ForceChangePassword { get; set; }
         public DateTime CreatedDate { get; set; }
 
+        public string NickName { get; set; }
+        public string AboutMe { get; set; }
+        public DateTime? DOB { get; set; }
+        public string City { get; set; }
+
         public virtual ICollection<Role> Roles
         {
             get { return _roles; }

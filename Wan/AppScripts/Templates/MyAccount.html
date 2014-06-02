@@ -79,6 +79,58 @@
         
 
     </div>
-    <div class="col-sm-9" data-ng-show="editMydetails"></div>
+    <div class="col-sm-9" data-ng-show="editMydetails">
+        
+        <form class="form-horizontal" name="editMyDetailsForm" data-ng-submit="saveMyDetails()">
+            <fieldset>
+                <legend>Change your password</legend>
+                <div class="form-group">
+                    <label for="nickName" class="col-lg-4 control-label">Nick Name</label>
+                    <div class="col-lg-8">
+                        <input type="text" class="form-control" id="nickName" name="nickName" placeholder="NickName"
+                               data-ng-model="nickName">                                                                                                                                          
+                    </div>
+                </div> 
+                <div class="form-group">
+                    <label for="dob" class="col-lg-4 control-label">Date of Birth</label>
+                    <div class="col-lg-8">
+                        <p class="input-group">
+                            <input type="text" class="form-control" datepicker-popup="yyyy/MM/dd" ng-model="dob" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="Close"  placeholder="Date of Birth"/>
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>                                                                                                                                       
+                    </div>
+                </div> 
+                
+                <div class="form-group">
+                    <label for="dob" class="col-lg-4 control-label">City</label>
+                    <div class="col-lg-8">
+                        <input type="text" ng-model="selectedCity" typeahead="city for city in cities | filter:$viewValue | limitTo:8" class="form-control">                                                                                                                                
+                    </div>
+                </div> 
+                
+                <div class="form-group">
+                    <label for="aboutMe" class="col-lg-2 control-label">About me</label>
+                    <div class="col-lg-10">
+                        <textarea class="form-control" rows="3" id="aboutMe" data-ng-model="aboutMe"></textarea>
+                        <span class="help-block">Write something about you.</span>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="col-lg-7 col-lg-offset-5">                       
+                        <button type="submit" data-ng-disabled="editMyDetailsform.$invalid" class="btn btn-primary">Submit</button>
+                        <span class="error" data-ng-show="editMyDetailsFormError">{{editMyDetailsFormErrorMessage}}</span>
+                        <span class="text-success" data-ng-show="editMyDetailsFormSuccess">Your details have been updated successfully.</span>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+        
+        
+
+
+    </div>
 </div>
 

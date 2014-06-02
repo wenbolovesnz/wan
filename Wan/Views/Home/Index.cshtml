@@ -26,6 +26,12 @@ else
                 var userSerivce = angular.element(document.body).injector().get('userService');
                 userSerivce.isLogged = true;
                 userSerivce.username = '@Html.ViewContext.HttpContext.User.Identity.Name';
+                userSerivce.id = '@ViewBag.Id';
+                userSerivce.dob = '@ViewBag.DOB';
+                userSerivce.city = '@ViewBag.City';
+                userSerivce.nickName = '@ViewBag.NickName';
+                userSerivce.createdDate = '@ViewBag.CreatedDate';
+                userSerivce.aboutMe = '@ViewBag.AboutMe';                
             }
         });
 

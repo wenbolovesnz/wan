@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using DotNetOpenAuth.AspNet;
+using FormBuilder.Business.Entities;
 using FormBuilder.Data.Contracts;
 using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
@@ -282,6 +283,33 @@ namespace Wan.Controllers
                 }
 
             return Json(new {succeeded = false});
+
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult SaveMyDetails(MyDetailsModel model)
+        {
+
+            try
+            {
+                User currentUser = _applicationUnit.UserRepository.GetByID(WebSecurity.CurrentUserId);
+                currentUser.DOB = model.DOB;
+                currentUser.City = model.City;
+                currentUser.NickName = model.NickName;
+                currentUser.AboutMe = model.AboutMe;
+
+                _applicationUnit.UserRepository.Update(currentUser);
+                _applicationUnit.SaveChanges();
+                return Json(new { succeeded = true });
+            }
+            catch (Exception ex)
+            {
+                //Todo: log ex;
+                return Json(new { succeeded = false, message = "Error, Please try again later" });
+            }
+
+            return Json(new { succeeded = false });
 
         }
 

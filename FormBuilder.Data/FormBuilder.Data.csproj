@@ -70,6 +70,18 @@
     <Compile Include="Migrations\201405202226464_AddedGroupTableAndConfig.Designer.cs">
       <DependentUpon>201405202226464_AddedGroupTableAndConfig.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201406020956233_AddedMorePropertiesToUserTable.cs" />
+    <Compile Include="Migrations\201406020956233_AddedMorePropertiesToUserTable.Designer.cs">
+      <DependentUpon>201406020956233_AddedMorePropertiesToUserTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201406020958140_addedCityToUserTable.cs" />
+    <Compile Include="Migrations\201406020958140_addedCityToUserTable.Designer.cs">
+      <DependentUpon>201406020958140_addedCityToUserTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201406021000053_MadeDOBNullable.cs" />
+    <Compile Include="Migrations\201406021000053_MadeDOBNullable.Designer.cs">
+      <DependentUpon>201406021000053_MadeDOBNullable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -101,6 +113,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201405202226464_AddedGroupTableAndConfig.resx">
       <DependentUpon>201405202226464_AddedGroupTableAndConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201406020956233_AddedMorePropertiesToUserTable.resx">
+      <DependentUpon>201406020956233_AddedMorePropertiesToUserTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201406020958140_addedCityToUserTable.resx">
+      <DependentUpon>201406020958140_addedCityToUserTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201406021000053_MadeDOBNullable.resx">
+      <DependentUpon>201406021000053_MadeDOBNullable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

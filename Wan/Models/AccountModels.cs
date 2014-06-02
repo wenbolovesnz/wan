@@ -18,6 +18,14 @@ namespace Wan.Models
         public string ExternalLoginData { get; set; }
     }
 
+    public class MyDetailsModel
+    {
+        public string NickName { get; set; }
+        public DateTime DOB { get; set; }
+        public string City { get; set; }
+        public string AboutMe { get; set; }
+    }
+
     public class LocalPasswordModel
     {
         [Required]

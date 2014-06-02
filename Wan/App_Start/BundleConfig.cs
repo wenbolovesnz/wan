@@ -33,7 +33,8 @@ namespace Wan
                                     "~/AppScripts/Controllers/UserSignup.js",
                                     "~/AppScripts/Controllers/MyAccount.js",
                                     "~/AppScripts/startSignalR.js",
-                                    "~/Scripts/bootstrap.js"
+                                    "~/Scripts/bootstrap.js",
+                                    "~/Scripts/angular-ui/ui-bootstrap-tpls.js"
                                     ));
 
 

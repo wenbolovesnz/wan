@@ -44,7 +44,12 @@ wan.factory('userService', [function () {
     var sdo = {
         isLogged: false,
         username: '',
-        userId: 0
+        id: 0,
+        dob: null,
+        city: "",
+        nickName: "",
+        createdDate: "",
+        aboutMe:""
     };
     return sdo;
 }]);

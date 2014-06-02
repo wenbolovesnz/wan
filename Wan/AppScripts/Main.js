@@ -1,6 +1,6 @@
 ﻿/* main: startup script creates the 'formBuilder' module and adds custom Ng directives */
 
-window.wan = angular.module('wan', ['ngRoute', 'ngResource']);
+window.wan = angular.module('wan', ['ngRoute', 'ngResource', 'ui.bootstrap']);
 
 $.connection.hub.error(function(err) {
     console.log('An error occurred: ' + err);
