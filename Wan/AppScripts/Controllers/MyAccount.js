@@ -1,7 +1,7 @@
 ﻿
 wan.controller('MyAccountCtrl',
-    ['$scope', 'datacontext', 'hub', 'userService', '$location', '$http',
-    function ($scope, datacontext, hub, userService, $location, $http) {
+    ['$scope', 'datacontext', 'hub', 'userService', '$location', '$http','$filter',
+    function ($scope, datacontext, hub, userService, $location, $http, $filter) {
 
         $scope.mygroups = true;
         $scope.changePassword = false;
@@ -77,9 +77,15 @@ wan.controller('MyAccountCtrl',
             });
         });
 
-        $scope.dob = userService.dob;
+        $scope.dob = $filter('date')(new Date(userService.dob), 'dd/MM/yyyy');
+        if ($scope.dob == "01/01/1900") {
+            $scope.dob = "";
+        }
         $scope.clear = function () {
-            $scope.dob = userService.dob;
+            $scope.dob = $filter('date')(new Date(userService.dob), 'dd/MM/yyyy');
+            if ($scope.dob == "01/01/1900") {
+                $scope.dob = "";
+            }
         };
 
         $scope.open = function ($event) {
@@ -114,6 +120,11 @@ wan.controller('MyAccountCtrl',
                     if (data.succeeded) {
                         $scope.editMyDetailsFormError = false;
                         $scope.editMyDetailsFormSuccess = true;
+                        userService.city = $scope.selectedCity;
+                        userService.aboutMe = $scope.aboutMe;
+                        userService.nickName = $scope.nickName;
+                        userService.dob = $scope.dob;
+
                         setTimeout(function () {
                             $scope.editMyDetailsFormSuccess = false;
                             $scope.$apply();
