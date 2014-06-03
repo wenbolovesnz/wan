@@ -35,14 +35,19 @@ namespace Wan.Controllers
             //}
 
             //_applicationUnit.SaveChanges();
-            User currentUser = _applicationUnit.UserRepository.GetByID(WebSecurity.CurrentUserId);
 
-            ViewBag.Id = currentUser.Id;
-            ViewBag.DOB = currentUser.DOB;
-            ViewBag.City = currentUser.City;
-            ViewBag.AboutMe = currentUser.AboutMe;
-            ViewBag.NickName = currentUser.NickName;
-            ViewBag.CreatedDate = currentUser.CreatedDate;
+            if (WebSecurity.IsAuthenticated)
+            {
+                User currentUser = _applicationUnit.UserRepository.GetByID(WebSecurity.CurrentUserId);
+
+                ViewBag.Id = currentUser.Id;
+                ViewBag.DOB = currentUser.DOB;
+                ViewBag.City = currentUser.City;
+                ViewBag.AboutMe = currentUser.AboutMe;
+                ViewBag.NickName = currentUser.NickName;
+                ViewBag.CreatedDate = currentUser.CreatedDate;                
+            }
+
                 
 
             return View();
