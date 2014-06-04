@@ -73,7 +73,7 @@ wan.controller('MyAccountCtrl',
                 
         $scope.groups = _.filter(datacontext.clientData.get('groups'), function (g) {
             return _.find(g.users, function(u) {
-                return u.userName = userService.username;
+                return u.userName == userService.username;
             });
         });
 
