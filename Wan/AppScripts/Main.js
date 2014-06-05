@@ -56,6 +56,15 @@ wan.directive('onFocus', function() {
             });
         };
     })
+    .directive('uploader', function () {
+        return {
+            restrict: 'E',
+            templateUrl: 'AppScripts/Templates/Directives/Uploader.html',
+            link: function(scope, element, attr) {
+                console.log(element.html());
+            }                
+        };
+    })
     .directive('selectedWhen', function() {
         return function(scope, elm, attrs) {
             scope.$watch(attrs.selectedWhen, function(shouldBeSelected) {

@@ -248,6 +248,7 @@
     <Content Include="AppScripts\Main.js" />
     <Content Include="AppScripts\startSignalR.js" />
     <Content Include="AppScripts\Templates\CreateGroup.html" />
+    <Content Include="AppScripts\Templates\Directives\Uploader.html" />
     <Content Include="AppScripts\Templates\GroupDetails.html" />
     <Content Include="AppScripts\Templates\Home.html" />
     <Content Include="AppScripts\Templates\MyAccount.html" />
@@ -259,6 +260,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\images\defaultUserIcon.jpg" />
     <Content Include="Content\images\p1.jpg" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -318,6 +320,7 @@
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\ajaxfileupload.js" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-cookies.js" />

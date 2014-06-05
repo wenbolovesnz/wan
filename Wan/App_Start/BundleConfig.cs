@@ -12,7 +12,8 @@ namespace Wan
 
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-1.9.0.js",
-                        "~/Scripts/underscore.js"
+                        "~/Scripts/underscore.js",
+                        "~/Scripts/ajaxfileupload.js"                        
                         ));
 
             bundles.Add(new ScriptBundle("~/bundles/signalr").Include(
