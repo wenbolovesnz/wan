@@ -33,6 +33,8 @@ else
                 userSerivce.createdDate = '@ViewBag.CreatedDate';
                 userSerivce.aboutMe = '@ViewBag.AboutMe';                
             }
+            
+            angular.element(document.body).injector().get('docTitleService');
         });
 
     </script>

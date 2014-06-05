@@ -1,7 +1,7 @@
 ﻿
 wan.controller('GroupDetailsCtrl',
-    ['$scope', 'datacontext', 'hub', '$location', '$routeParams','userService',
-    function ($scope, datacontext, hub, $location, $routeParams, userService) {
+    ['$scope', 'datacontext', 'hub', '$location', '$routeParams','userService','docTitleService', '$window',
+    function ($scope, datacontext, hub, $location, $routeParams, userService, docTitleService, $window) {
         $scope.isUserInGroup = function (userName) {
             return _.find($scope.group.users, function (u) {
                 return u.userName == userName;
@@ -24,7 +24,15 @@ wan.controller('GroupDetailsCtrl',
         hub.on('newGroupMessage', function (msg) {
             $scope.messages.push({ message: msg });
             $scope.$apply();
+            $('#messageChanel').scrollTop(200);
+            if (!docTitleService.isCurentTab) {
+                docTitleService.setDocTitle("New Message!");
+            }
         });
+
+        $window.onfocus = function() {
+            docTitleService.setIsCurrentTab(true);
+        };
     
         $scope.messages = [];
 

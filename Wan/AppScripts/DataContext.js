@@ -55,3 +55,31 @@ wan.factory('userService', [function () {
 }]);
 
 
+wan.factory('docTitleService', ['$window', function ($window) {
+
+    var isCurrentTab = true;
+    $window.onblur = function() {
+        isCurrentTab = false;
+    };
+
+    var setTitle = function(name) {
+        $window.document.title = name;
+    };
+    
+    var setOriginalValue = function() {
+        $window.document.title = 'Join Me';
+    };
+    
+    return {
+        isCurentTab: isCurrentTab,
+        setIsCurrentTab: function(value) {
+            isCurrentTab = value;
+            if (value == true) {
+                setOriginalValue();
+            }
+        },
+        setDocTitle: setTitle
+    };
+}]);
+
+

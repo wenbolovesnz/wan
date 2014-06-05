@@ -43,26 +43,29 @@ wan.directive('onFocus', function() {
             }
         };
     })
-    .directive('onEnter', function() {
-        return function(scope, element, attrs) {
-            element.bind("keydown keypress", function(event) {
-                if (event.which === 13) {
-                    scope.$apply(function() {
-                        scope.$eval(attrs.onEnter);
-                    });
+    .directive('ngEnterkey', function () {
+        return {
+            restrict: 'A',
+            link: function(scope, element, attr) {
+                element.bind("keydown keypress", function (event) {
+                    if (event.which === 13) {
+                        scope.$apply(function () {
+                            scope.$eval(attr.ngEnterkey);
+                        });
 
-                    event.preventDefault();
-                }
-            });
+                        event.preventDefault();
+                    }
+                });
+            }                
         };
     })
     .directive('uploader', function () {
         return {
             restrict: 'E',
             templateUrl: 'AppScripts/Templates/Directives/Uploader.html',
-            link: function(scope, element, attr) {
+            link: function (scope, element, attr) {
                 console.log(element.html());
-            }                
+            }
         };
     })
     .directive('selectedWhen', function() {

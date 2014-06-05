@@ -45,13 +45,17 @@
                 <h3 class="panel-title">Group Chat</h3>
             </div>
             <div class="panel-body" style="height: 200px;">
-                <div class="pre-scrollable" style="height: 130px;">
+                <div class="pre-scrollable" style="height: 130px;" id="messageChanel">
                     <div data-ng-repeat="msg in messages">
                         {{msg.message}}
                     </div>
                 </div>
                 <div style="margin-top: 10px;">
-                    <input data-ng-model="groupMessageContent" class="form-control input-sm pull-left" style="width: 80%" type="text"/>
+                    <input 
+                        data-ng-Enterkey="sendMessage()"
+                        data-ng-model="groupMessageContent" 
+                        class="form-control input-sm pull-left"  
+                        style="width: 80%" type="text"/>
                     <button class="pull-right btn btn-primary btn-sm" data-ng-click="sendMessage()">Send</button>
                 </div>
             </div>                
