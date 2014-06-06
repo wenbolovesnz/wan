@@ -82,6 +82,10 @@
     <Compile Include="Migrations\201406021000053_MadeDOBNullable.Designer.cs">
       <DependentUpon>201406021000053_MadeDOBNullable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201406052113146_addedProfileImage.cs" />
+    <Compile Include="Migrations\201406052113146_addedProfileImage.Designer.cs">
+      <DependentUpon>201406052113146_addedProfileImage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -122,6 +126,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201406021000053_MadeDOBNullable.resx">
       <DependentUpon>201406021000053_MadeDOBNullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201406052113146_addedProfileImage.resx">
+      <DependentUpon>201406052113146_addedProfileImage.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

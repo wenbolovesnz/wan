@@ -2,13 +2,14 @@
 <div class="row">    
     <div class="col-sm-3">
         <div>
-            <uploader></uploader>
+            <uploader image="image" url="url"></uploader>
         </div>
         <div class="list-group">
             <a href="javascript:void(0)"  
                class="list-group-item"
                data-ng-class="{active: mygroups}"
                data-ng-click="showMyGroups()" >
+                <span class="badge pull-right">{{groups.length}}</span>
                 My groups
             </a>
             <a href="javascript:void(0)" 

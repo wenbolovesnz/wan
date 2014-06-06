@@ -96,6 +96,10 @@ jQuery.extend({
                 var status;
                 try {
                     status = isTimeout != "timeout" ? "success" : "error";
+                    if (xml.responseXML.title == "Maximum request length exceeded.") {
+                        status = "error";
+                    }
+
                     // Make sure that the request was successful or notmodified
                     if ( status != "error" )
 					{
@@ -109,7 +113,7 @@ jQuery.extend({
                         if( s.global )
                             jQuery.event.trigger( "ajaxSuccess", [xml, s] );
                     } else
-                        jQuery.handleError(s, xml, status);
+                        s.error(s, xml, status);
                 } catch(e) 
 				{
                     status = "error";
@@ -189,8 +193,9 @@ jQuery.extend({
         if ( type == "script" )
             jQuery.globalEval( data );
         // Get the JavaScript object, if JSON is used.
-        if ( type == "json" )
-            eval( "data = " + data );
+        if (type == "json")
+            //eval( "data = " + data );
+            data = JSON.parse($(data).html());
         // evaluate scripts within html
         if ( type == "html" )
             jQuery("<div>").html(data).evalScripts();

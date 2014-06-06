@@ -1,12 +1,15 @@
-﻿<div>    
+﻿<div>
+
     <a href="javascript:void(0)" class="thumbnail">
-      <img data-src="holder.js/100%x180" alt="defaultIcon" src="/Content/images/defaultUserIcon.jpg">
+        <img data-src="holder.js/100%x180" alt="defaultIcon" src="{{url}}">
     </a>
-    
+    <p style="margin-left: 4px;">(Max-size:500k)</p>
     <div class="row" style="padding: 5px;">
-        <input type="file" id="uploadProfilePic" name="uploadProfilePic" style="margin-left: 15px;"/>
+        <input type="file" id="uploadProfilePic" name="uploadProfilePic" style="margin-left: 15px;"/> 
     </div>
     <div class="row" style="padding: 5px;">
-        <input type="button" value="upload" class="btn btn-sm btn-danger" style="margin-left: 15px;"/>    
+        <input type="button" value="upload" class="btn btn-sm btn-danger" style="margin-left: 15px;"/> 
+        <span class="error" style="display: none"></span>   
+        <a id="spinner" class="fa fa-spinner fa-spin" style="display: none"></a>
     </div>
 </div>

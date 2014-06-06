@@ -41,6 +41,7 @@ wan.factory('datacontext',
     }]);
 
 wan.factory('userService', [function () {
+    
     var sdo = {
         isLogged: false,
         username: '',
@@ -49,8 +50,10 @@ wan.factory('userService', [function () {
         city: "",
         nickName: "",
         createdDate: "",
-        aboutMe:""
+        aboutMe: "",
+        userImage: null
     };
+    
     return sdo;
 }]);
 

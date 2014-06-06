@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Transactions;
 using System.Web;
@@ -311,6 +312,73 @@ namespace Wan.Controllers
 
             return Json(new { succeeded = false });
 
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult UploadImage()
+        {            
+            var request = Request;
+
+            try
+            {
+                var uploadedFile = Request.Files["uploadProfilePic"];
+                var xFileName = request.Headers["X-File-Name"];
+                var formFilename = uploadedFile.FileName;
+                Stream inputStream = uploadedFile.InputStream;
+                var fileName = xFileName ?? formFilename;
+
+
+                if (ValidateUpload(fileName) && request.ContentLength < 550000)
+                {
+                    var contentType = request.ContentType;
+                    var contentLength = request.ContentLength;
+                    var currentUser = _applicationUnit.UserRepository.GetByID(WebSecurity.CurrentUserId);
+                    currentUser.ProfileImage = null;
+                    currentUser.ProfileImage = new byte[contentLength];
+                    currentUser.ContentType = contentType;
+                    inputStream.Read(currentUser.ProfileImage, 0, contentLength);
+
+                    _applicationUnit.UserRepository.Update(currentUser);
+                    _applicationUnit.SaveChanges();
+                    return Json(new { succeeded = true, imageFile = Convert.ToBase64String(currentUser.ProfileImage) });  
+                }
+            }
+            catch (Exception ex)
+            {
+                //log error todo
+                return Json(new { succeeded = false });  
+            }
+
+            return Json(new { succeeded = false });
+        }
+
+        [AllowAnonymous]
+        public JsonResult GetUserImage()
+        {
+            if (WebSecurity.IsAuthenticated)
+            {
+                var currentUser = _applicationUnit.UserRepository.GetByID(WebSecurity.CurrentUserId);
+
+                return Json(new { image = currentUser.ProfileImage }, JsonRequestBehavior.AllowGet);
+            }
+            return Json(new { }, JsonRequestBehavior.AllowGet);
+        }
+
+        private bool ValidateUpload(string fileName)
+        {
+            var isValid = true;
+
+            var allowedValue = new string[] { "jpeg", "jpg", "gif", "png", "PNG" };
+
+            var array = fileName.Split('.').ToList();
+
+            if (!allowedValue.Contains(array.Last()))
+            {
+                isValid = false;
+            }
+
+            return isValid;
         }
 
         //

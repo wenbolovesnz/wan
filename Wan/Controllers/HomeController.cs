@@ -21,21 +21,6 @@ namespace Wan.Controllers
 
         public ActionResult Index()
         {
-
-            //var user = _applicationUnit.UserRepository.Get().First();
-
-            //for (int i = 0; i < 101; i++)
-            //{
-            //    var group = new Group();
-            //    group.GroupName = "Awesome group" + i;
-            //    group.CreatedDate = DateTime.Now;
-            //    group.Description = "This is a good one" + i;
-            //    group.Users.Add(user);     
-            //    _applicationUnit.GroupRepository.Insert(group);           
-            //}
-
-            //_applicationUnit.SaveChanges();
-
             if (WebSecurity.IsAuthenticated)
             {
                 User currentUser = _applicationUnit.UserRepository.GetByID(WebSecurity.CurrentUserId);
@@ -45,11 +30,9 @@ namespace Wan.Controllers
                 ViewBag.City = currentUser.City;
                 ViewBag.AboutMe = currentUser.AboutMe;
                 ViewBag.NickName = currentUser.NickName;
-                ViewBag.CreatedDate = currentUser.CreatedDate;                
-            }
-
-                
-
+                ViewBag.CreatedDate = currentUser.CreatedDate;
+                ViewBag.UserImage = currentUser.ProfileImage != null ? Convert.ToBase64String(currentUser.ProfileImage) : null;
+            }               
             return View();
         }
 
