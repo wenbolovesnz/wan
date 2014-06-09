@@ -54,6 +54,7 @@
     <Compile Include="Entities\Group.cs" />
     <Compile Include="Entities\Membership.cs" />
     <Compile Include="Entities\OAuthMembership.cs" />
+    <Compile Include="Entities\UserGroupRole.cs" />
     <Compile Include="EntityConfigurations\GroupConfig.cs" />
     <Compile Include="EntityConfigurations\OAuthMemebershipConfig.cs" />
     <Compile Include="Entities\Role.cs" />

@@ -5,7 +5,9 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using FormBuilder.Business.Entities;
+using FormBuilder.Business.Entities.Enums;
 using FormBuilder.Data.Contracts;
+using Microsoft.Ajax.Utilities;
 using WebMatrix.WebData;
 
 namespace Wan.Controllers.ApiControllers
@@ -29,10 +31,12 @@ namespace Wan.Controllers.ApiControllers
                     CreatedDate = m.CreatedDate,
                     GroupName = m.GroupName,
                     Id = m.Id,
+                    GroupImage = m.GroupImage != null ? Convert.ToBase64String(m.GroupImage): null,
                     Users = m.Users.Select(u => new UserViewModel()
                         {
                             Id = u.Id,
-                            UserName = u.UserName
+                            UserName = u.UserName,
+                            IsGroupManager = m.UserGroupRoles.SingleOrDefault(ugr => ugr.UserId == u.Id && ugr.RoleId == (int)RoleTypes.GroupManager) != null                            
                         }).ToList()
                 }).ToList();
 
@@ -44,10 +48,18 @@ namespace Wan.Controllers.ApiControllers
         {
             var group = new Group();
 
+            var currentUser = _applicationUnit.UserRepository.GetByID(WebSecurity.CurrentUserId);
             group.GroupName = groupViewModel.GroupName;
             group.Description = groupViewModel.Description;
-            group.Users.Add(_applicationUnit.UserRepository.GetByID(WebSecurity.CurrentUserId));
+            group.Users.Add(currentUser);
             group.CreatedDate = DateTime.Now;
+
+            var userGroupRole = new UserGroupRole();
+            userGroupRole.User = currentUser;
+            userGroupRole.Group = group;
+            userGroupRole.Role =
+                _applicationUnit.RoleRepository.Get(m => m.RoleId == (int)RoleTypes.GroupManager).First();
+            group.UserGroupRoles.Add(userGroupRole);
             
             _applicationUnit.GroupRepository.Insert(group);
             _applicationUnit.SaveChanges();
@@ -84,6 +96,7 @@ namespace Wan.Controllers.ApiControllers
     {
         public int Id { get; set; }
         public string UserName { get; set; }
+        public bool IsGroupManager { get; set; }
     }
 
     public class GroupViewModel
@@ -98,6 +111,7 @@ namespace Wan.Controllers.ApiControllers
         public string GroupName { get; set; }
         public DateTime CreatedDate { get; set; }
         public string Description { get; set; }
+        public string GroupImage { get; set; }
 
     }
 }

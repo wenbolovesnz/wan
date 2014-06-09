@@ -51,7 +51,15 @@ wan.factory('userService', [function () {
         nickName: "",
         createdDate: "",
         aboutMe: "",
-        userImage: null
+        userImage: null,
+        
+        isCurrentUserManager: function (username, users) {
+            var managerRoleFound = _.find(users, function(user) {
+                return user.userName == username && user.isGroupManager == true;
+            });
+
+            return managerRoleFound;
+        }
     };
     
     return sdo;

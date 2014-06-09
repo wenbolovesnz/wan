@@ -11,9 +11,12 @@ namespace FormBuilder.Business.Entities
         public Group()
         {
             _users = new List<User>();
+            _userGroupRoles = new List<UserGroupRole>();
         }
 
         private ICollection<User> _users;
+
+        private ICollection<UserGroupRole> _userGroupRoles; 
 
         public virtual ICollection<User> Users
         {
@@ -21,12 +24,22 @@ namespace FormBuilder.Business.Entities
             set {_users = value; }
         }
 
+        public virtual ICollection<UserGroupRole> UserGroupRoles
+        {
+            get { return _userGroupRoles; }
+            set { _userGroupRoles = value; }
+        }
+
         public int Id { get; set; }
         public string GroupName { get; set; }
         public DateTime CreatedDate { get; set; }
         public string Description { get; set; }
 
-        
+
+        public byte[] GroupImage { get; set; }
+        public string ContentType { get; set; }
+
+
 
     }
 }

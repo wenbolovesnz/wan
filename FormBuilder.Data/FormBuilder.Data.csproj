@@ -86,6 +86,10 @@
     <Compile Include="Migrations\201406052113146_addedProfileImage.Designer.cs">
       <DependentUpon>201406052113146_addedProfileImage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201406090921446_addedUserGroupRoleTable.cs" />
+    <Compile Include="Migrations\201406090921446_addedUserGroupRoleTable.Designer.cs">
+      <DependentUpon>201406090921446_addedUserGroupRoleTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -129,6 +133,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201406052113146_addedProfileImage.resx">
       <DependentUpon>201406052113146_addedProfileImage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201406090921446_addedUserGroupRoleTable.resx">
+      <DependentUpon>201406090921446_addedUserGroupRoleTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -103,7 +103,8 @@ wan.directive('onFocus', function() {
             },
             scope: {
                 image: "=",
-                url: "="
+                url: "=",
+                display: "="
             }
         };
     }])

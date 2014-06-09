@@ -12,13 +12,17 @@ wan.controller('GroupDetailsCtrl',
             return g.id == $routeParams.groupId;
         });
         
-
+        $scope.image = $scope.group.groupImage;
+        
+        $scope.url = ($scope.image == null || $scope.image == "") ? '/Content/images/defaultUserIcon.jpg' : ('data:image/png;base64,' + $scope.image);
+               
+        $scope.isCurrentUserManager = userService.isCurrentUserManager(userService.username, $scope.group.users);
+        
         hub.on('newGroupMememberArrived', function (user) {
             if (!$scope.isUserInGroup(user.userName)) {
                 $scope.group.users.push(user);
                 $scope.$apply();
-            }
-                       
+            }                       
         });
         
         hub.on('newGroupMessage', function (msg) {
