@@ -198,8 +198,8 @@ jQuery.extend({
             //data = JSON.parse($(data).html());
         // evaluate scripts within html
         if ( type == "html" )
-            jQuery("<div>").html(data).evalScripts();
-
+            //jQuery("<div>").html(data).evalScripts();
+            data = JSON.parse($(data).html());
         return data;
     }
 })

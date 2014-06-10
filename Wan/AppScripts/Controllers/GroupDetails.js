@@ -14,7 +14,7 @@ wan.controller('GroupDetailsCtrl',
         
         $scope.image = $scope.group.groupImage;
         
-        $scope.url = ($scope.image == null || $scope.image == "") ? '/Content/images/defaultgroup.png' : ('data:image/png;base64,' + $scope.image);
+        $scope.url = $scope.image;
         $scope.uploadUrl = 'api/Group/UploadImage';
 
         $scope.data = {

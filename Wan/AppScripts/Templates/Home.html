@@ -5,18 +5,19 @@
       <p><a class="btn btn-primary btn-lg">Learn more</a></p>
     </div>
     <div class="row" data-ng-show="groups.length != 0">
-        <div class="col-md-3" data-ng-repeat="group in groups">                        
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title">{{group.groupName}}</h3>
-                </div>
-                <div class="panel-body" style="height: 170px;">
+                                      
+        <div class="col-sm-6 col-md-3" data-ng-repeat="group in groups">
+            <div class="thumbnail" style="height: 400px;">
+                <img data-src="holder.js/300x200" alt="300x200" src="{{group.groupImage}}" style="width: 300px; height: 200px;">
+         
+                <div class="caption">
+                    <h3>{{group.groupName}}</h3>
+                    <p>{{group.users.length}} members</p>   
                     <p>{{group.description}}</p>
-                    <p>Group created Date: {{group.createdDate | date:'d/M/yy'}}</p>
-                    <p>{{group.users.length}} members</p>                                    
-                    <a class="btn btn-default btn-sm" data-ng-click="groupDetails(group.id)">See more</a>
+                    <p> <a class="btn btn-default btn-sm" data-ng-click="groupDetails(group.id)">See more</a>
                     <a class="btn btn-danger btn-sm" >Join</a>
-                </div>                
+                    </p>
+                </div>
             </div>
         </div>
     </div>

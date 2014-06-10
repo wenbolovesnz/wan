@@ -33,7 +33,7 @@ namespace Wan.Controllers.ApiControllers
                     CreatedDate = m.CreatedDate,
                     GroupName = m.GroupName,
                     Id = m.Id,
-                    GroupImage = m.GroupImage != null ? Convert.ToBase64String(m.GroupImage): null,
+                    GroupImage = m.GroupImage != null ? ("data:image/png;base64," + Convert.ToBase64String(m.GroupImage)) : "/Content/images/defaultgroup.png",
                     Users = m.Users.Select(u => new UserViewModel()
                         {
                             Id = u.Id,
