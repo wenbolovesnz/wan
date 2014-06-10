@@ -9,14 +9,18 @@ wan.controller('MyAccountCtrl',
 
         $scope.image = userService.userImage;
         $scope.url = (userService.userImage == null || userService.userImage == "") ? '/Content/images/defaultUserIcon.jpg' : ('data:image/png;base64,' + userService.userImage);
-        
+        $scope.uploadUrl = 'Account/UploadImage';
         $scope.currentPassword = "";
         $scope.passwordRegister = "";
         $scope.passwordRegister2 = "";
         $scope.differentPasswordError = false;
         $scope.errorMessage = "";
         $scope.changeSucceeded = false;
-        
+
+        $scope.uploadCompletedCallBack = function (imageFile) {
+            userService.userImage = imageFile;
+        };
+               
         $scope.savePasswordChange = function () {
             if ($scope.passwordRegister != $scope.passwordRegister2) {
                 $scope.differentPasswordError = true;

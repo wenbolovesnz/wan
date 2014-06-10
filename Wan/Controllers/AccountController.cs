@@ -10,6 +10,7 @@ using DotNetOpenAuth.AspNet;
 using FormBuilder.Business.Entities;
 using FormBuilder.Data.Contracts;
 using Microsoft.Web.WebPages.OAuth;
+using Wan.Services;
 using WebMatrix.WebData;
 using Wan.Models;
 
@@ -328,8 +329,8 @@ namespace Wan.Controllers
                 Stream inputStream = uploadedFile.InputStream;
                 var fileName = xFileName ?? formFilename;
 
-
-                if (ValidateUpload(fileName) && request.ContentLength < 550000)
+                var fileValidationService = new FileValidationService();
+                if (fileValidationService.ValidateUpload(fileName) && request.ContentLength < 550000)
                 {
                     var contentType = request.ContentType;
                     var contentLength = request.ContentLength;
@@ -365,21 +366,7 @@ namespace Wan.Controllers
             return Json(new { }, JsonRequestBehavior.AllowGet);
         }
 
-        private bool ValidateUpload(string fileName)
-        {
-            var isValid = true;
 
-            var allowedValue = new string[] { "jpeg", "jpg", "gif", "png", "PNG" };
-
-            var array = fileName.Split('.').ToList();
-
-            if (!allowedValue.Contains(array.Last()))
-            {
-                isValid = false;
-            }
-
-            return isValid;
-        }
 
         //
         // POST: /Account/ExternalLogin

@@ -14,7 +14,21 @@ wan.controller('GroupDetailsCtrl',
         
         $scope.image = $scope.group.groupImage;
         
-        $scope.url = ($scope.image == null || $scope.image == "") ? '/Content/images/defaultUserIcon.jpg' : ('data:image/png;base64,' + $scope.image);
+        $scope.url = ($scope.image == null || $scope.image == "") ? '/Content/images/defaultgroup.png' : ('data:image/png;base64,' + $scope.image);
+        $scope.uploadUrl = 'api/Group/UploadImage';
+
+        $scope.data = {
+            groupId: $scope.group.id
+        };
+        
+        $scope.uploadCompletedCallBack = function (imageFile) {
+            
+            var group = _.find(datacontext.clientData.get('groups'), function (g) {
+                return g.id == $routeParams.groupId;
+            });
+
+            group.groupImage = imageFile;
+        };
                
         $scope.isCurrentUserManager = userService.isCurrentUserManager(userService.username, $scope.group.users);
         

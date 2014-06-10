@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
@@ -8,6 +9,7 @@ using FormBuilder.Business.Entities;
 using FormBuilder.Business.Entities.Enums;
 using FormBuilder.Data.Contracts;
 using Microsoft.Ajax.Utilities;
+using Wan.Services;
 using WebMatrix.WebData;
 
 namespace Wan.Controllers.ApiControllers
@@ -90,7 +92,54 @@ namespace Wan.Controllers.ApiControllers
             return groupViewModel;
         }
 
+        public object UploadImage()
+        {
+            var request = HttpContext.Current.Request;
+
+            try
+            {
+                var uploadedFile = request.Files["uploadProfilePic"];
+                var xFileName = request.Headers["X-File-Name"];
+                var formFilename = uploadedFile.FileName;
+                Stream inputStream = uploadedFile.InputStream;
+                var fileName = xFileName ?? formFilename;
+                int groupId;
+                int.TryParse(request.Form["groupId"], out groupId);
+                var group = _applicationUnit.GroupRepository.GetByID(groupId);
+                var currentUser = _applicationUnit.UserRepository.GetByID(WebSecurity.CurrentUserId);
+
+
+                var fileValidationService = new FileValidationService();
+                var groupSecService = new GroupSecurityService();
+
+                if (fileValidationService.ValidateUpload(fileName) && request.ContentLength < 550000 && groupSecService.IsUserGroupManager(currentUser, group.UserGroupRoles.ToList()) )
+                {
+                    var contentType = request.ContentType;
+                    var contentLength = request.ContentLength;
+
+                    group.GroupImage = null;
+                    group.GroupImage = new byte[contentLength];
+                    group.ContentType = contentType;
+                    inputStream.Read(group.GroupImage, 0, contentLength);
+
+                    _applicationUnit.GroupRepository.Update(group);
+                    _applicationUnit.SaveChanges();
+                    return new { succeeded = true, imageFile = Convert.ToBase64String(group.GroupImage) };
+                }
+            }
+            catch (Exception ex)
+            {
+                //log error todo
+                return new { succeeded = false };
+            }
+
+            return new { succeeded = false };
+        }
+
     }
+
+
+
 
     public class UserViewModel
     {

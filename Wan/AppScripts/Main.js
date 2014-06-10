@@ -70,18 +70,18 @@ wan.directive('onFocus', function() {
                     element.find('#spinner').show();
                     $.ajaxFileUpload(
                         {
-                            url: 'Account/UploadImage',
+                            url: scope.uploadurl,
                             secureuri: false,
                             fileElementId: element.find("input:file").attr('id'),
-                            dataType: 'json',
-                            data: { name: 'hi' },
+                            dataType: scope.datatype,
+                            data: scope.fromdata,
                             success: function (data, status) {
                                 var error = element.find(".error");
                                 if (data.succeeded) {
                                     scope.image = data.imageFile;
                                     var imageElement = element.find("img");
                                     imageElement.attr("src", ('data:image/png;base64,' + data.imageFile));
-                                    userService.userImage = data.imageFile;
+                                    scope.callback(data.imageFile);
                                     error.hide();
                                 } else {
                                     error.html('Error, your file type maybe not valid, please try again.');
@@ -104,7 +104,11 @@ wan.directive('onFocus', function() {
             scope: {
                 image: "=",
                 url: "=",
-                display: "="
+                display: "=",
+                uploadurl: "=",
+                callback: "=",
+                fromdata: "=",
+                datatype: "@"
             }
         };
     }])
