@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -9,6 +10,8 @@ using FormBuilder.Business.Entities;
 using FormBuilder.Business.Entities.Enums;
 using FormBuilder.Data.Contracts;
 using Microsoft.Ajax.Utilities;
+using Microsoft.WindowsAzure;
+using Microsoft.WindowsAzure.StorageClient;
 using Wan.Services;
 using WebMatrix.WebData;
 
@@ -117,13 +120,37 @@ namespace Wan.Controllers.ApiControllers
                     var contentType = request.ContentType;
                     var contentLength = request.ContentLength;
 
-                    group.GroupImage = null;
-                    group.GroupImage = new byte[contentLength];
-                    group.ContentType = contentType;
-                    inputStream.Read(group.GroupImage, 0, contentLength);
+                    //group.GroupImage = null;
+                    //group.GroupImage = new byte[contentLength];
+                    //group.ContentType = contentType;
+                    //inputStream.Read(group.GroupImage, 0, contentLength);
 
-                    _applicationUnit.GroupRepository.Update(group);
-                    _applicationUnit.SaveChanges();
+                    //_applicationUnit.GroupRepository.Update(group);
+                    //_applicationUnit.SaveChanges();
+
+                    var storageAccount = CloudStorageAccount.Parse(ConfigurationManager.ConnectionStrings["StorageConnection"].ConnectionString);
+
+                    var blobStorage = storageAccount.CreateCloudBlobClient();
+                    CloudBlobContainer container = blobStorage.GetContainerReference("productimages");
+                    if (container.CreateIfNotExist())
+                    {
+                        // configure container for public access
+                        var permissions = container.GetPermissions();
+                        permissions.PublicAccess = BlobContainerPublicAccessType.Container;
+                        container.SetPermissions(permissions);
+                    }
+
+                    string uniqueBlobName = string.Format("productimages/image_{0}{1}",
+                                                                Guid.NewGuid().ToString(), Path.GetExtension(uploadedFile.FileName));
+                    CloudBlockBlob blob = blobStorage.GetBlockBlobReference(uniqueBlobName);
+                    blob.Properties.ContentType = uploadedFile.ContentType;
+                    blob.UploadFromStream(uploadedFile.InputStream);
+
+                    var imagesContainer = blobStorage.GetContainerReference("productimages");
+                    var blobs = imagesContainer.ListBlobs();
+
+                    var urlstring = blob.Uri.ToString();
+
                     return new { succeeded = true, imageFile = Convert.ToBase64String(group.GroupImage) };
                 }
             }
