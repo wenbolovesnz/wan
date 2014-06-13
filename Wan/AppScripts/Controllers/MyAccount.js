@@ -8,7 +8,7 @@ wan.controller('MyAccountCtrl',
         $scope.editMydetails = false;
 
         $scope.image = userService.userImage;
-        $scope.url = (userService.userImage == null || userService.userImage == "") ? '/Content/images/defaultUserIcon.jpg' : ('data:image/png;base64,' + userService.userImage);
+        $scope.url = $scope.image;
         $scope.uploadUrl = 'Account/UploadImage';
         $scope.currentPassword = "";
         $scope.passwordRegister = "";

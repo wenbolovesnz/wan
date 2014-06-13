@@ -31,7 +31,7 @@ namespace Wan.Controllers
                 ViewBag.AboutMe = currentUser.AboutMe;
                 ViewBag.NickName = currentUser.NickName;
                 ViewBag.CreatedDate = currentUser.CreatedDate;
-                ViewBag.UserImage = currentUser.ProfileImage != null ? Convert.ToBase64String(currentUser.ProfileImage) : null;
+                ViewBag.UserImage = currentUser.ProfileImage ?? "/Content/images/defaultUserIcon.jpg";
             }               
             return View();
         }

@@ -80,7 +80,7 @@ wan.directive('onFocus', function() {
                                 if (data.succeeded) {
                                     scope.image = data.imageFile;
                                     var imageElement = element.find("img");
-                                    imageElement.attr("src", ('data:image/png;base64,' + data.imageFile));
+                                    imageElement.attr("src", (data.imageFile));
                                     scope.callback(data.imageFile);
                                     error.hide();
                                 } else {

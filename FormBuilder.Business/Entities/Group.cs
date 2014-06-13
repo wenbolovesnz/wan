@@ -36,7 +36,7 @@ namespace FormBuilder.Business.Entities
         public string Description { get; set; }
 
 
-        public byte[] GroupImage { get; set; }
+        public string GroupImage { get; set; }
         public string ContentType { get; set; }
 
 

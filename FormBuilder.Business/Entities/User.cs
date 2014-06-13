@@ -30,7 +30,7 @@ namespace FormBuilder.Business.Entities
         public DateTime? DOB { get; set; }
         public string City { get; set; }
 
-        public byte[] ProfileImage { get; set; }
+        public string ProfileImage { get; set; }
         public string ContentType { get; set; }
 
         public virtual ICollection<Role> Roles

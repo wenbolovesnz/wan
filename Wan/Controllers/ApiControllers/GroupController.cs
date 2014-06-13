@@ -36,7 +36,7 @@ namespace Wan.Controllers.ApiControllers
                     CreatedDate = m.CreatedDate,
                     GroupName = m.GroupName,
                     Id = m.Id,
-                    GroupImage = m.GroupImage != null ? ("data:image/png;base64," + Convert.ToBase64String(m.GroupImage)) : "/Content/images/defaultgroup.png",
+                    GroupImage = m.GroupImage ?? "/Content/images/defaultgroup.png",
                     Users = m.Users.Select(u => new UserViewModel()
                         {
                             Id = u.Id,
@@ -110,24 +110,13 @@ namespace Wan.Controllers.ApiControllers
                 int.TryParse(request.Form["groupId"], out groupId);
                 var group = _applicationUnit.GroupRepository.GetByID(groupId);
                 var currentUser = _applicationUnit.UserRepository.GetByID(WebSecurity.CurrentUserId);
-
+                var contentType = request.ContentType;
 
                 var fileValidationService = new FileValidationService();
                 var groupSecService = new GroupSecurityService();
 
                 if (fileValidationService.ValidateUpload(fileName) && request.ContentLength < 550000 && groupSecService.IsUserGroupManager(currentUser, group.UserGroupRoles.ToList()) )
                 {
-                    var contentType = request.ContentType;
-                    var contentLength = request.ContentLength;
-
-                    //group.GroupImage = null;
-                    //group.GroupImage = new byte[contentLength];
-                    //group.ContentType = contentType;
-                    //inputStream.Read(group.GroupImage, 0, contentLength);
-
-                    //_applicationUnit.GroupRepository.Update(group);
-                    //_applicationUnit.SaveChanges();
-
                     var storageAccount = CloudStorageAccount.Parse(ConfigurationManager.ConnectionStrings["StorageConnection"].ConnectionString);
 
                     var blobStorage = storageAccount.CreateCloudBlobClient();
@@ -146,12 +135,23 @@ namespace Wan.Controllers.ApiControllers
                     blob.Properties.ContentType = uploadedFile.ContentType;
                     blob.UploadFromStream(uploadedFile.InputStream);
 
-                    var imagesContainer = blobStorage.GetContainerReference("productimages");
-                    var blobs = imagesContainer.ListBlobs();
 
                     var urlstring = blob.Uri.ToString();
 
-                    return new { succeeded = true, imageFile = Convert.ToBase64String(group.GroupImage) };
+                    if (group.GroupImage != null)
+                    {
+                        var imagesContainer = blobStorage.GetContainerReference("productimages");
+                        var oldImageToDelete = imagesContainer.GetBlockBlobReference(group.GroupImage);
+                        oldImageToDelete.DeleteIfExists();
+                    }     
+
+                    group.GroupImage = urlstring;
+                    currentUser.ContentType = contentType;
+
+                    _applicationUnit.GroupRepository.Update(group);
+                    _applicationUnit.SaveChanges();
+
+                    return new { succeeded = true, imageFile = urlstring };
                 }
             }
             catch (Exception ex)

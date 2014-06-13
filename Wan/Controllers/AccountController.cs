@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Transactions;
@@ -10,6 +11,8 @@ using DotNetOpenAuth.AspNet;
 using FormBuilder.Business.Entities;
 using FormBuilder.Data.Contracts;
 using Microsoft.Web.WebPages.OAuth;
+using Microsoft.WindowsAzure;
+using Microsoft.WindowsAzure.StorageClient;
 using Wan.Services;
 using WebMatrix.WebData;
 using Wan.Models;
@@ -334,15 +337,40 @@ namespace Wan.Controllers
                 {
                     var contentType = request.ContentType;
                     var contentLength = request.ContentLength;
+
+                    var storageAccount = CloudStorageAccount.Parse(ConfigurationManager.ConnectionStrings["StorageConnection"].ConnectionString);
+
+                    var blobStorage = storageAccount.CreateCloudBlobClient();
+                    CloudBlobContainer container = blobStorage.GetContainerReference("productimages");
+                    if (container.CreateIfNotExist())
+                    {
+                        // configure container for public access
+                        var permissions = container.GetPermissions();
+                        permissions.PublicAccess = BlobContainerPublicAccessType.Container;
+                        container.SetPermissions(permissions);
+                    }
+
+                    string uniqueBlobName = string.Format("productimages/image_{0}{1}",
+                                                                Guid.NewGuid().ToString(), Path.GetExtension(uploadedFile.FileName));
+                    CloudBlockBlob blob = blobStorage.GetBlockBlobReference(uniqueBlobName);
+                    blob.Properties.ContentType = uploadedFile.ContentType;
+                    blob.UploadFromStream(uploadedFile.InputStream);
+                    var urlstring = blob.Uri.ToString();
+
                     var currentUser = _applicationUnit.UserRepository.GetByID(WebSecurity.CurrentUserId);
-                    currentUser.ProfileImage = null;
-                    currentUser.ProfileImage = new byte[contentLength];
+
+                    if (currentUser.ProfileImage != null)
+                    {
+                        var imagesContainer = blobStorage.GetContainerReference("productimages");
+                        var oldImageToDelete = imagesContainer.GetBlockBlobReference(currentUser.ProfileImage);
+                        oldImageToDelete.DeleteIfExists();
+                    }                    
+                    currentUser.ProfileImage = urlstring;
                     currentUser.ContentType = contentType;
-                    inputStream.Read(currentUser.ProfileImage, 0, contentLength);
 
                     _applicationUnit.UserRepository.Update(currentUser);
                     _applicationUnit.SaveChanges();
-                    return Json(new { succeeded = true, imageFile = Convert.ToBase64String(currentUser.ProfileImage) });  
+                    return Json(new { succeeded = true, imageFile = urlstring });  
                 }
             }
             catch (Exception ex)

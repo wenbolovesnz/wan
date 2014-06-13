@@ -90,6 +90,14 @@
     <Compile Include="Migrations\201406090921446_addedUserGroupRoleTable.Designer.cs">
       <DependentUpon>201406090921446_addedUserGroupRoleTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201406112229411_groupImageToStringProperty.cs" />
+    <Compile Include="Migrations\201406112229411_groupImageToStringProperty.Designer.cs">
+      <DependentUpon>201406112229411_groupImageToStringProperty.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201406112248536_userImageToStringProperty.cs" />
+    <Compile Include="Migrations\201406112248536_userImageToStringProperty.Designer.cs">
+      <DependentUpon>201406112248536_userImageToStringProperty.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -136,6 +144,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201406090921446_addedUserGroupRoleTable.resx">
       <DependentUpon>201406090921446_addedUserGroupRoleTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201406112229411_groupImageToStringProperty.resx">
+      <DependentUpon>201406112229411_groupImageToStringProperty.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201406112248536_userImageToStringProperty.resx">
+      <DependentUpon>201406112248536_userImageToStringProperty.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
