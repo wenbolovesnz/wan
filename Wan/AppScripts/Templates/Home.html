@@ -8,10 +8,10 @@
                                       
         <div class="col-sm-6 col-md-3" data-ng-repeat="group in groups">
             <div class="thumbnail" style="height: 400px;">
-                <img data-src="holder.js/300x200" alt="300x200" src="{{group.groupImage}}" style="width: 300px; height: 200px;">
+                <img data-src="holder.js/300x200" alt="300x200" src="{{group.groupImage}}" data-ng-click="groupDetails(group.id)" style="width: 300px; height: 200px; cursor: pointer">
          
                 <div class="caption">
-                    <h3>{{group.groupName}}</h3>
+                    <h3 class="pointer" data-ng-click="groupDetails(group.id)">{{group.groupName}}</h3>
                     <p>{{group.users.length}} members</p>   
                     <p>{{group.description}}</p>
                     <p> <a class="btn btn-default btn-sm" data-ng-click="groupDetails(group.id)">See more</a>

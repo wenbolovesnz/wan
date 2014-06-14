@@ -98,6 +98,10 @@
     <Compile Include="Migrations\201406112248536_userImageToStringProperty.Designer.cs">
       <DependentUpon>201406112248536_userImageToStringProperty.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201406131046330_addedCreatedById.cs" />
+    <Compile Include="Migrations\201406131046330_addedCreatedById.Designer.cs">
+      <DependentUpon>201406131046330_addedCreatedById.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -150,6 +154,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201406112248536_userImageToStringProperty.resx">
       <DependentUpon>201406112248536_userImageToStringProperty.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201406131046330_addedCreatedById.resx">
+      <DependentUpon>201406131046330_addedCreatedById.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

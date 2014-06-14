@@ -35,12 +35,14 @@ namespace Wan.Controllers.ApiControllers
                     Description = m.Description,
                     CreatedDate = m.CreatedDate,
                     GroupName = m.GroupName,
+                    CreatedById = m.CreatedById,
                     Id = m.Id,
                     GroupImage = m.GroupImage ?? "/Content/images/defaultgroup.png",
                     Users = m.Users.Select(u => new UserViewModel()
                         {
                             Id = u.Id,
                             UserName = u.UserName,
+                            ProfileImage = u.ProfileImage,
                             IsGroupManager = m.UserGroupRoles.SingleOrDefault(ugr => ugr.UserId == u.Id && ugr.RoleId == (int)RoleTypes.GroupManager) != null                            
                         }).ToList()
                 }).ToList();
@@ -58,6 +60,7 @@ namespace Wan.Controllers.ApiControllers
             group.Description = groupViewModel.Description;
             group.Users.Add(currentUser);
             group.CreatedDate = DateTime.Now;
+            group.CreatedById = currentUser.Id;
 
             var userGroupRole = new UserGroupRole();
             userGroupRole.User = currentUser;
@@ -142,7 +145,7 @@ namespace Wan.Controllers.ApiControllers
                     {
                         var imagesContainer = blobStorage.GetContainerReference("productimages");
                         var oldImageToDelete = imagesContainer.GetBlockBlobReference(group.GroupImage);
-                        oldImageToDelete.DeleteIfExists();
+                        oldImageToDelete.DeleteIfExists();                        
                     }     
 
                     group.GroupImage = urlstring;
@@ -173,6 +176,7 @@ namespace Wan.Controllers.ApiControllers
         public int Id { get; set; }
         public string UserName { get; set; }
         public bool IsGroupManager { get; set; }
+        public string ProfileImage { get; set; }
     }
 
     public class GroupViewModel
@@ -186,6 +190,7 @@ namespace Wan.Controllers.ApiControllers
         public int Id { get; set; }
         public string GroupName { get; set; }
         public DateTime CreatedDate { get; set; }
+        public int CreatedById { get; set; }
         public string Description { get; set; }
         public string GroupImage { get; set; }
 

@@ -58,6 +58,18 @@ wan.directive('onFocus', function() {
             }                
         };
     })
+    .directive('imageurl', function () {
+        return {
+            restrict: 'A',
+            link: function (scope, element, attr) {                
+                var imageUrl = '/azure' + scope.userdata.profileImage.slice(36) + "?width=50&height=50";
+                element.attr("src", imageUrl);
+            },
+            scope: {
+                userdata:"="
+            }
+        };
+    })
     .directive('uploader', ['userService', function (userService) {
         return {
             restrict: 'E',

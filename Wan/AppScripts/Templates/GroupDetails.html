@@ -1,11 +1,30 @@
 ﻿
 <div class="row">
-    <div class="col-xs-3"><h3>{{group.groupName}}</h3></div>
     <div class="col-xs-9">
+        <ul class="nav nav-pills" style="padding: 10px;">
+          <li class="active"><a href="#">Home</a></li>
+          <li><a href="#">Members</a></li>
+          <li><a href="#">Sponsors</a></li>
+          <li><a href="#">Photos</a></li>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              More <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Report this group</a></li>
+            </ul>
+          </li>
+        </ul>
+    </div>
+    <div class="col-xs-3">
         <input type="button" 
                data-ng-show="showJoinBtn"
                data-ng-click="joinGroup()"
-               value="Join" class="btn btn-danger btn-sm pull-right" style="margin-top: 20px"/>        
+               value="Join" class="btn btn-danger btn-sm pull-right" style="margin-top: 15px"/>        
     </div>
     
 </div>
@@ -19,6 +38,14 @@
                   callback ="uploadCompletedCallBack"
                   fromdata="data"
                   datatype="json"></uploader>
+        <div class="row">
+            <div class="panel panel-default">
+              <div class="panel-heading">Organizor</div>
+              <div class="panel-body">
+                {{groupCreator.userName}}
+              </div>
+            </div>
+        </div>
     </div>
     <div class="col-lg-6">            
         <div class="panel panel-primary">
@@ -31,6 +58,30 @@
                 <p>Group created Date: {{group.createdDate | date:'d/M/yy'}}</p>
             </div>                
         </div>
+        <div class="row" data-ng-show="!showJoinBtn">
+            <div class="col-lg-8">            
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Group Chat</h3>
+                    </div>
+                    <div class="panel-body" style="height: 200px;">
+                        <div class="pre-scrollable" style="height: 130px;" id="messageChanel">
+                            <div data-ng-repeat="msg in messages">
+                                {{msg.message}}
+                            </div>
+                        </div>
+                        <div style="margin-top: 10px;">
+                            <input 
+                                data-ng-Enterkey="sendMessage()"
+                                data-ng-model="groupMessageContent" 
+                                class="form-control input-sm pull-left"  
+                                style="width: 80%" type="text"/>
+                            <button class="pull-right btn btn-primary btn-sm" data-ng-click="sendMessage()">Send</button>
+                        </div>
+                    </div>                
+                </div>
+            </div>                              
+        </div>
     </div>                      
     <div class="col-lg-3">            
         <div class="panel panel-primary">
@@ -39,7 +90,15 @@
             </div>
             <div class="panel-body" style="min-height: 400px;">
                 <div data-ng-repeat="user in group.users">
-                    <strong>{{user.userName}}</strong>
+                    <div class="row">
+                        <div class="col-sm-4">
+                                <a href="javascript:void(0)" class="thumbnail">
+                                    <img alt="defaultIcon" imageurl userdata="user">
+                                </a>
+                        </div>
+                        <div class="col-sm-8"><strong>{{user.userName}}</strong></div>                        
+                    </div>
+                        
                 </div>
             </div>                
         </div>                                                    
@@ -47,30 +106,7 @@
         
 </div>
 
-<div class="row" data-ng-show="!showJoinBtn">
-    <div class="col-lg-8">            
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">Group Chat</h3>
-            </div>
-            <div class="panel-body" style="height: 200px;">
-                <div class="pre-scrollable" style="height: 130px;" id="messageChanel">
-                    <div data-ng-repeat="msg in messages">
-                        {{msg.message}}
-                    </div>
-                </div>
-                <div style="margin-top: 10px;">
-                    <input 
-                        data-ng-Enterkey="sendMessage()"
-                        data-ng-model="groupMessageContent" 
-                        class="form-control input-sm pull-left"  
-                        style="width: 80%" type="text"/>
-                    <button class="pull-right btn btn-primary btn-sm" data-ng-click="sendMessage()">Send</button>
-                </div>
-            </div>                
-        </div>
-    </div>                              
-</div>
+user
 
 
     

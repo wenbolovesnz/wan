@@ -23,18 +23,18 @@ namespace FormBuilder.Data.Migrations
             //  to avoid creating duplicate seed data. E.g.
             //
 
-            var user = context.Users.First();
+            //var user = context.Users.First();
 
-            var group = new Group();
-            group.GroupName = "Awesome one";
-            group.CreatedDate = DateTime.Now;
-            group.Description = "This is a good one";
-            group.Users.Add(user);
+            //var group = new Group();
+            //group.GroupName = "Awesome one";
+            //group.CreatedDate = DateTime.Now;
+            //group.Description = "This is a good one";
+            //group.Users.Add(user);
 
             
-            context.Groups.AddOrUpdate(
-              p => p.GroupName, group             
-            );
+            //context.Groups.AddOrUpdate(
+            //  p => p.GroupName, group             
+            //);
             
         }
     }

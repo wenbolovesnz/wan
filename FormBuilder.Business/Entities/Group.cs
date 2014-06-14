@@ -35,6 +35,7 @@ namespace FormBuilder.Business.Entities
         public DateTime CreatedDate { get; set; }
         public string Description { get; set; }
 
+        public int CreatedById { get; set; }
 
         public string GroupImage { get; set; }
         public string ContentType { get; set; }

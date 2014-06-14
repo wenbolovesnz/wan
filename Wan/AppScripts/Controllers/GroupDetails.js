@@ -11,6 +11,10 @@ wan.controller('GroupDetailsCtrl',
         $scope.group = _.find(datacontext.clientData.get('groups'), function (g) {
             return g.id == $routeParams.groupId;
         });
+
+        $scope.groupCreator = _.find($scope.group.users, function(u) {
+            return u.id == $scope.group.createdById;
+        });
         
         $scope.image = $scope.group.groupImage;
         
