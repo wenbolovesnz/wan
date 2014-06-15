@@ -42,6 +42,7 @@ namespace Wan.Controllers.ApiControllers
                         {
                             Id = u.Id,
                             UserName = u.UserName,
+                            AboutMe = u.AboutMe,
                             ProfileImage = u.ProfileImage,
                             IsGroupManager = m.UserGroupRoles.SingleOrDefault(ugr => ugr.UserId == u.Id && ugr.RoleId == (int)RoleTypes.GroupManager) != null                            
                         }).ToList()
@@ -177,6 +178,7 @@ namespace Wan.Controllers.ApiControllers
         public string UserName { get; set; }
         public bool IsGroupManager { get; set; }
         public string ProfileImage { get; set; }
+        public string AboutMe { get; set; }
     }
 
     public class GroupViewModel

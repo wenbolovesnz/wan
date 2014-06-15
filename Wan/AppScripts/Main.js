@@ -61,12 +61,17 @@ wan.directive('onFocus', function() {
     .directive('imageurl', function () {
         return {
             restrict: 'A',
-            link: function (scope, element, attr) {                
-                var imageUrl = '/azure' + scope.userdata.profileImage.slice(36) + "?width=50&height=50";
-                element.attr("src", imageUrl);
+            link: function (scope, element, attr) {
+                if (scope.sizedata) {
+                    var imageUrl = '/azure' + scope.userdata.slice(36) + scope.sizedata;
+                    element.attr("src", imageUrl);
+                } else {                    
+                    element.attr("src", scope.userdata);
+                }                
             },
             scope: {
-                userdata:"="
+                userdata: "@",
+                sizedata: "@"
             }
         };
     })
