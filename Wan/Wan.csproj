@@ -288,6 +288,7 @@
     <Content Include="Content\images\defaultgroup.png" />
     <Content Include="Content\images\defaultUserIcon.jpg" />
     <Content Include="Content\images\defaultUserIcon30x30.jpg" />
+    <Content Include="Content\images\defaultUserIcon50x50.jpg" />
     <Content Include="Content\images\p1.jpg" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />

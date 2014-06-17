@@ -102,8 +102,11 @@
                     <div class="row p5">
                         <div class="media">
                             <a href="javascript:void(0)" class="pull-left thumbnail">
-                                <img class="media-object" alt="defaultIcona" imageurl userdata="{{user.profileImage}}"
-                                    sizedata="?width=50&height=50">
+                                <img class="media-object" alt="defaultIcona" 
+                                     imageurl 
+                                     fallbackiconurl="/Content/images/defaultUserIcon50x50.jpg"
+                                     userdata="{{user.profileImage}}"
+                                     sizedata="?width=50&height=50">
                             </a>
                           <div class="media-body">
                             <h4 class="media-heading">{{user.userName}}</h4>
@@ -119,7 +122,6 @@
         
 </div>
 
-user
 
 
     

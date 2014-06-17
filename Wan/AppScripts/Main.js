@@ -62,16 +62,22 @@ wan.directive('onFocus', function() {
         return {
             restrict: 'A',
             link: function (scope, element, attr) {
-                if (scope.sizedata) {
-                    var imageUrl = '/azure' + scope.userdata.slice(36) + scope.sizedata;
-                    element.attr("src", imageUrl);
-                } else {                    
-                    element.attr("src", scope.userdata);
-                }                
+                if (scope.userdata == "" || scope.userdata == null) {
+                    element.attr("src", scope.fallbackiconurl);
+                } else {
+                    if (scope.sizedata) {
+                        var imageUrl = '/azure' + scope.userdata.slice(36) + scope.sizedata;
+                        element.attr("src", imageUrl);
+                    } else {
+                        element.attr("src", scope.userdata);
+                    }
+                }
+               
             },
             scope: {
                 userdata: "@",
-                sizedata: "@"
+                sizedata: "@",
+                fallbackiconurl: "@"
             }
         };
     })
