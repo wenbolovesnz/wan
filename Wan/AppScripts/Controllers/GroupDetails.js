@@ -7,10 +7,20 @@ wan.controller('GroupDetailsCtrl',
                 return u.userName == userName;
             });
         };
+
+        $scope.isEdit = false;
+
+        $scope.editToggle = function() {
+            $scope.isEdit = !$scope.isEdit;
+        };
                
         $scope.group = _.find(datacontext.clientData.get('groups'), function (g) {
             return g.id == $routeParams.groupId;
         });
+
+        $scope.newGroupName = $scope.group.groupName;
+        
+        $scope.newDescription = $scope.group.description;
 
         $scope.groupCreator = _.find($scope.group.users, function(u) {
             return u.id == $scope.group.createdById;
@@ -89,7 +99,35 @@ wan.controller('GroupDetailsCtrl',
             $scope.groupMessageContent = "";
         };
 
+        $scope.groupUpdating = false;
+        $scope.saveGroup = function () {
+            $scope.groupUpdating = true;
+            $scope.group.groupName = $scope.newGroupName;
+            $scope.group.description = $scope.newDescription;
+            
+            datacontext.updateGroup().update($scope.group, function (result) {
+                $scope.editToggle();
+                $scope.groupUpdating = false;
+                $scope.$apply();
+            });
 
+        };
 
+        $scope.removeUserFromGroup = function(user) {
+            removeItemFromArray($scope.group.users, user);
+
+            datacontext.updateGroup().update($scope.group, function (result) {
+                var a = result;
+            });
+        };
+
+        function removeItemFromArray (array, item) {
+            var index = _.indexOf(array, item);
+            if (index != -1) {
+                array.splice(index, 1);
+            }
+        };
+        
+         
 
     }]);

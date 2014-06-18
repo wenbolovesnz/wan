@@ -93,11 +93,31 @@ namespace Wan.Controllers.ApiControllers
                 group.Users.Add(currentUser);
             }
 
+            if (
+                group.UserGroupRoles.SingleOrDefault(
+                    m => m.UserId == currentUser.Id && m.RoleId == (int) RoleTypes.GroupManager) != null)
+            {
+                group.GroupName = groupViewModel.GroupName;
+                group.Description = groupViewModel.Description;
+            }
+
+            if (group.Users.Count > groupViewModel.Users.Count && group.UserGroupRoles.SingleOrDefault(
+                m => m.UserId == currentUser.Id && m.RoleId == (int) RoleTypes.GroupManager) != null)
+            {
+                var userIdsToRemove = group.Users.Select(m => m.Id).Except(groupViewModel.Users.Select(m => m.Id)).ToList();
+                foreach (var i in userIdsToRemove)
+                {
+                    var userToRemove = group.Users.Single(m => m.Id == i);
+                    group.Users.Remove(userToRemove);
+                }
+            }
+
             _applicationUnit.GroupRepository.Update(group);
             _applicationUnit.SaveChanges();    
 
             return groupViewModel;
         }
+
 
         public object UploadImage()
         {
