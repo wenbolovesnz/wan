@@ -11,16 +11,24 @@ namespace FormBuilder.Data
         private IGenericRepository<User> _userRepository;
         private IGenericRepository<Role> _roleRepository;
         private IGenericRepository<Group> _groupRepository;
+        private IGenericRepository<Event> _eventRepository;
 
         public ApplicationUnit(IGenericRepository<User> userRepository, 
                                IGenericRepository<Role> roleRepository,
                                IGenericRepository<Group> groupRepository,
+                               IGenericRepository<Event> eventRepository,
                                FormBuilderContext formBuilderContext)
         {
             _userRepository = userRepository;
             _roleRepository = roleRepository;
             _groupRepository = groupRepository;
+            _eventRepository = eventRepository;
             _context = formBuilderContext;
+        }
+
+        public IGenericRepository<Event> EventRepository
+        {
+            get { return this._eventRepository; }
         }
 
         public IGenericRepository<Group> GroupRepository

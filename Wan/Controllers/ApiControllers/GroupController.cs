@@ -82,9 +82,9 @@ namespace Wan.Controllers.ApiControllers
         }
 
         [System.Web.Http.Authorize]
-        public GroupViewModel UpdateGroup([FromBody] GroupViewModel groupViewModel)
+        [System.Web.Http.HttpPost]
+        public GroupViewModel Post(int id, [FromBody] GroupViewModel groupViewModel)
         {
-
             var currentUser = _applicationUnit.UserRepository.GetByID(WebSecurity.CurrentUserId);
 
             var group = _applicationUnit.GroupRepository.GetByID(groupViewModel.Id);

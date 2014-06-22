@@ -12,11 +12,23 @@ namespace FormBuilder.Business.Entities
         {
             _users = new List<User>();
             _userGroupRoles = new List<UserGroupRole>();
+            _events = new List<Event>();
         }
 
         private ICollection<User> _users;
 
-        private ICollection<UserGroupRole> _userGroupRoles; 
+        private ICollection<UserGroupRole> _userGroupRoles;
+
+        private ICollection<Event> _events;
+
+        public virtual ICollection<Event> Events
+        {
+            get { return _events; }
+            set
+            {
+                _events = value;
+            }
+        }
 
         public virtual ICollection<User> Users
         {

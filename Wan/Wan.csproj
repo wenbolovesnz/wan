@@ -249,6 +249,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ApiControllers\EventController.cs" />
     <Compile Include="Controllers\ApiControllers\GroupController.cs" />
     <Compile Include="Controllers\ApiControllers\UserController.cs" />
     <Compile Include="Controllers\HomeController.cs" />

@@ -10,7 +10,15 @@ namespace FormBuilder.Business.Entities
     {
         public Event()
         {
-            
+            _users = new List<User>();
+        }
+
+        private ICollection<User> _users;
+
+        public virtual ICollection<User> Users
+        {
+            get { return _users; }
+            set { _users = value; }
         }
 
         public int Id { get; set; }
@@ -18,5 +26,8 @@ namespace FormBuilder.Business.Entities
         public int GroupId { get; set; }
         public Group Group { get; set; }
         public DateTime EventDateTime { get; set; }
+        public string EventLocation { get; set; }
+        public string Description { get; set; }
+
     }
 }

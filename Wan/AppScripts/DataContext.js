@@ -12,7 +12,7 @@ wan.factory('datacontext',
         clientData.put('groups', []);
 
         function getAllGroups() {
-            return $resource('api/Group', {}, {
+            return $resource('api/Group/:groupId', {groupId: '@id'}, {
                 query: { method: 'GET', isArray: true }
             });
         }

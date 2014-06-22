@@ -12,6 +12,7 @@ namespace FormBuilder.Data.Contracts
         IGenericRepository<User> UserRepository { get; }
         IGenericRepository<Role> RoleRepository { get; }
         IGenericRepository<Group> GroupRepository { get; }
+        IGenericRepository<Event>   EventRepository { get; } 
         void SaveChanges();
     }
 }

@@ -77,6 +77,7 @@ namespace Wan.App_Start
             kernel.Bind<IGenericRepository<User>>().To<GenericRepository<User>>().InRequestScope();
             kernel.Bind<IGenericRepository<Role>>().To<GenericRepository<Role>>().InRequestScope();
             kernel.Bind<IGenericRepository<Group>>().To<GroupsRepository>().InRequestScope();
+            kernel.Bind<IGenericRepository<Event>>().To<GenericRepository<Event>>().InRequestScope();
         }        
     }
 }

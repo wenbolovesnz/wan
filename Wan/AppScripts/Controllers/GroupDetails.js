@@ -80,9 +80,14 @@ wan.controller('GroupDetailsCtrl',
         
         $scope.joinGroup = function() {
             if (userService.isLogged) {
-                datacontext.updateGroup().update($scope.group, function(data) {
+                //datacontext.updateGroup().update($scope.group, function(data) {
+                //    hub.server.joinGroup($scope.group);
+                //});
+                
+                $scope.group.$save(function (result) {
                     hub.server.joinGroup($scope.group);
-                });                
+                });
+                
                 $scope.showJoinBtn = false;                
             } else {
                 var currentPath = $location.path();               
@@ -104,21 +109,28 @@ wan.controller('GroupDetailsCtrl',
             $scope.groupUpdating = true;
             $scope.group.groupName = $scope.newGroupName;
             $scope.group.description = $scope.newDescription;
-            
-            datacontext.updateGroup().update($scope.group, function (result) {
+
+            $scope.group.$save(function(result) {
                 $scope.editToggle();
                 $scope.groupUpdating = false;
-                $scope.$apply();
             });
+
+            //datacontext.updateGroup().update($scope.group, function (result) {
+            //    $scope.editToggle();
+            //    $scope.groupUpdating = false;
+            //    $scope.$apply();
+            //});
 
         };
 
         $scope.removeUserFromGroup = function(user) {
             removeItemFromArray($scope.group.users, user);
+            
+            $scope.group.$save();
 
-            datacontext.updateGroup().update($scope.group, function (result) {
-                var a = result;
-            });
+            //datacontext.updateGroup().update($scope.group, function (result) {
+            //    var a = result;
+            //});
         };
 
         function removeItemFromArray (array, item) {
