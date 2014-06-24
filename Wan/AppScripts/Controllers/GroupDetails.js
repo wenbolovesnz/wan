@@ -141,5 +141,48 @@ wan.controller('GroupDetailsCtrl',
         };
         
          
+        //---event date
+        $scope.dob = "";
+        
+        $scope.clear = function () {
+            $scope.dob = "";
+        };
 
+        $scope.open = function ($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+
+            $scope.opened = true;
+        };
+
+        $scope.dateOptions = {
+            formatYear: 'yy',
+            startingDay: 1
+        };
+        
+        $scope.saveNewEvent = function () {
+            $scope.groupUpdating = true;
+
+            var newEvent = {                
+                name: $scope.eventName,
+                description: $scope.eventDescription,
+                eventLocation: $scope.eventLocation,
+                eventDateTime:$scope.dob
+            };
+
+            $scope.group.events.push(newEvent);
+            
+            $scope.group.$save(function (result) {                
+                $scope.groupUpdating = false;
+                $scope.hideCreateEvent();
+            });
+        };
+
+        $scope.showCreateEvent = function() {
+            $scope.displayCreateEvent = true;
+        };
+        
+        $scope.hideCreateEvent = function () {
+            $scope.displayCreateEvent = false;
+        };
     }]);

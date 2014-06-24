@@ -38,13 +38,28 @@ namespace Wan.Controllers.ApiControllers
                     CreatedById = m.CreatedById,
                     Id = m.Id,
                     GroupImage = m.GroupImage ?? "/Content/images/defaultgroup.png",
+                    Events = m.Events.Select(e => new EventViewModel()
+                    {
+                        Id = e.Id,
+                        Description = e.Description,
+                        EventDateTime = e.EventDateTime,
+                        EventLocation = e.EventLocation,
+                        Name = e.Name,
+                        Group = new GroupViewModel() { Id = e.GroupId},
+                        Users = e.Users.Select(eu => new UserViewModel()
+                        {
+                            UserName = eu.UserName,
+                            Id = eu.Id,
+                            ProfileImage = eu.ProfileImage
+                        }).ToList()
+                    }).OrderByDescending(e => e.Id).ToList(),
                     Users = m.Users.Select(u => new UserViewModel()
                         {
                             Id = u.Id,
                             UserName = u.UserName,
                             AboutMe = u.AboutMe,
                             ProfileImage = u.ProfileImage,
-                            IsGroupManager = m.UserGroupRoles.SingleOrDefault(ugr => ugr.UserId == u.Id && ugr.RoleId == (int)RoleTypes.GroupManager) != null                            
+                            IsGroupManager = m.UserGroupRoles.SingleOrDefault(ugr => ugr.UserId == u.Id && ugr.RoleId == (int)RoleTypes.GroupManager) != null
                         }).ToList()
                 }).ToList();
 
@@ -88,21 +103,24 @@ namespace Wan.Controllers.ApiControllers
             var currentUser = _applicationUnit.UserRepository.GetByID(WebSecurity.CurrentUserId);
 
             var group = _applicationUnit.GroupRepository.GetByID(groupViewModel.Id);
+            var isCurrentUserManager = group.UserGroupRoles.SingleOrDefault(
+                m => m.UserId == currentUser.Id && m.RoleId == (int) RoleTypes.GroupManager) != null;
+
+
             if (!group.Users.Contains(currentUser))
             {
                 group.Users.Add(currentUser);
             }
 
-            if (
-                group.UserGroupRoles.SingleOrDefault(
-                    m => m.UserId == currentUser.Id && m.RoleId == (int) RoleTypes.GroupManager) != null)
+            if (isCurrentUserManager)
             {
                 group.GroupName = groupViewModel.GroupName;
                 group.Description = groupViewModel.Description;
+
+                this.updateGroupEvents(group, groupViewModel);
             }
 
-            if (group.Users.Count > groupViewModel.Users.Count && group.UserGroupRoles.SingleOrDefault(
-                m => m.UserId == currentUser.Id && m.RoleId == (int) RoleTypes.GroupManager) != null)
+            if (group.Users.Count > groupViewModel.Users.Count && isCurrentUserManager)
             {
                 var userIdsToRemove = group.Users.Select(m => m.Id).Except(groupViewModel.Users.Select(m => m.Id)).ToList();
                 foreach (var i in userIdsToRemove)
@@ -116,6 +134,50 @@ namespace Wan.Controllers.ApiControllers
             _applicationUnit.SaveChanges();    
 
             return groupViewModel;
+        }
+
+        private void updateGroupEvents(Group group, GroupViewModel groupViewModel)
+        {
+            var eventToCreate = groupViewModel.Events.SingleOrDefault(m => m.Id == 0);
+            if (eventToCreate != null)
+            {
+                var newEvent = new Event();
+                newEvent.Description = eventToCreate.Description;
+                newEvent.EventDateTime = eventToCreate.EventDateTime;
+                newEvent.EventLocation = eventToCreate.EventLocation;
+                newEvent.GroupId = group.Id;
+                newEvent.Name = eventToCreate.Name;
+                group.Events.Add(newEvent);               
+            }
+
+            if (group.Events.Count < groupViewModel.Events.Count)
+            {
+                var eventIdsToRemove = group.Events.Select(m => m.Id).Except(groupViewModel.Events.Select(m => m.Id)).ToList();
+                foreach (var i in eventIdsToRemove)
+                {
+                    var eventToRemove = group.Events.Single(m => m.Id == i);
+                    group.Events.Remove(eventToRemove);
+                }
+            }         
+        }
+
+
+        [System.Web.Http.Authorize]
+        public GroupViewModel CreateEvent([FromBody] EventViewModel eventViewModel)
+        {
+            var currentUser = _applicationUnit.UserRepository.GetByID(WebSecurity.CurrentUserId);
+            var group = _applicationUnit.GroupRepository.GetByID(eventViewModel.Group.Id);
+
+            if (
+                group.UserGroupRoles.SingleOrDefault(
+                    m => m.UserId == currentUser.Id && m.RoleId == (int)RoleTypes.GroupManager) != null)
+            {
+
+
+            }
+
+
+            return null;
         }
 
 
@@ -206,9 +268,12 @@ namespace Wan.Controllers.ApiControllers
         public GroupViewModel()
         {
             Users = new List<UserViewModel>();
+            Events = new List<EventViewModel>();
         }
 
         public ICollection<UserViewModel> Users { get; set; }
+        public ICollection<EventViewModel> Events { get; set; }
+
         public int Id { get; set; }
         public string GroupName { get; set; }
         public DateTime CreatedDate { get; set; }
