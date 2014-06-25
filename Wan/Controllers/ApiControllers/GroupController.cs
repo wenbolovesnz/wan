@@ -20,49 +20,18 @@ namespace Wan.Controllers.ApiControllers
     public class GroupController : ApiController
     {
         private IApplicationUnit _applicationUnit;
+        private ModelFactoryService _modelFactoryService;
 
         public GroupController(IApplicationUnit applicationUnit)
         {
-            _applicationUnit = applicationUnit;           
+            _applicationUnit = applicationUnit;    
+            _modelFactoryService = new ModelFactoryService();
         }
 
         public List<GroupViewModel> Get()
         {
             var groups = _applicationUnit.GroupRepository.Get().ToList();
-
-            var groupViewModels = groups.Select(m => new GroupViewModel()
-                {
-                    Description = m.Description,
-                    CreatedDate = m.CreatedDate,
-                    GroupName = m.GroupName,
-                    CreatedById = m.CreatedById,
-                    Id = m.Id,
-                    GroupImage = m.GroupImage ?? "/Content/images/defaultgroup.png",
-                    Events = m.Events.Select(e => new EventViewModel()
-                    {
-                        Id = e.Id,
-                        Description = e.Description,
-                        EventDateTime = e.EventDateTime,
-                        EventLocation = e.EventLocation,
-                        Name = e.Name,
-                        Group = new GroupViewModel() { Id = e.GroupId},
-                        Users = e.Users.Select(eu => new UserViewModel()
-                        {
-                            UserName = eu.UserName,
-                            Id = eu.Id,
-                            ProfileImage = eu.ProfileImage
-                        }).ToList()
-                    }).OrderByDescending(e => e.Id).ToList(),
-                    Users = m.Users.Select(u => new UserViewModel()
-                        {
-                            Id = u.Id,
-                            UserName = u.UserName,
-                            AboutMe = u.AboutMe,
-                            ProfileImage = u.ProfileImage,
-                            IsGroupManager = m.UserGroupRoles.SingleOrDefault(ugr => ugr.UserId == u.Id && ugr.RoleId == (int)RoleTypes.GroupManager) != null
-                        }).ToList()
-                }).ToList();
-
+            var groupViewModels = groups.Select(m => _modelFactoryService.Create(m)).ToList();
             return groupViewModels;
         }
 
@@ -118,6 +87,7 @@ namespace Wan.Controllers.ApiControllers
                 group.Description = groupViewModel.Description;
 
                 this.updateGroupEvents(group, groupViewModel);
+                this.updateGroupManagers(group, groupViewModel);
             }
 
             if (group.Users.Count > groupViewModel.Users.Count && isCurrentUserManager)
@@ -133,7 +103,7 @@ namespace Wan.Controllers.ApiControllers
             _applicationUnit.GroupRepository.Update(group);
             _applicationUnit.SaveChanges();    
 
-            return groupViewModel;
+            return _modelFactoryService.Create(group);
         }
 
         private void updateGroupEvents(Group group, GroupViewModel groupViewModel)
@@ -161,6 +131,40 @@ namespace Wan.Controllers.ApiControllers
             }         
         }
 
+        private void updateGroupManagers(Group group, GroupViewModel groupViewModel)
+        {
+            if (group.UserGroupRoles.Count < groupViewModel.GroupManagers.Count)
+            {
+                var userIdsToAddToManagers =
+                    groupViewModel.GroupManagers.Select(m => m.Id)
+                                  .Except(group.UserGroupRoles.Select(m => m.UserId))
+                                  .ToList();
+
+                foreach (var userId in userIdsToAddToManagers)
+                {
+                    var newManagerConfig = new UserGroupRole();
+                    newManagerConfig.UserId = userId;
+                    newManagerConfig.GroupId = groupViewModel.Id;
+                    newManagerConfig.RoleId = (int) RoleTypes.GroupManager;
+                    group.UserGroupRoles.Add(newManagerConfig);
+                }
+            }
+
+            if (group.UserGroupRoles.Count > groupViewModel.GroupManagers.Count)
+            {
+                var userIdsToRemove =
+                            group.UserGroupRoles.Select(m => m.UserId)
+                                          .Except(groupViewModel.GroupManagers.Select(m => m.Id))
+                                          .ToList();
+
+                foreach (var i in userIdsToRemove)
+                {
+                    var managerToRemove = group.UserGroupRoles.Single(m => m.UserId == i);
+                    group.UserGroupRoles.Remove(managerToRemove);
+                }
+
+            }
+        }
 
         [System.Web.Http.Authorize]
         public GroupViewModel CreateEvent([FromBody] EventViewModel eventViewModel)
@@ -271,6 +275,7 @@ namespace Wan.Controllers.ApiControllers
             Events = new List<EventViewModel>();
         }
 
+        public ICollection<UserViewModel> GroupManagers { get; set; } 
         public ICollection<UserViewModel> Users { get; set; }
         public ICollection<EventViewModel> Events { get; set; }
 

@@ -260,11 +260,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\FileValidationService.cs" />
     <Compile Include="Services\GroupSecurityService.cs" />
+    <Compile Include="Services\ModelFactoryService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="WanHub.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppScripts\Controllers\CreateGroup.js" />
+    <Content Include="AppScripts\Controllers\Events.js" />
     <Content Include="AppScripts\Controllers\GroupDetails.js" />
     <Content Include="AppScripts\Controllers\Home.js" />
     <Content Include="AppScripts\Controllers\MyAccount.js" />

@@ -16,7 +16,24 @@ wan.config(['$routeProvider', function ($routeProvider) {
         when('/', { templateUrl: 'AppScripts/Templates/Home.html', controller: 'HomeCtrl' }).
         when('/home', { templateUrl: 'AppScripts/Templates/Home.html', controller: 'HomeCtrl' }).
         when('/createGroup', { templateUrl: 'AppScripts/Templates/CreateGroup.html', controller: 'CreateGroupCtrl' }).
-        when('/groupDetails/:groupId', { templateUrl: 'AppScripts/Templates/GroupDetails.html', controller: 'GroupDetailsCtrl' }).
+        when('/groupDetails/:groupId', {
+            templateUrl: 'AppScripts/Templates/GroupDetails.html', controller: 'GroupDetailsCtrl',
+            resolve: {
+                loadGroups: function (datacontext, $q) {
+                    var defer = $q.defer();
+                    
+                    if (datacontext.clientData.get('groups').length > 0) {
+                        defer.resolve();                        
+                    } else {
+                        var groups = datacontext.getAllGroups().query(function () {
+                            datacontext.clientData.put('groups', groups);
+                            defer.resolve();
+                        });
+                    }
+                    
+                    return defer.promise;
+                }   
+            }}).
         when('/myAccount', { templateUrl: 'AppScripts/Templates/MyAccount.html', controller: 'MyAccountCtrl' }).
         otherwise({ redirectTo: '/home' });
 }]);

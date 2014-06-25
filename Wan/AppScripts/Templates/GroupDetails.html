@@ -215,7 +215,8 @@
                           </button>
                           <ul class="dropdown-menu" role="menu">
                             <li><a href="javascript:void(0)" data-ng-click="removeUserFromGroup(user)">Remove from Group</a></li>
-                            <li><a href="javascript:void(0)">Give Organizor Role</a></li>
+                              <li><a href="javascript:void(0)" data-ng-show="!isUserGroupManager(user)" data-ng-click="giveManangerRole(user)">Give Organizor Role</a></li>
+                              <li><a href="javascript:void(0)" data-ng-show="isUserGroupManager(user)" data-ng-click="removeManangerRole(user)">Remove Organizor Role</a></li>
                           </ul>
                         </div>
                         <div class="media">

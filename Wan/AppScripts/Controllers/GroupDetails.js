@@ -44,7 +44,16 @@ wan.controller('GroupDetailsCtrl',
             group.groupImage = imageFile;
         };
                
-        $scope.isCurrentUserManager = userService.isCurrentUserManager(userService.username, $scope.group.users);
+        //$scope.isCurrentUserManager = userService.isCurrentUserManager(userService.username, $scope.group.users);
+        $scope.isCurrentUserManager = _.find($scope.group.groupManagers, function(user) {
+            return user.id == userService.id;
+        });
+
+        $scope.isUserGroupManager = function(user) {
+            return _.find($scope.group.groupManagers, function(u) {
+                return u.id == user.id;
+            });
+        };
         
         hub.on('newGroupMememberArrived', function (user) {
             if (!$scope.isUserInGroup(user.userName)) {
@@ -114,23 +123,27 @@ wan.controller('GroupDetailsCtrl',
                 $scope.editToggle();
                 $scope.groupUpdating = false;
             });
-
-            //datacontext.updateGroup().update($scope.group, function (result) {
-            //    $scope.editToggle();
-            //    $scope.groupUpdating = false;
-            //    $scope.$apply();
-            //});
-
         };
 
         $scope.removeUserFromGroup = function(user) {
-            removeItemFromArray($scope.group.users, user);
-            
+            removeItemFromArray($scope.group.users, user);            
             $scope.group.$save();
+        };
 
-            //datacontext.updateGroup().update($scope.group, function (result) {
-            //    var a = result;
-            //});
+        $scope.giveManangerRole = function(user) {
+            var newManager = {
+                id: user.id
+            };
+            $scope.group.groupManagers.push(newManager);
+            $scope.group.$save();
+        };
+
+        $scope.removeManangerRole = function(user) {
+            var managerToRemove = _.find($scope.group.groupManagers, function(gm) {
+                return gm.id == user.id;
+            });
+            removeItemFromArray($scope.group.groupManagers, managerToRemove);
+            $scope.group.$save();
         };
 
         function removeItemFromArray (array, item) {
@@ -174,6 +187,10 @@ wan.controller('GroupDetailsCtrl',
             
             $scope.group.$save(function (result) {                
                 $scope.groupUpdating = false;
+                var eventToUpdate = _.find(result.events, function(event) {
+                    return event.name == newEvent.name;
+                });
+                newEvent.id = eventToUpdate.id;
                 $scope.hideCreateEvent();
             });
         };
