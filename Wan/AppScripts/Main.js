@@ -19,7 +19,10 @@ wan.config(['$routeProvider', function ($routeProvider) {
         when('/groupDetails/:groupId', {
             templateUrl: 'AppScripts/Templates/GroupDetails.html', controller: 'GroupDetailsCtrl',
             resolve: {
-                loadGroups: function (datacontext, $q) {
+                loadGroups: function () {
+                    var datacontext = angular.element(document.body).injector().get('datacontext');
+                    var $q = angular.element(document.body).injector().get('$q');
+                    
                     var defer = $q.defer();
                     
                     if (datacontext.clientData.get('groups').length > 0) {
