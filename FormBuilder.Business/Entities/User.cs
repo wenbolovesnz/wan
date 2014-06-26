@@ -13,11 +13,13 @@ namespace FormBuilder.Business.Entities
         private ICollection<Role> _roles;
 
         private ICollection<Group> _groups;
+        private ICollection<Event> _events;
 
         public User()
         {
             _roles = new List<Role>();
             _groups = new List<Group>();
+            _events = new List<Event>();
         }
 
         public int Id { get; set; }
@@ -32,6 +34,12 @@ namespace FormBuilder.Business.Entities
 
         public string ProfileImage { get; set; }
         public string ContentType { get; set; }
+
+        public virtual ICollection<Event> Events
+        {
+            get { return _events; }
+            set { _events = value; }
+        }
 
         public virtual ICollection<Role> Roles
         {

@@ -86,7 +86,7 @@ namespace Wan.Controllers.ApiControllers
                 group.GroupName = groupViewModel.GroupName;
                 group.Description = groupViewModel.Description;
 
-                this.updateGroupEvents(group, groupViewModel);
+                this.updateGroupEvents(group, groupViewModel, currentUser);
                 this.updateGroupManagers(group, groupViewModel);
             }
 
@@ -106,7 +106,7 @@ namespace Wan.Controllers.ApiControllers
             return _modelFactoryService.Create(group);
         }
 
-        private void updateGroupEvents(Group group, GroupViewModel groupViewModel)
+        private void updateGroupEvents(Group group, GroupViewModel groupViewModel, User currentUser)
         {
             var eventToCreate = groupViewModel.Events.SingleOrDefault(m => m.Id == 0);
             if (eventToCreate != null)
@@ -117,6 +117,7 @@ namespace Wan.Controllers.ApiControllers
                 newEvent.EventLocation = eventToCreate.EventLocation;
                 newEvent.GroupId = group.Id;
                 newEvent.Name = eventToCreate.Name;
+                newEvent.Users.Add(currentUser);
                 group.Events.Add(newEvent);               
             }
 
@@ -165,25 +166,6 @@ namespace Wan.Controllers.ApiControllers
 
             }
         }
-
-        [System.Web.Http.Authorize]
-        public GroupViewModel CreateEvent([FromBody] EventViewModel eventViewModel)
-        {
-            var currentUser = _applicationUnit.UserRepository.GetByID(WebSecurity.CurrentUserId);
-            var group = _applicationUnit.GroupRepository.GetByID(eventViewModel.Group.Id);
-
-            if (
-                group.UserGroupRoles.SingleOrDefault(
-                    m => m.UserId == currentUser.Id && m.RoleId == (int)RoleTypes.GroupManager) != null)
-            {
-
-
-            }
-
-
-            return null;
-        }
-
 
         public object UploadImage()
         {

@@ -29,13 +29,19 @@ wan.factory('datacontext',
             });
         }
         
+        function events() {
+            return $resource('api/Event/:eventId/user/:userId', { eventId: '@id', userId: '@userId' });
+        }
+
+        
         
         
         return {
             getAllGroups: getAllGroups,
             createGroup: createGroup,
             clientData: clientData,
-            updateGroup: updateGroup                        
+            updateGroup: updateGroup,
+            events: events
         };
 
     }]);

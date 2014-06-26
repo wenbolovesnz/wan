@@ -106,6 +106,10 @@
     <Compile Include="Migrations\201406220618252_addedEventClass.Designer.cs">
       <DependentUpon>201406220618252_addedEventClass.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201406262255567_addedEventsToUser.cs" />
+    <Compile Include="Migrations\201406262255567_addedEventsToUser.Designer.cs">
+      <DependentUpon>201406262255567_addedEventsToUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -164,6 +168,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201406220618252_addedEventClass.resx">
       <DependentUpon>201406220618252_addedEventClass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201406262255567_addedEventsToUser.resx">
+      <DependentUpon>201406262255567_addedEventsToUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -205,12 +205,22 @@ wan.controller('GroupDetailsCtrl',
 
         $scope.joinEvent = function (event) {
             if (userService.isLogged) {
-                $scope.group.$save(function (result) {
-                    hub.server.joinGroup($scope.group);
-                });
-                $scope.showJoinBtn = false;
+
+                $scope.groups = datacontext.events().save(
+                    { eventId: event.id, userId: userService.id },
+                    event
+                );
+                
             } else {
                 $location.path('login');
             }
+        };
+
+        $scope.userJoined = function(event) {
+            var currentUserIn = _.find(event.users, function(user) {
+                return user.id == userService.id;
+            });
+
+            return currentUserIn;
         };
     }]);

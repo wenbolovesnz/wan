@@ -46,8 +46,9 @@ namespace Wan.Controllers.ApiControllers
                 }).ToList()
             });            
         }
-
-        public HttpResponseMessage Post(int courseId, [FromUri]int userId, [FromBody]EventViewModel eventViewModel)
+        [System.Web.Http.Authorize]
+        [HttpPost]
+        public HttpResponseMessage Post(int eventId, [FromUri]int userId, [FromBody]EventViewModel eventViewModel)
         {
             try
             {
