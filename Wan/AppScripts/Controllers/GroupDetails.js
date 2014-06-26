@@ -202,4 +202,15 @@ wan.controller('GroupDetailsCtrl',
         $scope.hideCreateEvent = function () {
             $scope.displayCreateEvent = false;
         };
+
+        $scope.joinEvent = function (event) {
+            if (userService.isLogged) {
+                $scope.group.$save(function (result) {
+                    hub.server.joinGroup($scope.group);
+                });
+                $scope.showJoinBtn = false;
+            } else {
+                $location.path('login');
+            }
+        };
     }]);

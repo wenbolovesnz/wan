@@ -1,7 +1,7 @@
 ﻿
 wan.controller('UserLoginCtrl',
-    ['$scope', 'hub', 'userService', '$http', '$routeParams', '$location',
-function ($scope, hub, userService, $http, $routeParams, $location) {
+    ['$scope', 'hub', 'userService', '$http', '$location',
+function ($scope, hub, userService, $http, $location) {
 
         $scope.emailAddress = "";
 
@@ -18,11 +18,7 @@ function ($scope, hub, userService, $http, $routeParams, $location) {
                     if (data.status) {
                         userService.isLogged = true;
                         userService.username = data.userName;
-                        if ($routeParams.returnUrl) {
-                            $location.path($routeParams.returnUrl);                            
-                        } else {
-                            window.location = "";
-                        }
+                        window.location = "";                        
                     }
                 })
                 .error(function (data, status, headers, config) {
