@@ -1,0 +1,32 @@
+﻿
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">Group Events</h3>
+        <input value="Create" type="button" class="btn btn-warning btn-sm pull-right" 
+               data-ng-show="isCurrentUserManager"
+               style="margin-top: -23px;"
+               data-ng-click="showCreateEvent()"/>
+    </div>
+    <ul class="nav nav-pills pull-right p5">
+      <li data-ng-class="{active:showAll}"><a href="javascript:void(0)" data-ng-click="getAll()">All</a></li>
+      <li data-ng-class="{active:showFuture}"><a href="javascript:void(0)" data-ng-click="getFuture()">Future</a></li>
+      <li data-ng-class="{active:showPast}"><a href="javascript:void(0)" data-ng-click="getPast()">Past</a></li>
+    </ul>
+    <div class="panel-body">
+        <div data-ng-repeat="event in group.events|eventsFilter:matchCase">
+            <div class="row">                                
+                <div class="col-sm-12" >
+                    <input type="button" value="I am in!" class="btn btn-danger btn-sm pull-right mt10 mr10" data-ng-click="joinEvent(event)"
+                                data-ng-show="!userJoined(event)"/>
+                    <div class="well well-sm event-list-view" title="View Details" data-ng-click="goEventDetails()">                                                                                
+                        <p><b>{{event.name}}</b></p>
+                        <p>{{event.description}}</p>
+                        <p>{{event.eventDateTime | date:'medium'}}</p>
+                        <p>{{event.eventLocation }}</p>
+                        <p><b>{{event.users.length}}</b> is going</p>
+                    </div>
+                </div>
+            </div>                           
+        </div>
+    </div>                        
+</div>

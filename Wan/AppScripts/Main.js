@@ -167,6 +167,48 @@ wan.directive('onFocus', function() {
         };
     });
 
+wan.filter('futureEventTop', function () {
+
+    return function (items, number) {
+
+        var arrayToReturn = [];
+        var limit = number;
+        for (var i = 0; i < items.length; i++) {
+            if (new Date(items[i].eventDateTime) >=  new Date()) {
+                arrayToReturn.push(items[i]);
+            }
+        }
+        
+        return _.first(arrayToReturn, limit);
+    };
+});
+
+wan.filter('eventsFilter', function () {
+
+    return function (items, matchCase) {
+
+        var arrayToReturn = [];
+        
+        if (matchCase == "future") {
+            for (var i = 0; i < items.length; i++) {
+                if (new Date(items[i].eventDateTime) >= new Date()) {
+                    arrayToReturn.push(items[i]);
+                }
+            }
+        }else if (matchCase == "past") {
+            for (var index = 0; index < items.length; index++) {
+                if (new Date(items[index].eventDateTime) < new Date()) {
+                    arrayToReturn.push(items[index]);
+                }
+            }
+        } else {
+            return items;
+        }
+        
+        return arrayToReturn;
+    };
+});
+
 if (!Modernizr.input.placeholder) {
     // this browser does not support HTML5 placeholders
     // see http://stackoverflow.com/questions/14777841/angularjs-inputplaceholder-directive-breaking-with-ng-model

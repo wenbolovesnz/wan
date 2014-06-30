@@ -13,3 +13,28 @@
 .p5 {
     padding: 5px;
 }
+
+.mt10 {
+    margin-top: 10px;
+}
+.mr10 {
+    margin-right: 10px;
+}
+
+.user-list-view:hover {
+    cursor: pointer;
+    background-color: #2fa4e7;
+    color: snow;
+}
+
+.user-list-view:hover h4 {    
+    color: snow;
+}
+
+.event-list-view:hover {
+    cursor: pointer;
+    background-color: #adadb2;    
+}   
+
+
+

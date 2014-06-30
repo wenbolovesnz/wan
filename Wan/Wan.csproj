@@ -269,6 +269,7 @@
     <Content Include="AppScripts\Controllers\Events.js" />
     <Content Include="AppScripts\Controllers\GroupDetails.js" />
     <Content Include="AppScripts\Controllers\Home.js" />
+    <Content Include="AppScripts\Controllers\Members.js" />
     <Content Include="AppScripts\Controllers\MyAccount.js" />
     <Content Include="AppScripts\Controllers\UserLogin.js" />
     <Content Include="AppScripts\Controllers\UserSignup.js" />
@@ -277,6 +278,7 @@
     <Content Include="AppScripts\startSignalR.js" />
     <Content Include="AppScripts\Templates\CreateGroup.html" />
     <Content Include="AppScripts\Templates\Directives\Uploader.html" />
+    <Content Include="AppScripts\Templates\EventsTab.html" />
     <Content Include="AppScripts\Templates\GroupDetails.html" />
     <Content Include="AppScripts\Templates\Home.html" />
     <Content Include="AppScripts\Templates\membersTab.html" />
@@ -291,6 +293,7 @@
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\images\defaultgroup.png" />
     <Content Include="Content\images\defaultUserIcon.jpg" />
+    <Content Include="Content\images\defaultUserIcon100x100.jpg" />
     <Content Include="Content\images\defaultUserIcon30x30.jpg" />
     <Content Include="Content\images\defaultUserIcon50x50.jpg" />
     <Content Include="Content\images\p1.jpg" />
