@@ -1,0 +1,40 @@
+﻿
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{group.users.length}} members</h3>
+    </div>
+    <div class="panel-body" style="min-height: 400px;">
+        <div data-ng-repeat="user in group.users">
+            <div class="row p5">
+                <div class="btn-group pull-right">
+                    <button type="button" 
+                            data-ng-show="isCurrentUserManager"
+                            class="btn btn-warning dropdown-toggle btn-sm" data-toggle="dropdown">
+                    Actions <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                    <li><a href="javascript:void(0)" data-ng-click="removeUserFromGroup(user)">Remove from Group</a></li>
+                        <li><a href="javascript:void(0)" data-ng-show="!isUserGroupManager(user)" data-ng-click="giveManangerRole(user)">Give Organizor Role</a></li>
+                        <li><a href="javascript:void(0)" data-ng-show="isUserGroupManager(user)" data-ng-click="removeManangerRole(user)">Remove Organizor Role</a></li>
+                    </ul>
+                </div>
+                <div class="media">
+                    <a href="javascript:void(0)" class="pull-left thumbnail">
+                        <img class="media-object" alt="defaultIcona" 
+                                imageurl 
+                                fallbackiconurl="/Content/images/defaultUserIcon50x50.jpg"
+                                userdata="{{user.profileImage}}"
+                                sizedata="?width=50&height=50">
+                    </a>
+                    <div class="media-body">
+                        <h4 class="media-heading">{{user.userName}}</h4>
+                        {{user.aboutMe}}
+                    </div>
+
+                </div>
+                                                  
+            </div>
+                                                                
+        </div>
+    </div>                
+</div>   

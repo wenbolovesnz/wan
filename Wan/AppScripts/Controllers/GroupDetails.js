@@ -2,6 +2,46 @@
 wan.controller('GroupDetailsCtrl',
     ['$scope', 'datacontext', 'hub', '$location', '$routeParams','userService','docTitleService', '$window',
     function ($scope, datacontext, hub, $location, $routeParams, userService, docTitleService, $window) {
+
+        $scope.homeTab = true;
+        $scope.membersTab = false;
+        $scope.eventsTab = false;
+        $scope.sponsorsTab = false;
+        $scope.photosTab = false;
+        
+        function setAllTabsFalse() {
+            $scope.homeTab = false;
+            $scope.membersTab = false;
+            $scope.eventsTab = false;
+            $scope.sponsorsTab = false;
+            $scope.photosTab = false;
+        }
+
+        $scope.showHomeTab = function() {
+            setAllTabsFalse();
+            $scope.homeTab = true;
+        };        
+        $scope.showMemembersTab = function () {
+            setAllTabsFalse();
+            $scope.membersTab = true;
+        };        
+        $scope.showEventsTab = function () {
+            setAllTabsFalse();
+            $scope.eventsTab = true;
+        };        
+        $scope.showSponsorsTab = function () {
+            setAllTabsFalse();
+            $scope.sponsorsTab = true;
+        };        
+        $scope.showPhotosTab = function () {
+            setAllTabsFalse();
+            $scope.photosTab = true;
+        };
+        
+
+
+
+
         $scope.isUserInGroup = function (userName) {
             return _.find($scope.group.users, function (u) {
                 return u.userName == userName;
@@ -205,11 +245,20 @@ wan.controller('GroupDetailsCtrl',
 
         $scope.joinEvent = function (event) {
             if (userService.isLogged) {
-
+                
                 $scope.groups = datacontext.events().save(
                     { eventId: event.id, userId: userService.id },
                     event
-                );
+                ).$promise.then(function(successResult) {
+                    var user = {
+                        id: userService.id,
+                        userName: userService.username,
+                        profileImage: userService.profileImage
+                    };
+                    event.users.push(user);                    
+                }, function(errorResult) {
+                    
+                });
                 
             } else {
                 $location.path('login');

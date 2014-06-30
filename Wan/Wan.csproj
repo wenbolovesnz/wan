@@ -279,6 +279,7 @@
     <Content Include="AppScripts\Templates\Directives\Uploader.html" />
     <Content Include="AppScripts\Templates\GroupDetails.html" />
     <Content Include="AppScripts\Templates\Home.html" />
+    <Content Include="AppScripts\Templates\membersTab.html" />
     <Content Include="AppScripts\Templates\MyAccount.html" />
     <Content Include="AppScripts\Templates\UserLogin.html" />
     <Content Include="AppScripts\Templates\UserSignup.html" />

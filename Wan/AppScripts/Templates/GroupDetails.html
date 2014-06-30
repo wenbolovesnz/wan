@@ -2,11 +2,11 @@
 <div class="row">
     <div class="col-xs-9">
         <ul class="nav nav-pills" style="padding: 10px;">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#">Members</a></li>
-          <li><a href="#">Events</a></li>
-          <li><a href="#">Sponsors</a></li>
-          <li><a href="#">Photos</a></li>
+          <li data-ng-class="{active:homeTab}"><a href="javascript:void(0)" data-ng-click="showHomeTab()">Home</a></li>
+          <li data-ng-class="{active:membersTab}"><a href="javascript:void(0)" data-ng-click="showMemembersTab()">Members</a></li>
+          <li data-ng-class="{active:eventsTab}"><a href="javascript:void(0)" data-ng-click="showEventsTab()">Events</a></li>
+          <li data-ng-class="{active:sponsorsTab}"><a href="javascript:void(0)" data-ng-click="showSponsorsTab()">Sponsors</a></li>
+          <li data-ng-class="{active:photosTab}"><a href="javascript:void(0)" data-ng-click="showPhotosTab()">Photos</a></li>
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
               More <span class="caret"></span>
@@ -30,7 +30,7 @@
     
 </div>
 
-<div class="row">
+<div class="row" data-ng-show="homeTab">
     <div class="col-lg-3">
         <uploader image="image" 
                   url="url" 
@@ -246,6 +246,18 @@
         
 </div>
 
-
+<div class="row" data-ng-show="membersTab">
+    <div data-ng-include="'AppScripts/Templates/membersTab.html'" 
+         data-ng-controller="EventsCtrl"></div>
+</div>
+<div class="row" data-ng-show="eventsTab">
+    event tab
+</div>
+<div class="row" data-ng-show="sponsorsTab">
+    sponsors tab
+</div>
+<div class="row" data-ng-show="photosTab">
+    photos tab
+</div>
 
     
