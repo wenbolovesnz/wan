@@ -2,7 +2,9 @@
 wan.controller('GroupDetailsCtrl',
     ['$scope', 'datacontext', 'hub', '$location', '$routeParams','userService','docTitleService', '$window',
     function ($scope, datacontext, hub, $location, $routeParams, userService, docTitleService, $window) {
-
+        $scope.testFunc = function() {
+            console.log($scope.test);
+        };
         $scope.homeTab = true;
         $scope.membersTab = false;
         $scope.eventsTab = false;
@@ -195,23 +197,7 @@ wan.controller('GroupDetailsCtrl',
         
          
         //---event date
-        $scope.dob = "";
-        
-        $scope.clear = function () {
-            $scope.dob = "";
-        };
-
-        $scope.open = function ($event) {
-            $event.preventDefault();
-            $event.stopPropagation();
-
-            $scope.opened = true;
-        };
-
-        $scope.dateOptions = {
-            formatYear: 'yy',
-            startingDay: 1
-        };
+        $scope.eventDateTime = "";
         
         $scope.saveNewEvent = function () {
             $scope.groupUpdating = true;
@@ -220,7 +206,7 @@ wan.controller('GroupDetailsCtrl',
                 name: $scope.eventName,
                 description: $scope.eventDescription,
                 eventLocation: $scope.eventLocation,
-                eventDateTime:$scope.dob
+                eventDateTime: $scope.eventDateTime
             };
 
             $scope.group.events.push(newEvent);

@@ -13,7 +13,8 @@ namespace Wan
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-1.9.0.js",
                         "~/Scripts/underscore.js",
-                        "~/Scripts/ajaxfileupload.js"                        
+                        "~/Scripts/ajaxfileupload.js",
+                        "~/Scripts/jquery.datetimepicker.js"
                         ));
 
             bundles.Add(new ScriptBundle("~/bundles/signalr").Include(
@@ -53,7 +54,9 @@ namespace Wan
             bundles.Add(new StyleBundle("~/Content/css").Include(                
                                         "~/Content/site.css",
                                         "~/Content/bootstrap.css",
-                                        "~/Content/font-awesome.css"));
+                                        "~/Content/font-awesome.css",
+                                        "~/Content/jquery.datetimepicker.css"
+                                        ));
           
         }
     }
