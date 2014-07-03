@@ -29,6 +29,19 @@ namespace Wan.Controllers
         {
             _applicationUnit = applicationUnit;
         }
+        [Authorize]
+        public JsonResult JoinGroupRequest()
+        {
+            var currentUser = _applicationUnit.UserRepository.GetByID(WebSecurity.CurrentUserId);
+
+            var groupsWithinManagerRole = currentUser.Groups.Where(m => m.UserGroupRoles.Select(ugr => ugr.UserId).Contains(currentUser.Id)).Select(g => g.Id);
+
+            var joinGroupRequestMessages =
+                _applicationUnit.JoinGroupRequestRepository.Get(
+                    m => !m.IsApproved & groupsWithinManagerRole.Contains(m.GroupId)).ToList();
+
+            return Json(new {messages = joinGroupRequestMessages}, JsonRequestBehavior.AllowGet);
+        }
 
         //
         // GET: /Account/Login

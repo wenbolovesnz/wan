@@ -14,7 +14,8 @@ namespace Wan
                         "~/Scripts/jquery-1.9.0.js",
                         "~/Scripts/underscore.js",
                         "~/Scripts/ajaxfileupload.js",
-                        "~/Scripts/jquery.datetimepicker.js"
+                        "~/Scripts/jquery.datetimepicker.js",
+                        "~/Scripts/bootbox.js"
                         ));
 
             bundles.Add(new ScriptBundle("~/bundles/signalr").Include(
@@ -28,6 +29,7 @@ namespace Wan
             bundles.Add(new ScriptBundle("~/bundles/joinme").Include(
                                     "~/AppScripts/Main.js", // must be first   
                                     "~/AppScripts/DataContext.js",
+                                    "~/AppScripts/Controllers/MenuAfter.js",
                                     "~/AppScripts/Controllers/Home.js",
                                     "~/AppScripts/Controllers/CreateGroup.js",
                                     "~/AppScripts/Controllers/GroupDetails.js",

@@ -53,6 +53,7 @@
     <Compile Include="Entities\Enums\RoleTypes.cs" />
     <Compile Include="Entities\Event.cs" />
     <Compile Include="Entities\Group.cs" />
+    <Compile Include="Entities\JoinGroupRequest.cs" />
     <Compile Include="Entities\Membership.cs" />
     <Compile Include="Entities\OAuthMembership.cs" />
     <Compile Include="Entities\UserGroupRole.cs" />

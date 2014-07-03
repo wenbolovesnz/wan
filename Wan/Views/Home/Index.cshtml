@@ -4,7 +4,11 @@
 
 @if (@User.Identity.IsAuthenticated)
 {    
-    @Html.Partial("_MenuAfterLogin")
+    //@Html.Partial("_MenuAfterLogin")
+    <div class="navbar navbar-default navbar-fixed-top"
+         data-ng-include="'AppScripts/Templates/MenuAfterLogin.html'"
+         data-ng-controller="MenuAfterCtrl" >  
+    </div>
 }
 else
 {
@@ -33,6 +37,7 @@ else
                 userSerivce.createdDate = '@ViewBag.CreatedDate';
                 userSerivce.aboutMe = '@ViewBag.AboutMe';     
                 userSerivce.userImage = '@ViewBag.UserImage';     
+                userSerivce.messages = [];     
             }
             
             angular.element(document.body).injector().get('docTitleService');

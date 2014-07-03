@@ -23,6 +23,7 @@ namespace FormBuilder.Data
         public DbSet<Group> Groups { get; set; }
         public DbSet<UserGroupRole> UserGroupRoles { get; set; }
         public DbSet<Event> Events { get; set; }
+        public DbSet<JoinGroupRequest> JoinGroupRequests { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

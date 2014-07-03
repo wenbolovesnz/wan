@@ -110,6 +110,10 @@
     <Compile Include="Migrations\201406262255567_addedEventsToUser.Designer.cs">
       <DependentUpon>201406262255567_addedEventsToUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201407030951537_JoinGroupRequest.cs" />
+    <Compile Include="Migrations\201407030951537_JoinGroupRequest.Designer.cs">
+      <DependentUpon>201407030951537_JoinGroupRequest.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -171,6 +175,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201406262255567_addedEventsToUser.resx">
       <DependentUpon>201406262255567_addedEventsToUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201407030951537_JoinGroupRequest.resx">
+      <DependentUpon>201407030951537_JoinGroupRequest.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
