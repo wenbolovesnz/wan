@@ -111,12 +111,14 @@ namespace Wan.Controllers.ApiControllers
             var eventToCreate = groupViewModel.Events.SingleOrDefault(m => m.Id == 0);
             if (eventToCreate != null)
             {
-                var newEvent = new Event();
-                newEvent.Description = eventToCreate.Description;
-                newEvent.EventDateTime = eventToCreate.EventDateTime;
-                newEvent.EventLocation = eventToCreate.EventLocation;
-                newEvent.GroupId = group.Id;
-                newEvent.Name = eventToCreate.Name;
+                var newEvent = new Event
+                {
+                    Description = eventToCreate.Description,
+                    EventDateTime = eventToCreate.EventDateTime,
+                    EventLocation = eventToCreate.EventLocation,
+                    GroupId = @group.Id,
+                    Name = eventToCreate.Name
+                };
                 newEvent.Users.Add(currentUser);
                 group.Events.Add(newEvent);               
             }
@@ -143,10 +145,12 @@ namespace Wan.Controllers.ApiControllers
 
                 foreach (var userId in userIdsToAddToManagers)
                 {
-                    var newManagerConfig = new UserGroupRole();
-                    newManagerConfig.UserId = userId;
-                    newManagerConfig.GroupId = groupViewModel.Id;
-                    newManagerConfig.RoleId = (int) RoleTypes.GroupManager;
+                    var newManagerConfig = new UserGroupRole
+                    {
+                        UserId = userId,
+                        GroupId = groupViewModel.Id,
+                        RoleId = (int) RoleTypes.GroupManager
+                    };
                     group.UserGroupRoles.Add(newManagerConfig);
                 }
             }

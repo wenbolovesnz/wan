@@ -128,12 +128,33 @@ wan.controller('GroupDetailsCtrl',
                 $scope.showJoinBtn = false;                
             }
         }
+
+        $scope.createJoinGroupRequest = function () {
+            
+            bootbox.prompt("Please tell us why you want to join?", function (result) {
+                if (result === null) {
+                    
+                } else {
+                    if (userService.isLogged) {
+
+                        datacontext.joinGroupRequest().save({
+                            groupId: $scope.group.id,
+                            message: result,
+                        }, function(data) {
+                            var newresult = data;
+                        });
+
+                        $scope.showJoinBtn = false;
+                    } else {
+                        var currentPath = $location.path();
+                        $location.path('login' + currentPath);
+                    }
+                }
+            });
+        };
         
         $scope.joinGroup = function() {
-            if (userService.isLogged) {
-                //datacontext.updateGroup().update($scope.group, function(data) {
-                //    hub.server.joinGroup($scope.group);
-                //});
+            if (userService.isLogged) {                
                 
                 $scope.group.$save(function (result) {
                     hub.server.joinGroup($scope.group);

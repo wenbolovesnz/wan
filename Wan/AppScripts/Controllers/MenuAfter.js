@@ -13,4 +13,8 @@
                   // called asynchronously if an error occurs
                   // or server returns response with an error status.
               });
+
+        $scope.logout = function () {
+            $http({ method: 'POST', url: '/Account/LogOff' });
+        };
     }]);

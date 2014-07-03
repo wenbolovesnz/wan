@@ -20,7 +20,7 @@ namespace FormBuilder.Business.Entities
         public bool IsProcessed { get; set; }
         public bool IsApproved { get; set; }
         public DateTime RequestedDate { get; set; }
-        public DateTime DecisionDate { get; set; }
+        public DateTime? DecisionDate { get; set; }
 
         public int? DecisionUserId { get; set; }
         public User DecisionUser { get; set; }

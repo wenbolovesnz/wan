@@ -38,7 +38,12 @@ namespace Wan.Controllers
 
             var joinGroupRequestMessages =
                 _applicationUnit.JoinGroupRequestRepository.Get(
-                    m => !m.IsApproved & groupsWithinManagerRole.Contains(m.GroupId)).ToList();
+                    m => !m.IsProcessed & groupsWithinManagerRole.Contains(m.GroupId)).Select(jgr => new JoinGroupRequestViewModel()
+                    {
+                        Id = jgr.Id,
+                        GroupId = jgr.GroupId,
+                        UserId = jgr.UserId
+                    }).ToList();
 
             return Json(new {messages = joinGroupRequestMessages}, JsonRequestBehavior.AllowGet);
         }

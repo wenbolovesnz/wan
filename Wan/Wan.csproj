@@ -251,12 +251,14 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ApiControllers\EventController.cs" />
     <Compile Include="Controllers\ApiControllers\GroupController.cs" />
+    <Compile Include="Controllers\ApiControllers\JoinGroupRequestController.cs" />
     <Compile Include="Controllers\ApiControllers\UserController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\JoinGroupRequestViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\FileValidationService.cs" />
     <Compile Include="Services\GroupSecurityService.cs" />

@@ -8,8 +8,6 @@ namespace Wan
         // For more information on Bundling, visit http://go.microsoft.com/fwlink/?LinkId=254725
         public static void RegisterBundles(BundleCollection bundles)
         {
-
-
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-1.9.0.js",
                         "~/Scripts/underscore.js",
@@ -42,7 +40,6 @@ namespace Wan
                                     "~/Scripts/bootstrap.js",
                                     "~/Scripts/angular-ui/ui-bootstrap-tpls.js"
                                     ));
-
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.unobtrusive*",
