@@ -24,10 +24,12 @@ namespace Wan.Controllers
     {
 
         private IApplicationUnit _applicationUnit;
+        private ModelFactoryService _modelFactory;
 
         public AccountController(IApplicationUnit applicationUnit)
         {
             _applicationUnit = applicationUnit;
+            _modelFactory = new ModelFactoryService();
         }
         [Authorize]
         public JsonResult JoinGroupRequest()
@@ -38,12 +40,7 @@ namespace Wan.Controllers
 
             var joinGroupRequestMessages =
                 _applicationUnit.JoinGroupRequestRepository.Get(
-                    m => !m.IsProcessed & groupsWithinManagerRole.Contains(m.GroupId)).Select(jgr => new JoinGroupRequestViewModel()
-                    {
-                        Id = jgr.Id,
-                        GroupId = jgr.GroupId,
-                        UserId = jgr.UserId
-                    }).ToList();
+                    m => !m.IsProcessed & groupsWithinManagerRole.Contains(m.GroupId), null, "User").Select(jgr => _modelFactory.Create(jgr)).ToList();
 
             return Json(new {messages = joinGroupRequestMessages}, JsonRequestBehavior.AllowGet);
         }

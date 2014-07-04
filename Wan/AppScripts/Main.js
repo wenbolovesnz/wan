@@ -40,6 +40,7 @@ wan.config(['$routeProvider', function ($routeProvider) {
                 }   
             }}).
         when('/myAccount', { templateUrl: 'AppScripts/Templates/MyAccount.html', controller: 'MyAccountCtrl' }).
+        when('/myNotificationMessages', { templateUrl: 'AppScripts/Templates/NotificationMessages.html', controller: 'NotificationMessagesCtrl' }).
         otherwise({ redirectTo: '/home' });
 }]);
 

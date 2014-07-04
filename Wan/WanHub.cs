@@ -24,8 +24,8 @@ namespace Wan
         public void JoinGroup(GroupViewModel groupViewModel)
         {
             Groups.Add(Context.ConnectionId, groupViewModel.GroupName);
-            Clients.Group(groupViewModel.GroupName).newGroupMememberArrived(new { userId = WebSecurity.CurrentUserId, userName = WebSecurity.CurrentUserName });
-                    
+            //Clients.Group(groupViewModel.GroupName).newGroupMememberArrived(new { userId = WebSecurity.CurrentUserId, userName = WebSecurity.CurrentUserName });
+            Clients.All.newGroupMememberArrived(new { userId = WebSecurity.CurrentUserId, userName = WebSecurity.CurrentUserName, groupId = groupViewModel.Id });                    
         }
 
         public void NewGroupMemember(int userId, string userName, string groupName)

@@ -40,10 +40,6 @@ wan.controller('GroupDetailsCtrl',
             $scope.photosTab = true;
         };
         
-
-
-
-
         $scope.isUserInGroup = function (userName) {
             return _.find($scope.group.users, function (u) {
                 return u.userName == userName;
@@ -97,12 +93,12 @@ wan.controller('GroupDetailsCtrl',
             });
         };
         
-        hub.on('newGroupMememberArrived', function (user) {
-            if (!$scope.isUserInGroup(user.userName)) {
-                $scope.group.users.push(user);
-                $scope.$apply();
-            }                       
-        });
+        //hub.on('newGroupMememberArrived', function (user) {
+        //    if (!$scope.isUserInGroup(user.userName)) {
+        //        $scope.group.users.push(user);
+        //        $scope.$apply();
+        //    }            
+        //});
         
         hub.on('newGroupMessage', function (msg) {
             $scope.messages.push({ message: msg });
@@ -142,6 +138,7 @@ wan.controller('GroupDetailsCtrl',
                             message: result,
                         }, function(data) {
                             var newresult = data;
+                            hub.server.joinGroup($scope.group);
                         });
 
                         $scope.showJoinBtn = false;

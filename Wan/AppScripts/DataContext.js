@@ -34,7 +34,9 @@ wan.factory('datacontext',
         }
         
         function joinGroupRequest() {
-            return $resource('api/JoinGroupRequest');
+            return $resource('api/JoinGroupRequest/:id', {id: '@id'}, {
+                update:{ method: 'Post'}
+            });
         }
 
         

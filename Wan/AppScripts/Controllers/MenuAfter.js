@@ -1,6 +1,23 @@
 ﻿wan.controller('MenuAfterCtrl',
-    ['$scope', 'datacontext', 'userService', '$http',
-    function ($scope, datacontext, userService, $http) {
+    ['$scope', 'datacontext', 'userService', '$http', 'hub',
+    function ($scope, datacontext, userService, $http, hub) {
+
+        hub.on('newGroupMememberArrived', function (user) {
+            
+            var group = _.find(datacontext.clientData.get('groups'), function (g) {
+                return g.id == user.groupId;
+            });
+            
+            var isCurrentUserManager = _.find(group.groupManagers, function (u) {
+                return u.id == userService.id;
+            });
+            
+            if (isCurrentUserManager) {
+                userService.messages.push(user);
+                $scope.$apply();
+            }
+        });
+
         $scope.user = userService;
         
         $http({ method: 'GET', url: '/Account/JoinGroupRequest' }).
@@ -15,6 +32,10 @@
               });
 
         $scope.logout = function () {
-            $http({ method: 'POST', url: '/Account/LogOff' });
+            $http({ method: 'POST', url: '/Account/LogOff' }).success(function (data, status, headers, config) {
+                location.reload();
+            });
         };
+
+
     }]);

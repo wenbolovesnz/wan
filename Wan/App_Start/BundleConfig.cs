@@ -13,7 +13,8 @@ namespace Wan
                         "~/Scripts/underscore.js",
                         "~/Scripts/ajaxfileupload.js",
                         "~/Scripts/jquery.datetimepicker.js",
-                        "~/Scripts/bootbox.js"
+                        "~/Scripts/bootbox.js",
+                        "~/Scripts/jquery.dataTables.js"
                         ));
 
             bundles.Add(new ScriptBundle("~/bundles/signalr").Include(
@@ -36,6 +37,7 @@ namespace Wan
                                     "~/AppScripts/Controllers/MyAccount.js",
                                     "~/AppScripts/Controllers/Events.js",
                                     "~/AppScripts/Controllers/Members.js",
+                                    "~/AppScripts/Controllers/NotificationMessages.js",
                                     "~/AppScripts/startSignalR.js",
                                     "~/Scripts/bootstrap.js",
                                     "~/Scripts/angular-ui/ui-bootstrap-tpls.js"
@@ -54,7 +56,8 @@ namespace Wan
                                         "~/Content/site.css",
                                         "~/Content/bootstrap.css",
                                         "~/Content/font-awesome.css",
-                                        "~/Content/jquery.datetimepicker.css"
+                                        "~/Content/jquery.datetimepicker.css",
+                                        "~/Content/jquery.jquery.dataTables.css"                                        
                                         ));
           
         }

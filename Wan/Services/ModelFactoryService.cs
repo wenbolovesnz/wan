@@ -5,6 +5,7 @@ using System.Web;
 using FormBuilder.Business.Entities;
 using FormBuilder.Business.Entities.Enums;
 using Wan.Controllers.ApiControllers;
+using Wan.Models;
 
 namespace Wan.Services
 {
@@ -54,5 +55,21 @@ namespace Wan.Services
                     }).ToList()
                 };
         }
+
+        public JoinGroupRequestViewModel Create(JoinGroupRequest joinGroupRequest)
+        {
+            return new JoinGroupRequestViewModel()
+            {
+                Id = joinGroupRequest.Id,
+                User = new UserViewModel() { Id= joinGroupRequest.UserId, UserName = joinGroupRequest.User.UserName},
+                DecisionDate = joinGroupRequest.DecisionDate,
+                Group = this.Create(joinGroupRequest.Group),
+                IsApproved = joinGroupRequest.IsApproved,
+                IsProcessed = joinGroupRequest.IsProcessed,
+                Message = joinGroupRequest.Message,
+                RequestedDate = joinGroupRequest.RequestedDate
+            };
+        }
+
     }
 }
