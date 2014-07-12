@@ -35,8 +35,8 @@ namespace Wan.Controllers.ApiControllers
             return groupViewModels;
         }
 
-        [System.Web.Http.Authorize]
-        public GroupViewModel Create([FromBody] GroupViewModel groupViewModel)
+       
+        private GroupViewModel CreateNewGroup(GroupViewModel groupViewModel)
         {
             var group = new Group();
 
@@ -69,6 +69,10 @@ namespace Wan.Controllers.ApiControllers
         [System.Web.Http.HttpPost]
         public GroupViewModel Post(int id, [FromBody] GroupViewModel groupViewModel)
         {
+            if (id == 0)
+            {
+                return this.CreateNewGroup(groupViewModel);
+            }
             var currentUser = _applicationUnit.UserRepository.GetByID(WebSecurity.CurrentUserId);
 
             var group = _applicationUnit.GroupRepository.GetByID(groupViewModel.Id);
