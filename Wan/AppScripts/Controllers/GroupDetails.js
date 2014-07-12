@@ -93,7 +93,7 @@ wan.controller('GroupDetailsCtrl',
             });
         };
         
-        //hub.on('newGroupMememberArrived', function (user) {
+        //hub.on('newMemberJoinedChat', function (user) {
         //    if (!$scope.isUserInGroup(user.userName)) {
         //        $scope.group.users.push(user);
         //        $scope.$apply();
@@ -120,7 +120,7 @@ wan.controller('GroupDetailsCtrl',
         
         if (userService.isLogged) {
             if ($scope.isUserInGroup(userService.username)) {
-                hub.server.joinGroup($scope.group);
+                hub.server.joinGroupChat($scope.group);
                 $scope.showJoinBtn = false;                
             }
         }

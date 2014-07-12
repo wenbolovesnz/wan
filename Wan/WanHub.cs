@@ -28,6 +28,12 @@ namespace Wan
             Clients.All.newGroupMememberArrived(new { userId = WebSecurity.CurrentUserId, userName = WebSecurity.CurrentUserName, groupId = groupViewModel.Id });                    
         }
 
+        public void JoinGroupChat(GroupViewModel groupViewModel)
+        {
+            Groups.Add(Context.ConnectionId, groupViewModel.GroupName);
+            Clients.Group(groupViewModel.GroupName).newMemberJoinedChat(new { userId = WebSecurity.CurrentUserId, userName = WebSecurity.CurrentUserName });
+        }
+
         public void NewGroupMemember(int userId, string userName, string groupName)
         {
             
