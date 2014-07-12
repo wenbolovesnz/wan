@@ -9,10 +9,11 @@
         </div>
         <div class="navbar-collapse collapse" id="navbar-main">
             <ul class="nav navbar-nav">                
-                <li>
-                    <a href="#/myAccount">{{user.username}}</a>
+                <li title="My Account">
+                    <a href="#/myAccount"><i class="fa fa-user fa-lg"></i> {{user.username}}</a>
                 </li>                
-                <li><a href="#/myNotificationMessages">Messages <span class="badge">{{user.messages.length}}</span></a></li>
+                <li title="messages"><a href="#/myNotificationMessages"><i class="fa fa-envelope fa-lg"></i> <span class="badge">{{user.messages.length}}</span></a></li>
+                <li title="Log out"><a href="javascript:void(0)" data-ng-click="logout()"><i class="fa fa-sign-out fa-lg"></i >Logout</a></li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)" id="themes"> More <span class="caret"></span></a>
                     <ul class="dropdown-menu" aria-labelledby="themes">
