@@ -38,6 +38,7 @@ namespace Wan.Services
                         EventLocation = e.EventLocation,
                         Name = e.Name,
                         Group = new GroupViewModel() { Id = e.GroupId },
+                        CreatedById = e.CreatedByUserId,
                         Users = e.Users.Select(eu => new UserViewModel()
                         {
                             UserName = eu.UserName,

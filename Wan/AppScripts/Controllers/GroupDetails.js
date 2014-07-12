@@ -278,14 +278,13 @@ wan.controller('GroupDetailsCtrl',
         };
 
         $scope.getCreatedBy = function (event) {
-            if (event.eventCreatedBy) {
+            if (event.createdById) {
                 var currentUserIn = _.find(event.users, function (user) {
-                    return user.id == event.eventCreatedBy.id;
+                    return user.id == event.createdById;
                 });
                 return currentUserIn.userName;
             }
             
-
             return "";
         };
     }]);

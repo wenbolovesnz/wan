@@ -118,6 +118,10 @@
     <Compile Include="Migrations\201407032324020_makeDecisionDateNullAble.Designer.cs">
       <DependentUpon>201407032324020_makeDecisionDateNullAble.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201407122248491_AddedEventCreatedById.cs" />
+    <Compile Include="Migrations\201407122248491_AddedEventCreatedById.Designer.cs">
+      <DependentUpon>201407122248491_AddedEventCreatedById.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -185,6 +189,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201407032324020_makeDecisionDateNullAble.resx">
       <DependentUpon>201407032324020_makeDecisionDateNullAble.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201407122248491_AddedEventCreatedById.resx">
+      <DependentUpon>201407122248491_AddedEventCreatedById.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

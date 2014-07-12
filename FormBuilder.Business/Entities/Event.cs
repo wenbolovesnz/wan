@@ -28,6 +28,7 @@ namespace FormBuilder.Business.Entities
         public DateTime EventDateTime { get; set; }
         public string EventLocation { get; set; }
         public string Description { get; set; }
+        public int CreatedByUserId { get; set; }
 
     }
 }

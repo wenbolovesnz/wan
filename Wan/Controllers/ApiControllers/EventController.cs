@@ -89,5 +89,6 @@ namespace Wan.Controllers.ApiControllers
         public string EventLocation { get; set; }
         public string Description { get; set; }
         public IList<UserViewModel> Users { get; set; }
+        public int CreatedById { get; set; }
     }
 }
