@@ -118,11 +118,22 @@
                                     <div class="well well-sm">                                                                                
                                         <input type="button" value="I am in!" class="btn btn-danger btn-sm pull-right" data-ng-click="joinEvent(event)"
                                                data-ng-show="!userJoined(event)"/>
-                                        <p><b>{{event.name}}</b></p>
+                                        <p><b>{{event.name}}: Created by {{getCreatedBy(event)}}</b></p>
                                         <p>{{event.description}}</p>
                                         <p>{{event.eventDateTime | date:'medium'}}</p>
                                         <p>{{event.eventLocation }}</p>
                                         <p><b>{{event.users.length}}</b> is going</p>
+                                        <div class="row">
+                                            <div class="col-sm-2" data-ng-repeat="u in event.users | limitTo:3">                                                
+                                                <a href="javascript:void(0)" class="pull-left thumbnail">
+                                                    <img class="img-responsive" alt="defaultIcona" 
+                                                            imageurl 
+                                                            fallbackiconurl="/Content/images/defaultUserIcon50x50.jpg"
+                                                            userdata="{{u.profileImage}}"
+                                                            sizedata="?width=50&height=50">
+                                                </a>                                                                                                    
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>                           

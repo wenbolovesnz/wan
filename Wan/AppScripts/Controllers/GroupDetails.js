@@ -276,4 +276,16 @@ wan.controller('GroupDetailsCtrl',
 
             return currentUserIn;
         };
+
+        $scope.getCreatedBy = function (event) {
+            if (event.eventCreatedBy) {
+                var currentUserIn = _.find(event.users, function (user) {
+                    return user.id == event.eventCreatedBy.id;
+                });
+                return currentUserIn.userName;
+            }
+            
+
+            return "";
+        };
     }]);
