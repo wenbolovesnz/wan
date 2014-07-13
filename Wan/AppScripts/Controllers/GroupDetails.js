@@ -250,21 +250,27 @@ wan.controller('GroupDetailsCtrl',
 
         $scope.joinEvent = function (event) {
             if (userService.isLogged) {
-                
-                $scope.groups = datacontext.events().save(
-                    { eventId: event.id, userId: userService.id },
-                    event
-                ).$promise.then(function(successResult) {
-                    var user = {
-                        id: userService.id,
-                        userName: userService.username,
-                        profileImage: userService.profileImage
-                    };
-                    event.users.push(user);                    
-                }, function(errorResult) {
-                    
-                });
-                
+                if ($scope.isUserInGroup(userService.username)) {
+                        $scope.groups = datacontext.events().save(
+                            { eventId: event.id, userId: userService.id },
+                            event
+                        ).$promise.then(function (successResult) {
+                            var user = {
+                                id: userService.id,
+                                userName: userService.username,
+                                profileImage: userService.profileImage
+                            };
+                            event.users.push(user);
+                        }, function (errorResult) {
+
+                        });
+                } else {
+                    bootbox.confirm("Sorry, you are not in this group yet, do you want to join this group now?", function (result) {
+                        if (result) {
+                            $scope.createJoinGroupRequest();
+                        }
+                    });
+                }                
             } else {
                 $location.path('login');
             }
