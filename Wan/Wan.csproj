@@ -268,6 +268,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppScripts\Controllers\CreateGroup.js" />
+    <Content Include="AppScripts\Controllers\Event.js" />
     <Content Include="AppScripts\Controllers\Events.js" />
     <Content Include="AppScripts\Controllers\GroupDetails.js" />
     <Content Include="AppScripts\Controllers\Home.js" />
@@ -281,6 +282,7 @@
     <Content Include="AppScripts\Main.js" />
     <Content Include="AppScripts\startSignalR.js" />
     <Content Include="AppScripts\Templates\CreateGroup.html" />
+    <Content Include="AppScripts\Templates\event.html" />
     <Content Include="AppScripts\Templates\NotificationMessages.html" />
     <Content Include="AppScripts\Templates\Directives\Uploader.html" />
     <Content Include="AppScripts\Templates\EventsTab.html" />

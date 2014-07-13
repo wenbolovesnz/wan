@@ -27,24 +27,31 @@ namespace Wan.Controllers.ApiControllers
         }
 
         [System.Web.Http.Authorize]
-        public IEnumerable<EventViewModel> GetEvent(int id)
+        public EventViewModel GetEvent(int id)
         {
-            var events = _applicationUnit.EventRepository.Get(m => m.GroupId == id).ToList();
+            var eventModel = _applicationUnit.EventRepository.Get(m => m.Id == id, null, "Users,Group").First();
 
-            return events.Select(m => new EventViewModel()
+            return new EventViewModel()
             {
-                Id = m.Id,
-                Description = m.Description,
-                EventDateTime = m.EventDateTime,
-                EventLocation = m.EventLocation,
-                Name = m.Name,
-                Users = m.Users.Select(u => new UserViewModel()
+                Id = eventModel.Id,
+                Description = eventModel.Description,
+                EventDateTime = eventModel.EventDateTime,
+                EventLocation = eventModel.EventLocation,
+                Name = eventModel.Name,
+                CreatedById = eventModel.CreatedByUserId,                
+                Users = eventModel.Users.Select(u => new UserViewModel()
                 {
                     Id = u.Id,
                     UserName = u.UserName,
                     ProfileImage = u.ProfileImage
-                }).ToList()
-            });            
+                }).ToList(),
+                Group = new GroupViewModel()
+                {
+                    Id = eventModel.GroupId,
+                    GroupName = eventModel.Group.GroupName
+                }
+                
+            };            
         }
         [System.Web.Http.Authorize]
         [HttpPost]

@@ -38,7 +38,10 @@ wan.config(['$routeProvider', function ($routeProvider) {
                     
                     return defer.promise;
                 }   
-            }}).
+            }
+        }).when('/event/:eventId', {
+                    templateUrl: 'AppScripts/Templates/event.html', controller: 'EventCtrl'
+            }).
         when('/myAccount', { templateUrl: 'AppScripts/Templates/MyAccount.html', controller: 'MyAccountCtrl' }).
         when('/myNotificationMessages', { templateUrl: 'AppScripts/Templates/NotificationMessages.html', controller: 'NotificationMessagesCtrl' }).
         otherwise({ redirectTo: '/home' });

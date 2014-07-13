@@ -36,6 +36,7 @@ namespace Wan
                                     "~/AppScripts/Controllers/UserSignup.js",
                                     "~/AppScripts/Controllers/MyAccount.js",
                                     "~/AppScripts/Controllers/Events.js",
+                                    "~/AppScripts/Controllers/Event.js",
                                     "~/AppScripts/Controllers/Members.js",
                                     "~/AppScripts/Controllers/NotificationMessages.js",
                                     "~/AppScripts/startSignalR.js",

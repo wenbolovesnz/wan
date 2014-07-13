@@ -39,6 +39,11 @@ wan.factory('datacontext',
             });
         }
 
+        function event() {
+            return $resource('api/Event/:id', { id: '@id' }, {
+                update: { method: 'Post' }
+            });
+        }
         
         
         
@@ -48,6 +53,7 @@ wan.factory('datacontext',
             clientData: clientData,
             updateGroup: updateGroup,
             events: events,
+            event:event,
             joinGroupRequest: joinGroupRequest
         };
 
