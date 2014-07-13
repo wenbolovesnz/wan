@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.AccessControl;
 using System.Web;
 using Wan.Controllers.ApiControllers;
 
@@ -16,6 +17,9 @@ namespace Wan.Models
         public bool IsApproved { get; set; }
         public DateTime RequestedDate { get; set; }
         public DateTime? DecisionDate { get; set; }
+        
+
+        public string DeclineReason { get; set; }
         
 
 

@@ -68,7 +68,8 @@ namespace Wan.Services
                 IsApproved = joinGroupRequest.IsApproved,
                 IsProcessed = joinGroupRequest.IsProcessed,
                 Message = joinGroupRequest.Message,
-                RequestedDate = joinGroupRequest.RequestedDate
+                RequestedDate = joinGroupRequest.RequestedDate,
+                DeclineReason = joinGroupRequest.DeclineReason
             };
         }
 

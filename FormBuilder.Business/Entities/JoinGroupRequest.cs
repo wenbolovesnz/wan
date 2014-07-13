@@ -25,6 +25,7 @@ namespace FormBuilder.Business.Entities
         public int? DecisionUserId { get; set; }
         public User DecisionUser { get; set; }
 
+        public string DeclineReason { get; set; }
 
     }
 }

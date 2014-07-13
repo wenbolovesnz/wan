@@ -25,14 +25,24 @@ wan.controller('NotificationMessagesCtrl',
         };
         
         $scope.decline = function (message) {
-            $scope.processing = true;
-            message.isProcessed = true;
-            message.isApproved = false;
 
-            message.$update(function () {
-                $scope.processing = false;
-                removeItemFromArray(userService.messages, message);
+            bootbox.prompt("Please state the reason for this?", function (result) {
+                if (result === null) {
+
+                } else {
+                    $scope.processing = true;
+                    message.isProcessed = true;
+                    message.isApproved = false;
+                    message.declineReason = result;
+
+                    message.$update(function () {
+                        $scope.processing = false;
+                        removeItemFromArray(userService.messages, message);
+                    });
+                }
             });
+
+
         };
         
         function removeItemFromArray(array, item) {

@@ -79,6 +79,7 @@ namespace Wan.Controllers.ApiControllers
                     joinGroupRequest.IsProcessed = true;
                     joinGroupRequest.DecisionDate = System.DateTime.Now;
                     joinGroupRequest.DecisionUserId = WebSecurity.CurrentUserId;
+                    joinGroupRequest.DeclineReason = joinGroupRequestViewModel.DeclineReason;
 
                     if (joinGroupRequest.IsApproved)
                     {
