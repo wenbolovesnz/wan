@@ -67,7 +67,7 @@ wan.controller('GroupDetailsCtrl',
         $scope.image = $scope.group.groupImage;
         
         $scope.url = $scope.image;
-        $scope.uploadUrl = 'api/Group/UploadImage';
+        $scope.uploadUrl = 'Account/UploadGroupImage';
 
         $scope.data = {
             groupId: $scope.group.id

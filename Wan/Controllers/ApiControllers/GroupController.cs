@@ -175,6 +175,7 @@ namespace Wan.Controllers.ApiControllers
             }
         }
 
+        [System.Web.Http.HttpPost]
         public object UploadImage()
         {
             var request = HttpContext.Current.Request;
