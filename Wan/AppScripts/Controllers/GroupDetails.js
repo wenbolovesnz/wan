@@ -116,12 +116,13 @@ wan.controller('GroupDetailsCtrl',
         $scope.messages = [];
 
         $scope.showJoinBtn = true;
+        $scope.showChat = false;
         $scope.groupMessageContent = "";
         
         if (userService.isLogged) {
             if ($scope.isUserInGroup(userService.username)) {
                 hub.server.joinGroupChat($scope.group);
-                $scope.showJoinBtn = false;                
+                $scope.showChat = true;
             }
         }
 
@@ -150,19 +151,19 @@ wan.controller('GroupDetailsCtrl',
             });
         };
         
-        $scope.joinGroup = function() {
-            if (userService.isLogged) {                
+        //$scope.joinGroup = function() {
+        //    if (userService.isLogged) {                
                 
-                $scope.group.$save(function (result) {
-                    hub.server.joinGroup($scope.group);
-                });
+        //        $scope.group.$save(function (result) {
+        //            hub.server.joinGroup($scope.group);
+        //        });
                 
-                $scope.showJoinBtn = false;                
-            } else {
-                var currentPath = $location.path();               
-                $location.path('login' + currentPath);
-            }
-        };
+        //        $scope.showJoinBtn = false;                
+        //    } else {
+        //        var currentPath = $location.path();               
+        //        $location.path('login' + currentPath);
+        //    }
+        //};
         
         $scope.sendMessage = function () {
             hub.server.sendGroupMessage({
