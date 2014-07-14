@@ -251,11 +251,16 @@ namespace Wan.Controllers.ApiControllers
 
     public class UserViewModel
     {
+        public UserViewModel()
+        {
+            Groups = new List<GroupViewModel>();
+        }
         public int Id { get; set; }
         public string UserName { get; set; }
         public bool IsGroupManager { get; set; }
         public string ProfileImage { get; set; }
         public string AboutMe { get; set; }
+        public IList<GroupViewModel> Groups { get; set; }
     }
 
     public class GroupViewModel

@@ -11,18 +11,21 @@
             </div> 
     </div>
     <div class="col-lg-6">
-            <div class="panel panel-default">
+            <div class="panel panel-primary">
               <div class="panel-heading"><b>{{event.users.length}}</b> is going</div>
-                <div class="panel-body">                   
-                    <div data-ng-repeat="u in event.users">                                                
-                        <a href="javascript:void(0)" class="pull-left thumbnail">
-                            <img class="img-responsive" alt="defaultIcona" 
-                                    imageurl 
-                                    fallbackiconurl="/Content/images/defaultUserIcon50x50.jpg"
-                                    userdata="{{u.profileImage}}"
-                                    sizedata="?width=50&height=50">
-                        </a>                                                                                                    
-                    </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div data-ng-repeat="u in event.users" class="col-sm-2" title="{{u.userName}}">                                                
+                            <a href="#user/{{u.id}}" class="pull-left thumbnail" >
+                                <img class="img-responsive" alt="defaultIcona" 
+                                     imageurl 
+                                     fallbackiconurl="/Content/images/defaultUserIcon50x50.jpg"
+                                     userdata="{{u.profileImage}}"
+                                     sizedata="?width=50&height=50">
+                            </a>                                                                                                    
+                        </div>
+                    </div>                   
+
                 </div>
             </div>
     </div>    

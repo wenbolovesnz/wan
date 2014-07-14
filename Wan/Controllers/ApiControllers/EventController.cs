@@ -26,7 +26,7 @@ namespace Wan.Controllers.ApiControllers
             return null;
         }
 
-        [System.Web.Http.Authorize]
+        [System.Web.Http.AllowAnonymous]
         public EventViewModel GetEvent(int id)
         {
             var eventModel = _applicationUnit.EventRepository.Get(m => m.Id == id, null, "Users,Group").First();

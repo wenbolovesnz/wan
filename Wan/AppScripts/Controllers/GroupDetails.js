@@ -151,20 +151,6 @@ wan.controller('GroupDetailsCtrl',
             });
         };
         
-        //$scope.joinGroup = function() {
-        //    if (userService.isLogged) {                
-                
-        //        $scope.group.$save(function (result) {
-        //            hub.server.joinGroup($scope.group);
-        //        });
-                
-        //        $scope.showJoinBtn = false;                
-        //    } else {
-        //        var currentPath = $location.path();               
-        //        $location.path('login' + currentPath);
-        //    }
-        //};
-        
         $scope.sendMessage = function () {
             hub.server.sendGroupMessage({
                 GroupName: $scope.group.groupName,

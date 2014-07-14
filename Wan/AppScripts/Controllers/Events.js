@@ -33,8 +33,8 @@
         };
         
         
-        $scope.goEventDetails = function() {
-            console.log("fired go details");
+        $scope.goEventDetails = function(event) {
+            $location.path('event/' + event.id);
         };
 
     }]);

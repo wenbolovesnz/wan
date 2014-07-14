@@ -27,5 +27,26 @@ namespace Wan.Controllers.ApiControllers
 
         }
 
+        public UserViewModel GetUser(int id)
+        {
+
+            var user = _applicationUnit.UserRepository.Get(u => u.Id == id, null, "Events,Groups").First();
+
+
+            return new UserViewModel()
+            {
+                AboutMe = user.AboutMe,
+                Id = user.Id,
+                ProfileImage = user.ProfileImage,
+                UserName = user.UserName,
+                Groups = user.Groups.Select(m => new GroupViewModel()
+                {
+                    GroupName = m.GroupName,
+                    GroupImage = m.GroupImage,
+                    Id = m.Id
+                }).ToList()
+            };
+        }
+
     }
 }

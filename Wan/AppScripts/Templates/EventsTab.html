@@ -18,8 +18,8 @@
                 <div class="col-sm-12" >
                     <input type="button" value="I am in!" class="btn btn-danger btn-sm pull-right mt10 mr10" data-ng-click="joinEvent(event)"
                                 data-ng-show="!userJoined(event)"/>
-                    <div class="well well-sm event-list-view" title="View Details" data-ng-click="goEventDetails()">                                                                                
-                        <p><b>{{event.name}}</b></p>
+                    <div class="well well-sm event-list-view" title="View Details" data-ng-click="goEventDetails(event)">                                                                                
+                        <p><b>{{event.name}}: Created by {{getCreatedBy(event)}}</b></p>
                         <p>{{event.description}}</p>
                         <p>{{event.eventDateTime | date:'medium'}}</p>
                         <p>{{event.eventLocation }}</p>

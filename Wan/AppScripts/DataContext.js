@@ -10,6 +10,7 @@ wan.factory('datacontext',
         var clientData = $cacheFactory('cachedData');
 
         clientData.put('groups', []);
+        clientData.put('users', []);
 
         function getAllGroups() {
             return $resource('api/Group/:groupId', {groupId: '@id'}, {
@@ -44,6 +45,12 @@ wan.factory('datacontext',
                 update: { method: 'Post' }
             });
         }
+
+        function user() {
+            return $resource('api/User/:id', { id: '@id' }, {
+                update: { method: 'Post' }
+            });
+        }
         
         
         
@@ -53,7 +60,8 @@ wan.factory('datacontext',
             clientData: clientData,
             updateGroup: updateGroup,
             events: events,
-            event:event,
+            event: event,
+            user:user,
             joinGroupRequest: joinGroupRequest
         };
 
