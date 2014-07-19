@@ -14,8 +14,8 @@
   </thead>
   <tbody>
     <tr data-ng-repeat="message in messages">      
-      <td>{{message.user.userName}}</td>
-      <td>{{message.group.groupName}}</td>
+      <td><a href="#user/{{message.user.id}}">{{message.user.userName}}</a></td>
+      <td><a href="#groupDetails/{{message.group.id}}">{{message.group.groupName}}</a></td>
         <td>{{message.message}}</td>
         <td>{{message.requestedDate | date:'medium'}}</td>
         <td>{{message.isProcessed ? 'Yes' : 'No'}}</td>

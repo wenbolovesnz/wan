@@ -39,6 +39,7 @@ namespace Wan.Controllers.ApiControllers
                 Id = user.Id,
                 ProfileImage = user.ProfileImage,
                 UserName = user.UserName,
+                NickName = user.NickName,
                 Groups = user.Groups.Select(m => new GroupViewModel()
                 {
                     GroupName = m.GroupName,

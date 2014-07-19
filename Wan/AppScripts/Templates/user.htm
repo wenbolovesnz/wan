@@ -13,10 +13,24 @@
                 >
         </a>  
         
+        <div class="row">
+            <div class="col-sm-12">
+                {{user.aboutMe}}                
+            </div>
+            <div class="col-sm-12">
+                <h5>Nick Name: </h5>{{user.nickName}}
+            </div>
+                        
+            <div class="col-sm-12">
+                <h5>City: </h5>{{user.city}}
+            </div>
+           
+        </div>
+        
     </div>
     
-    <div class="col-sm-9">
-        
+    <div class="col-sm-9">                       
+            <h5>{{user.userName}} is in the following {{user.groups.length}} groups.</h5>               
         <div class="panel panel-primary" data-ng-repeat="group in user.groups">
             <div class="panel-heading">
                 <h3 class="panel-title">{{group.groupName}}</h3>

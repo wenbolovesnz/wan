@@ -8,7 +8,9 @@ wan.controller('UserCtrl',
         });
 
         $scope.$on("picDownloaded", function () {
-            $("#usericon").attr("src", $scope.user.profileImage);
+            if ($scope.user.profileImage) {
+                $("#usericon").attr("src", $scope.user.profileImage);
+            }            
         });
 
     }]);

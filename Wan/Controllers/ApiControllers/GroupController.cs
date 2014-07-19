@@ -121,7 +121,8 @@ namespace Wan.Controllers.ApiControllers
                     EventDateTime = eventToCreate.EventDateTime,
                     EventLocation = eventToCreate.EventLocation,
                     GroupId = @group.Id,
-                    Name = eventToCreate.Name
+                    Name = eventToCreate.Name,
+                    CreatedByUserId = currentUser.Id
                 };
                 newEvent.Users.Add(currentUser);
                 group.Events.Add(newEvent);               
@@ -260,6 +261,7 @@ namespace Wan.Controllers.ApiControllers
         public bool IsGroupManager { get; set; }
         public string ProfileImage { get; set; }
         public string AboutMe { get; set; }
+        public string NickName { get; set; }        
         public IList<GroupViewModel> Groups { get; set; }
     }
 
