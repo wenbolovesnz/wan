@@ -126,6 +126,10 @@
     <Compile Include="Migrations\201407130404402_AddedDeclineReasonToJoinGroupRequest.Designer.cs">
       <DependentUpon>201407130404402_AddedDeclineReasonToJoinGroupRequest.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201407221003560_AddedEventMessage.cs" />
+    <Compile Include="Migrations\201407221003560_AddedEventMessage.Designer.cs">
+      <DependentUpon>201407221003560_AddedEventMessage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -199,6 +203,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201407130404402_AddedDeclineReasonToJoinGroupRequest.resx">
       <DependentUpon>201407130404402_AddedDeclineReasonToJoinGroupRequest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201407221003560_AddedEventMessage.resx">
+      <DependentUpon>201407221003560_AddedEventMessage.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

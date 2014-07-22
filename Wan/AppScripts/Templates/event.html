@@ -1,14 +1,83 @@
-﻿<h3>Event Details</h3>
+﻿<h3 class="pull-left">Event Details</h3>
+<button type="button" style="margin-top: 10px;" class="btn btn-danger pull-right" data-ng-show="isCurrentUserManager" data-ng-click="showEdit()">Edit</button>
+<div class="clearfix"></div>
 <div class="row">    
     <div class="col-lg-6">
             <div class="panel panel-primary">
               <div class="panel-heading"><b>{{event.name}}</b></div>
-                <div class="panel-body">                   
+                <div class="panel-body" data-ng-show="!isEdit">                   
                     <p>{{event.description}}</p>
                     <p>{{event.eventDateTime | date:'medium'}}</p>
                     <p>{{event.eventLocation }}</p>
                 </div>
+                
+                <div class="panel-body" data-ng-show="isEdit">
+                        <form class="form-horizontal" name="createEvent" data-ng-submit="updateEvent()" novalidate>
+                            <fieldset>
+                                <div class="form-group">
+                                    <label for="eventName" class="col-lg-4 control-label">New Event Name</label>
+                                    <div class="col-lg-8">
+                                        <input type="text" class="form-control" id="eventName" placeholder="Event Name" required="required"
+                                               data-ng-model="event.name">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="textArea" class="col-lg-4 control-label">New Event Description</label>
+                                    <div class="col-lg-8">
+                                        <textarea class="form-control" rows="3" id="eventDescription" required="required" data-ng-model="event.description"></textarea>
+                                        <span class="help-block">Write something about this event.</span>
+                                    </div>
+                                </div> 
+                                
+                                <div class="form-group">
+                                    <label for="dob" class="col-lg-4 control-label">Event Date Time</label>
+                                    <div class="col-lg-8">
+                                        <p class="input-group">
+                                            <input type="text" id="dob" class="form-control" ng-model="event.eventDateTime" datetimepicker/>                                           
+                                        </p>                                                                                                                                       
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="eventLocation" class="col-lg-4 control-label">Location</label>
+                                    <div class="col-lg-8">
+                                        <input type="text" class="form-control" id="eventLocation" placeholder="Event Location" required="required"
+                                               data-ng-model="event.eventLocation">
+                                    </div>
+                                </div> 
+                                <div class="form-group">
+                                    <div class="col-lg-10 col-lg-offset-2">
+                                        <button class="btn btn-default" data-ng-click="cancelEdit()">Cancel</button>
+                                        <button type="submit" data-ng-disabled="createEvent.$invalid || updating" class="btn btn-primary">Save</button>
+                                        <a id="A1" class="fa fa-spinner fa-spin" data-ng-show="updating"></a>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
             </div> 
+        
+        <div class="well" style="padding: 5px;" data-ng-repeat="m in event.eventMessages">
+            <p><b>{{m.user.userName}} said: </b> {{m.message}}  at {{ m.createdDate | date: short}}</p>
+        </div>
+        
+        <form class="form-horizontal" name="createMessage" data-ng-submit="createNewMessage()" novalidate>
+            <fieldset>
+                <div class="form-group">
+                    <label for="message" class="col-lg-4 control-label">New Message:</label>
+                    <div class="col-lg-8">
+                        <textarea class="form-control" rows="3" id="message" required="required" data-ng-model="message"></textarea>
+                    </div>
+                </div> 
+                                
+                <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                        <button type="submit" data-ng-disabled="createMessage.$invalid || updating" class="btn btn-primary">Submit</button>
+                        <a id="A2" class="fa fa-spinner fa-spin" data-ng-show="updating"></a>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+
     </div>
     <div class="col-lg-6">
             <div class="panel panel-primary">

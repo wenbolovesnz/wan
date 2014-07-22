@@ -30,14 +30,4 @@ wan.controller('HomeCtrl',
         $.connection.hub.logging = true;
         $.connection.hub.start();
 
-
-        //$scope.refresh = function () {
-        //    $scope.formDefinitionSets = datacontext.formDefinitionSets().query();
-        //};
-
-        //$scope.viewFormDefinitionVersion = function (formDefinitionModel) {
-        //    window.location = '/#newForm/' + '?formDefinitionId=' + formDefinitionModel.id;
-        //};
-
-
     }]);

@@ -11,6 +11,7 @@ namespace FormBuilder.Business.Entities
         public Event()
         {
             _users = new List<User>();
+            _eventMessages = new List<EventMessage>();
         }
 
         private ICollection<User> _users;
@@ -19,6 +20,14 @@ namespace FormBuilder.Business.Entities
         {
             get { return _users; }
             set { _users = value; }
+        }
+
+        private ICollection<EventMessage> _eventMessages;
+
+        public virtual ICollection<EventMessage> EventMessages
+        {
+            get { return _eventMessages; }
+            set { _eventMessages = value; }
         }
 
         public int Id { get; set; }
