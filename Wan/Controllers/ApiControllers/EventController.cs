@@ -50,6 +50,13 @@ namespace Wan.Controllers.ApiControllers
                 {
                     Id = eventModel.GroupId,
                     GroupName = eventModel.Group.GroupName,
+                    Users = eventModel.Group.Users.Select( gu => new UserViewModel()
+                    {
+                        Id = gu.Id,
+                        UserName = gu.UserName,
+                        ProfileImage = gu.ProfileImage
+                    }).ToList(),
+
                     GroupManagers = eventModel.Group.UserGroupRoles.Select(gm => new UserViewModel()
                     {
                         Id = gm.Id

@@ -252,6 +252,7 @@
     <Compile Include="Controllers\ApiControllers\EventController.cs" />
     <Compile Include="Controllers\ApiControllers\GroupController.cs" />
     <Compile Include="Controllers\ApiControllers\JoinGroupRequestController.cs" />
+    <Compile Include="Controllers\ApiControllers\SponsorController.cs" />
     <Compile Include="Controllers\ApiControllers\UserController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -661,6 +662,7 @@
     <None Include="Properties\PublishProfiles\wanban - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\wanban - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\wanban - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\wanban.pubxml" />
     <None Include="Scripts\jquery-1.9.0.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.0.js" />
     <Content Include="Scripts\jquery-1.9.0.min.js" />

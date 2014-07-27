@@ -51,10 +51,15 @@ wan.factory('datacontext',
                 update: { method: 'Post' }
             });
         }
-        
-        
-        
+
+        function sponsor() {
+            return $resource('api/Sponsor/:id', { id: '@id' }, {
+                query: { method: 'GET', isArray: true }
+            });
+        }
+                        
         return {
+            sponsor:sponsor,
             getAllGroups: getAllGroups,
             createGroup: createGroup,
             clientData: clientData,

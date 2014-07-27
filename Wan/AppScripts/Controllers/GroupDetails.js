@@ -10,6 +10,8 @@ wan.controller('GroupDetailsCtrl',
         $scope.eventsTab = false;
         $scope.sponsorsTab = false;
         $scope.photosTab = false;
+
+        $scope.sponsors = [];
         
         function setAllTabsFalse() {
             $scope.homeTab = false;
@@ -34,6 +36,12 @@ wan.controller('GroupDetailsCtrl',
         $scope.showSponsorsTab = function () {
             setAllTabsFalse();
             $scope.sponsorsTab = true;
+
+            if ($scope.sponsors.length == 0) {
+                $scope.sponsors = datacontext.sponsor().query({ id: $scope.group.id }, function(dsfds) {
+                    var d = dsfds;
+                });
+            }
         };        
         $scope.showPhotosTab = function () {
             setAllTabsFalse();

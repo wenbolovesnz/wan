@@ -130,6 +130,10 @@
     <Compile Include="Migrations\201407221003560_AddedEventMessage.Designer.cs">
       <DependentUpon>201407221003560_AddedEventMessage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201407231025503_AddSponsor.cs" />
+    <Compile Include="Migrations\201407231025503_AddSponsor.Designer.cs">
+      <DependentUpon>201407231025503_AddSponsor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -206,6 +210,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201407221003560_AddedEventMessage.resx">
       <DependentUpon>201407221003560_AddedEventMessage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201407231025503_AddSponsor.resx">
+      <DependentUpon>201407231025503_AddSponsor.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

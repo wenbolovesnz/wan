@@ -10,8 +10,17 @@ namespace FormBuilder.Business.Entities
     {
         public Event()
         {
+            _sponsors = new List<Sponsor>();
             _users = new List<User>();
             _eventMessages = new List<EventMessage>();
+        }
+
+        private ICollection<Sponsor> _sponsors;
+
+        public virtual ICollection<Sponsor> Sponsors
+        {
+            get { return _sponsors; }
+            set { _sponsors = value; }
         }
 
         private ICollection<User> _users;

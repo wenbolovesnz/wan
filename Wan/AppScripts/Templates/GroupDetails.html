@@ -264,7 +264,20 @@
          data-ng-controller="EventsCtrl"></div>
 </div>
 <div class="row" data-ng-show="sponsorsTab">
-    sponsors tab
+    <div class="row" data-ng-show="sponsors.length != 0">                                      
+        <div class="col-sm-6 col-md-3" data-ng-repeat="sponsor in sponsors">
+            <div class="thumbnail" style="height: 400px;">
+                <img data-src="holder.js/300x200" alt="300x200" imageurl 
+                     userdata="{{sponsor.photoUrl}}" 
+                    fallbackiconurl="/Content/images/defaultgroup.png"
+                     style="width: 300px; height: 200px; cursor: pointer">
+         
+                <div class="caption">
+                    <h3 class="pointer">{{sponsor.name}}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <div class="row" data-ng-show="photosTab">
     photos tab
