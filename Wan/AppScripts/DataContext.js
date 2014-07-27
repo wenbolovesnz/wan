@@ -11,6 +11,7 @@ wan.factory('datacontext',
 
         clientData.put('groups', []);
         clientData.put('users', []);
+        clientData.put('sponsors', []);
 
         function getAllGroups() {
             return $resource('api/Group/:groupId', {groupId: '@id'}, {

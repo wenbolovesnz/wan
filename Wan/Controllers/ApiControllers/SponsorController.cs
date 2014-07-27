@@ -19,12 +19,28 @@ namespace Wan.Controllers.ApiControllers
         {
             _applicationUnit = applicationUnit;
         }
+ 
+        public SponsorViewModel Get(int id)
+        {
+            var sponsor = _applicationUnit.SponsoRepository.Get(m => m.Id == id, null, "Group").First();
 
+            var isCurrentUserGroupManager = sponsor.Group.UserGroupRoles.Select(m => m.UserId).Contains(WebSecurity.CurrentUserId);
 
+            return new SponsorViewModel()
+            {
+                Id = sponsor.Id,
+                Name = sponsor.Name,
+                PhotoUrl = sponsor.PhotoUrl,
+                IsManager = isCurrentUserGroupManager
+            };
+        }
 
          //GET api/sponsor/5 get all the sponsors in groupId 
-        public IList<SponsorViewModel> Get(int id)
+        [HttpGet]
+        public IList<SponsorViewModel> Get(string groupId)
         {
+            var id = Int32.Parse(groupId);
+
             var sponsors = _applicationUnit.SponsoRepository.Get(m => m.GroupId == id);
 
             return sponsors.Select(s => new SponsorViewModel()
@@ -36,7 +52,7 @@ namespace Wan.Controllers.ApiControllers
         }
 
         // POST api/sponsor
-        public void Post([FromBody]SponsorViewModel sponsorViewModel)
+        public SponsorViewModel Post([FromBody]SponsorViewModel sponsorViewModel)
         {            
             var group =
                 _applicationUnit.GroupRepository.Get(m => m.Id == sponsorViewModel.GroupId, null, "UserGroupRoles")
@@ -51,9 +67,11 @@ namespace Wan.Controllers.ApiControllers
                 };
 
                 _applicationUnit.SponsoRepository.Insert(newSponsor);
-                _applicationUnit.SaveChanges();               
+                _applicationUnit.SaveChanges();
+                sponsorViewModel.Id = newSponsor.Id;
             }
- 
+
+            return sponsorViewModel;
         }
 
         // PUT api/sponsor/5
@@ -63,7 +81,9 @@ namespace Wan.Controllers.ApiControllers
 
         // DELETE api/sponsor/5
         public void Delete(int id)
-        {
+        {            
+            _applicationUnit.SponsoRepository.Delete(id);
+            _applicationUnit.SaveChanges();
         }        
     }
 
@@ -73,5 +93,6 @@ namespace Wan.Controllers.ApiControllers
         public string Name { get; set; }
         public string PhotoUrl { get; set; }
         public int GroupId { get; set; }
+        public bool IsManager { get; set; }
     }
 }

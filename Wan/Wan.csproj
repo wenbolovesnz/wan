@@ -277,6 +277,7 @@
     <Content Include="AppScripts\Controllers\MenuAfter.js" />
     <Content Include="AppScripts\Controllers\MyAccount.js" />
     <Content Include="AppScripts\Controllers\NotificationMessages.js" />
+    <Content Include="AppScripts\Controllers\Sponsor.js" />
     <Content Include="AppScripts\Controllers\User.js" />
     <Content Include="AppScripts\Controllers\UserLogin.js" />
     <Content Include="AppScripts\Controllers\UserSignup.js" />
@@ -293,6 +294,7 @@
     <Content Include="AppScripts\Templates\membersTab.html" />
     <Content Include="AppScripts\Templates\MenuAfterLogin.html" />
     <Content Include="AppScripts\Templates\MyAccount.html" />
+    <Content Include="AppScripts\Templates\Sponsor.html" />
     <Content Include="AppScripts\Templates\user.htm" />
     <Content Include="AppScripts\Templates\UserLogin.html" />
     <Content Include="AppScripts\Templates\UserSignup.html" />

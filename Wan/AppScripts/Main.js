@@ -39,6 +39,32 @@ wan.config(['$routeProvider', function ($routeProvider) {
                     return defer.promise;
                 }   
             }
+        }).when('/sponsor/:sponsorId', {
+            templateUrl: 'AppScripts/Templates/Sponsor.html', controller: 'SponsorCtrl',
+            resolve: {
+                loadGroups: function () {
+                    var datacontext = angular.element(document.body).injector().get('datacontext');
+                    var $q = angular.element(document.body).injector().get('$q');
+                    var $location = angular.element(document.body).injector().get('$location');
+                    var urlValues = $location.url().split("/");
+                    
+                    var defer = $q.defer();
+                    
+                    if(_.find(datacontext.clientData.get('sponsors'), function(s){
+                        return s.id == urlValues[urlValues.length - 1];
+                    })) {
+                        defer.resolve();
+                    } else {
+                        var sponsor = datacontext.sponsor().get({ id: urlValues[urlValues.length - 1] }, function () {
+                            datacontext.clientData.get('sponsors').push(sponsor);
+                            defer.resolve();
+                        });
+                    }                        
+                    
+                    
+                    return defer.promise;
+                }   
+            }
         }).when('/event/:eventId', {
                     templateUrl: 'AppScripts/Templates/event.html', controller: 'EventCtrl'
         }).

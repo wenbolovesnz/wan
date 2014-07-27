@@ -2,9 +2,7 @@
 wan.controller('GroupDetailsCtrl',
     ['$scope', 'datacontext', 'hub', '$location', '$routeParams','userService','docTitleService', '$window',
     function ($scope, datacontext, hub, $location, $routeParams, userService, docTitleService, $window) {
-        $scope.testFunc = function() {
-            console.log($scope.test);
-        };
+
         $scope.homeTab = true;
         $scope.membersTab = false;
         $scope.eventsTab = false;
@@ -38,8 +36,8 @@ wan.controller('GroupDetailsCtrl',
             $scope.sponsorsTab = true;
 
             if ($scope.sponsors.length == 0) {
-                $scope.sponsors = datacontext.sponsor().query({ id: $scope.group.id }, function(dsfds) {
-                    var d = dsfds;
+                $scope.sponsors = datacontext.sponsor().query({ groupId: $scope.group.id }, function(dsfds) {
+                    datacontext.clientData.put('sponsors', $scope.sponsors);
                 });
             }
         };        
@@ -67,7 +65,7 @@ wan.controller('GroupDetailsCtrl',
         $scope.newGroupName = $scope.group.groupName;
         
         $scope.newDescription = $scope.group.description;
-
+        
         $scope.groupCreator = _.find($scope.group.users, function(u) {
             return u.id == $scope.group.createdById;
         });
@@ -89,8 +87,7 @@ wan.controller('GroupDetailsCtrl',
 
             group.groupImage = imageFile;
         };
-               
-        //$scope.isCurrentUserManager = userService.isCurrentUserManager(userService.username, $scope.group.users);
+                      
         $scope.isCurrentUserManager = _.find($scope.group.groupManagers, function(user) {
             return user.id == userService.id;
         });
@@ -100,14 +97,7 @@ wan.controller('GroupDetailsCtrl',
                 return u.id == user.id;
             });
         };
-        
-        //hub.on('newMemberJoinedChat', function (user) {
-        //    if (!$scope.isUserInGroup(user.userName)) {
-        //        $scope.group.users.push(user);
-        //        $scope.$apply();
-        //    }            
-        //});
-        
+                
         hub.on('newGroupMessage', function (msg) {
             $scope.messages.push({ message: msg });
             $scope.$apply();
@@ -123,7 +113,7 @@ wan.controller('GroupDetailsCtrl',
     
         $scope.messages = [];
 
-        $scope.showJoinBtn = true;
+        $scope.showJoinBtn = $scope.isUserInGroup(userService.username);
         $scope.showChat = false;
         $scope.groupMessageContent = "";
         
@@ -288,4 +278,33 @@ wan.controller('GroupDetailsCtrl',
             
             return "";
         };
+
+        $scope.createSponsor = function () {
+            bootbox.prompt("What is the name of this new sponsor?", function (sponsorName) {
+                if (sponsorName) {
+                    var Sponsor = datacontext.sponsor()
+                    var newSponsor = new Sponsor({
+                        name: sponsorName,
+                        groupId: $scope.group.id,
+                        photoUrl: null
+                    });
+                    newSponsor.$save(function (data) {
+                        $scope.sponsors.push(newSponsor);
+                    });
+                    
+                }
+            });
+
+        }
+
+        $scope.removeSponsor = function (sponsor) {
+            bootbox.confirm("Are you sure you want to remove this sponsor?", function (result) {
+                if (result) {
+
+                    removeItemFromArray($scope.sponsors, sponsor);
+                    
+                    sponsor.$remove();
+                }
+            });
+        }
     }]);

@@ -23,7 +23,7 @@
     </div>
     <div class="col-xs-3">
         <input type="button" 
-               data-ng-show="showJoinBtn"
+               data-ng-show="!showJoinBtn"
                data-ng-click="createJoinGroupRequest()"
                value="Join" class="btn btn-danger btn-lg pull-right" style="margin-top: 15px"/>        
     </div>
@@ -264,16 +264,22 @@
          data-ng-controller="EventsCtrl"></div>
 </div>
 <div class="row" data-ng-show="sponsorsTab">
+    <h3 class="pull-left">Sponsors</h3>
+    <button type="button" style="margin-top: 10px;" class="btn btn-danger pull-right" data-ng-show="isCurrentUserManager" data-ng-click="createSponsor()">Create New Sponsor</button>
+    <div class="clearfix"></div>
     <div class="row" data-ng-show="sponsors.length != 0">                                      
         <div class="col-sm-6 col-md-3" data-ng-repeat="sponsor in sponsors">
-            <div class="thumbnail" style="height: 400px;">
+            <div class="thumbnail">
                 <img data-src="holder.js/300x200" alt="300x200" imageurl 
                      userdata="{{sponsor.photoUrl}}" 
-                    fallbackiconurl="/Content/images/defaultgroup.png"
-                     style="width: 300px; height: 200px; cursor: pointer">
+                     fallbackiconurl="/Content/images/defaultgroup.png"
+                     style="width: 300px; height: 200px;">
          
                 <div class="caption">
-                    <h3 class="pointer">{{sponsor.name}}</h3>
+                    <h3>{{sponsor.name}}</h3>
+                    <a href="#/sponsor/{{sponsor.id}}" class="btn btn-danger" data-ng-show="isCurrentUserManager">Edit</a>
+                    <button type="button" class="btn btn-danger" data-ng-show="isCurrentUserManager" data-ng-click="removeSponsor(sponsor)">Remove</button>
+                    
                 </div>
             </div>
         </div>
