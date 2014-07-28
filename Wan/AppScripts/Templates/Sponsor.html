@@ -2,7 +2,8 @@
 <div class="row">    
     <div class="col-sm-3">
         <div>
-            <uploader image="image" url="url" display="true" uploadurl="uploadUrl" callback ="uploadCompletedCallBack"
+	        <uploader image="image" url="url" display="true" uploadurl="uploadUrl" callback ="uploadCompletedCallBack"
+					  fromdata="data"
                       datatype="html"></uploader>
         </div>
 
@@ -21,7 +22,7 @@
                     </div>                                
                     <div class="form-group">
                         <div class="col-lg-10 col-lg-offset-2">
-                            <button type="submit" data-ng-disabled="editSponsor.$invalid || updating" class="btn btn-primary">Save</button>
+                            <button type="submit" data-ng-disabled="editSponsor.$invalid || updating" data-ng-click="updateSponsor();"class="btn btn-primary">Save</button>
                             <a id="A1" class="fa fa-spinner fa-spin" data-ng-show="updating"></a>
                         </div>
                     </div>

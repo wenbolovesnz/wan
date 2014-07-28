@@ -282,8 +282,9 @@ wan.controller('GroupDetailsCtrl',
         $scope.createSponsor = function () {
             bootbox.prompt("What is the name of this new sponsor?", function (sponsorName) {
                 if (sponsorName) {
-                    var Sponsor = datacontext.sponsor()
+                    var Sponsor = datacontext.sponsor();
                     var newSponsor = new Sponsor({
+                        id: 0,
                         name: sponsorName,
                         groupId: $scope.group.id,
                         photoUrl: null

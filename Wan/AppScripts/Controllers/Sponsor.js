@@ -11,16 +11,21 @@
 
         $scope.image = $scope.sponsor.photoUrl;
         $scope.url = $scope.image != null ? $scope.image : '/content/images/defaultgroup.png';
-        $scope.uploadUrl = 'Account';
+        $scope.uploadUrl = 'Account/UploadSponsorImage';
 
         $scope.updateSponsor = function () {
             $scope.updating = true;
-            $scope.event.$update(function () {
+            $scope.sponsor.$save(function () {
                 $scope.updating = false;
-                $scope.isEdit = false;
             });
         };
 
-       
+        $scope.uploadCompletedCallBack = function () {
+            
+        };
+
+        $scope.data = {
+            sponsorId: $scope.sponsor.id
+        };
 
     }]);

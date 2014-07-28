@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -7,6 +8,8 @@ using System.Web.Http;
 using FormBuilder.Business.Entities;
 using FormBuilder.Data.Contracts;
 using Microsoft.Owin.Security.Provider;
+using Microsoft.WindowsAzure;
+using Microsoft.WindowsAzure.StorageClient;
 using WebMatrix.WebData;
 
 namespace Wan.Controllers.ApiControllers
@@ -52,7 +55,7 @@ namespace Wan.Controllers.ApiControllers
         }
 
         // POST api/sponsor
-        public SponsorViewModel Post([FromBody]SponsorViewModel sponsorViewModel)
+        private SponsorViewModel Create(SponsorViewModel sponsorViewModel)
         {            
             var group =
                 _applicationUnit.GroupRepository.Get(m => m.Id == sponsorViewModel.GroupId, null, "UserGroupRoles")
@@ -75,14 +78,35 @@ namespace Wan.Controllers.ApiControllers
         }
 
         // PUT api/sponsor/5
-        public void Put(int id, [FromBody]string value)
+        public SponsorViewModel Post(int id, [FromBody]SponsorViewModel sponsorViewModel)
         {
+            if (id == 0)
+            {
+                return Create(sponsorViewModel);
+            }
+
+            var sponsor = _applicationUnit.SponsoRepository.GetByID(id);
+            sponsor.Name = sponsorViewModel.Name;
+            _applicationUnit.SponsoRepository.Update(sponsor);
+            _applicationUnit.SaveChanges();
+
+            return sponsorViewModel;
         }
 
         // DELETE api/sponsor/5
         public void Delete(int id)
-        {            
-            _applicationUnit.SponsoRepository.Delete(id);
+        {
+            var sponsor = _applicationUnit.SponsoRepository.GetByID(id);
+
+            var storageAccount = CloudStorageAccount.Parse(ConfigurationManager.ConnectionStrings["StorageConnection"].ConnectionString);
+            var blobStorage = storageAccount.CreateCloudBlobClient();
+            CloudBlobContainer container = blobStorage.GetContainerReference("productimages");
+
+            var imagesContainer = blobStorage.GetContainerReference("productimages");
+            var oldImageToDelete = imagesContainer.GetBlockBlobReference(sponsor.PhotoUrl);
+            oldImageToDelete.DeleteIfExists();
+
+            _applicationUnit.SponsoRepository.Delete(sponsor);
             _applicationUnit.SaveChanges();
         }        
     }
