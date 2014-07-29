@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -30,7 +31,7 @@ namespace Wan.Controllers.ApiControllers
         [System.Web.Http.AllowAnonymous]
         public EventViewModel GetEvent(int id)
         {
-            var eventModel = _applicationUnit.EventRepository.Get(m => m.Id == id, null, "Users,Group,EventMessages").First();
+            var eventModel = _applicationUnit.EventRepository.Get(m => m.Id == id, null, "Users,Group,EventMessages,Sponsors").First();
 
             return new EventViewModel()
             {
@@ -40,6 +41,12 @@ namespace Wan.Controllers.ApiControllers
                 EventLocation = eventModel.EventLocation,
                 Name = eventModel.Name,
                 CreatedById = eventModel.CreatedByUserId,                
+                Sponsors = eventModel.Sponsors.Select(s => new SponsorViewModel()
+                {
+                    Id = s.Id,
+                    Name = s.Name,
+                    PhotoUrl = s.PhotoUrl
+                }).ToList(),
                 Users = eventModel.Users.Select(u => new UserViewModel()
                 {
                     Id = u.Id,
@@ -97,6 +104,15 @@ namespace Wan.Controllers.ApiControllers
                     eventToUpdate.Description = eventViewModel.Description;
                     eventToUpdate.EventLocation = eventViewModel.EventLocation;
                     eventToUpdate.EventDateTime = eventViewModel.EventDateTime;
+
+                    eventToUpdate.Sponsors.Clear();
+
+                    foreach (var sponsorToAdd in eventViewModel.Sponsors)
+                    {
+                        var itemToAdd = _applicationUnit.SponsoRepository.GetByID(sponsorToAdd.Id);
+                        eventToUpdate.Sponsors.Add(itemToAdd);
+                    }
+
                 }
 
                 if (eventToUpdate.Group.Users.Select(u => u.Id).Contains(currentUserId))
@@ -177,7 +193,8 @@ namespace Wan.Controllers.ApiControllers
         public string EventLocation { get; set; }
         public string Description { get; set; }
         public IList<UserViewModel> Users { get; set; }
-        public IList<EventMessageViewModel> EventMessages { get; set; } 
+        public IList<EventMessageViewModel> EventMessages { get; set; }
+        public IList<SponsorViewModel> Sponsors { get; set; }
         public int CreatedById { get; set; }
     }
 

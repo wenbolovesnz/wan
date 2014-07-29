@@ -298,6 +298,7 @@
     <Content Include="AppScripts\Templates\user.htm" />
     <Content Include="AppScripts\Templates\UserLogin.html" />
     <Content Include="AppScripts\Templates\UserSignup.html" />
+    <Content Include="Content\angular-multi-select.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -379,6 +380,7 @@
     <Content Include="Scripts\angular-loader.js" />
     <Content Include="Scripts\angular-loader.min.js" />
     <Content Include="Scripts\angular-mocks.js" />
+    <Content Include="Scripts\angular-multi-select.js" />
     <Content Include="Scripts\angular-resource.js" />
     <Content Include="Scripts\angular-resource.min.js" />
     <Content Include="Scripts\angular-route.js" />

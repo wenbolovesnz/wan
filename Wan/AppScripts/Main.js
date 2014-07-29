@@ -1,12 +1,13 @@
 ﻿/* main: startup script creates the 'formBuilder' module and adds custom Ng directives */
 
-window.wan = angular.module('wan', ['ngRoute', 'ngResource', 'ui.bootstrap']);
+window.wan = angular.module('wan', ['ngRoute', 'ngResource', 'ui.bootstrap', 'multi-select']);
 
 $.connection.hub.error(function(err) {
     console.log('An error occurred: ' + err);
 });
 
 wan.value('hub', $.connection.joinmeHub);
+
 
 wan.value('Q', window.Q);
 

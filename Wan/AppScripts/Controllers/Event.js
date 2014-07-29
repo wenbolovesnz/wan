@@ -18,10 +18,38 @@ wan.controller('EventCtrl',
 
             $scope.canCreateMessage = userService.isLogged && $scope.isCurrentUserInGroup;
 
+            $scope.sponsors = datacontext.sponsor().query({ groupId: $scope.event.group.id }, function (dsfds) {
+                datacontext.clientData.put('sponsors', $scope.sponsors);
+
+                $scope.sponsorsSelect = [];
+                _.each($scope.sponsors, function(s) {
+                    var isInEvent = _.find($scope.event.sponsors, function(sp) {
+                        return sp.id == s.id;
+                    });
+
+                    var selectItem = {
+                        icon: s.photoUrl != null ? '<img src=' + s.photoUrl + '>' : '<img  src="/Content/Images/defaultgroup.png" />',
+                        photoUrl : s.photoUrl,
+                        id: s.id,
+                        name: s.name,
+                        ticked: isInEvent ? true : false
+
+                };
+
+                    $scope.sponsorsSelect.push(selectItem);
+                });
+
+            });
+
         });
 
         $scope.updateEvent = function () {
             $scope.updating = true;
+
+            $scope.event.sponsors = _.filter($scope.sponsorsSelect, function(s) {
+                return s.ticked == true;
+            });
+
             $scope.event.$update(function() {
                 $scope.updating = false;
                 $scope.isEdit = false;

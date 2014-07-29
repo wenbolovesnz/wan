@@ -37,13 +37,26 @@
                                         </p>                                                                                                                                       
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="eventLocation" class="col-lg-4 control-label">Location</label>
+	                            <div class="form-group">
+		                            <label for="eventLocation" class="col-lg-4 control-label">Location</label>
+		                            <div class="col-lg-8">
+			                            <input type="text" class="form-control" id="eventLocation" placeholder="Event Location" required="required"
+			                                   data-ng-model="event.eventLocation">
+		                            </div>
+	                            </div>
+								<div class="form-group">
+                                    <label for="sponsorsSelect" class="col-lg-4 control-label">Sponsors</label>
                                     <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="eventLocation" placeholder="Event Location" required="required"
-                                               data-ng-model="event.eventLocation">
+										<div
+											multi-select
+											input-model="sponsorsSelect"
+											button-label="icon name"
+											item-label="icon name"
+											tick-property="ticked"
+										>
+										</div>
                                     </div>
-                                </div> 
+                                </div>  
                                 <div class="form-group">
                                     <div class="col-lg-10 col-lg-offset-2">
                                         <button class="btn btn-default" data-ng-click="cancelEdit()">Cancel</button>
@@ -81,23 +94,40 @@
         </form>
 
     </div>
-    <div class="col-lg-6">
-            <div class="panel panel-primary">
-              <div class="panel-heading"><b>{{event.users.length}}</b> is going</div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div data-ng-repeat="u in event.users" class="col-sm-2" title="{{u.userName}}">                                                
-                            <a href="#user/{{u.id}}" class="pull-left thumbnail" >
-                                <img class="img-responsive" alt="defaultIcona" 
-                                     imageurl 
-                                     fallbackiconurl="/Content/images/defaultUserIcon50x50.jpg"
-                                     userdata="{{u.profileImage}}"
-                                     sizedata="?width=50&height=50">
-                            </a>                                                                                                    
-                        </div>
-                    </div>                   
+	<div class="col-lg-6">
+		<div class="panel panel-primary">
+            <div class="panel-heading"><b>Event Sponsors</b></div>
+            <div class="panel-body">
+                <div class="row">
+                    <div data-ng-repeat="s in event.sponsors" class="col-sm-3" title="{{s.name}}">                                                
+                        <a href="#sponsor/{{s.id}}" class="pull-left thumbnail" >
+                            <img class="img-responsive" alt="defaultIcona"
+                                    imageurl 
+                                    fallbackiconurl="/Content/images/defaultUserIcon100x100.jpg"
+                                    userdata="{{s.photoUrl}}"
+                                    sizedata="?width=100&height=100">
+                        </a>                                                                                                    
+                    </div>
+                </div>                   
 
-                </div>
             </div>
-    </div>    
+        </div>
+		<div class="panel panel-primary">
+			<div class="panel-heading"><b>{{event.users.length}}</b> is going</div>
+			<div class="panel-body">
+				<div class="row">
+					<div data-ng-repeat="u in event.users" class="col-sm-2" title="{{u.userName}}">                                                
+						<a href="#user/{{u.id}}" class="pull-left thumbnail" >
+							<img class="img-responsive" alt="defaultIcona" 
+							     imageurl 
+							     fallbackiconurl="/Content/images/defaultUserIcon50x50.jpg"
+							     userdata="{{u.profileImage}}"
+							     sizedata="?width=50&height=50">
+						</a>                                                                                                    
+					</div>
+				</div>                   
+
+			</div>
+		</div>
+	</div>    
 </div>

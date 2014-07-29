@@ -42,7 +42,8 @@ namespace Wan
                                     "~/AppScripts/Controllers/NotificationMessages.js",
                                     "~/AppScripts/startSignalR.js",
                                     "~/Scripts/bootstrap.js",
-                                    "~/Scripts/angular-ui/ui-bootstrap-tpls.js"
+                                    "~/Scripts/angular-ui/ui-bootstrap-tpls.js",
+                                    "~/Scripts/angular-multi-select.js"                                    
                                     ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
@@ -58,7 +59,8 @@ namespace Wan
                                         "~/Content/site.css",
                                         "~/Content/bootstrap.css",
                                         "~/Content/font-awesome.css",
-                                        "~/Content/jquery.datetimepicker.css"                                     
+                                        "~/Content/jquery.datetimepicker.css",
+                                        "~/Content/angular-multi-select.css"
                                         ));
           
         }
