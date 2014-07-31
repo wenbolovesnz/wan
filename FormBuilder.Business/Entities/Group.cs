@@ -14,6 +14,7 @@ namespace FormBuilder.Business.Entities
             _users = new List<User>();
             _userGroupRoles = new List<UserGroupRole>();
             _events = new List<Event>();
+            _groupPhotos = new List<GroupPhoto>();
         }
 
         private ICollection<User> _users;
@@ -22,6 +23,8 @@ namespace FormBuilder.Business.Entities
 
         private ICollection<Event> _events;
 
+        private ICollection<GroupPhoto> _groupPhotos;
+
         public virtual ICollection<Event> Events
         {
             get { return _events; }
@@ -29,6 +32,12 @@ namespace FormBuilder.Business.Entities
             {
                 _events = value;
             }
+        }
+
+        public virtual ICollection<GroupPhoto> GroupPhotos
+        {
+            get { return _groupPhotos; } 
+            set { _groupPhotos = value; }
         }
 
         public virtual ICollection<User> Users

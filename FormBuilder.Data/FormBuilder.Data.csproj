@@ -134,6 +134,10 @@
     <Compile Include="Migrations\201407231025503_AddSponsor.Designer.cs">
       <DependentUpon>201407231025503_AddSponsor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201407310925086_addedGroupPhoto.cs" />
+    <Compile Include="Migrations\201407310925086_addedGroupPhoto.Designer.cs">
+      <DependentUpon>201407310925086_addedGroupPhoto.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -213,6 +217,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201407231025503_AddSponsor.resx">
       <DependentUpon>201407231025503_AddSponsor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201407310925086_addedGroupPhoto.resx">
+      <DependentUpon>201407310925086_addedGroupPhoto.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

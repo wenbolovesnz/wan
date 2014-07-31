@@ -13,6 +13,7 @@ using FormBuilder.Data.Contracts;
 using Microsoft.Web.WebPages.OAuth;
 using Microsoft.WindowsAzure;
 using Microsoft.WindowsAzure.StorageClient;
+using Wan.Controllers.ApiControllers;
 using Wan.Services;
 using WebMatrix.WebData;
 using Wan.Models;
@@ -526,6 +527,72 @@ namespace Wan.Controllers
                     _applicationUnit.SaveChanges();
 
                     return Json(new { succeeded = true, imageFile = urlstring });
+                }
+            }
+            catch (Exception ex)
+            {
+                //log error todo
+                return Json(new { succeeded = false });
+            }
+
+            return Json(new { succeeded = false });
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult UploadGroupPhoto()
+        {
+            try
+            {
+                var uploadedFile = Request.Files["uploadInputElement"];
+                var xFileName = Request.Headers["X-File-Name"];
+                var formFilename = uploadedFile.FileName;
+                Stream inputStream = uploadedFile.InputStream;
+                var fileName = xFileName ?? formFilename;
+                int groupId;
+                int.TryParse(Request.Form["groupId"], out groupId);
+                var group = _applicationUnit.GroupRepository.Get(m => m.Id == groupId, null, "UserGroupRoles").First();
+                var currentUser = _applicationUnit.UserRepository.GetByID(WebSecurity.CurrentUserId);
+                var contentType = Request.ContentType;
+                var fileValidationService = new FileValidationService();
+                var groupSecService = new GroupSecurityService();
+
+                if (fileValidationService.ValidateUpload(fileName) && Request.ContentLength < 550000 && groupSecService.IsUserGroupManager(currentUser, group.UserGroupRoles.ToList()))
+                {
+                    var storageAccount = CloudStorageAccount.Parse(ConfigurationManager.ConnectionStrings["StorageConnection"].ConnectionString);
+
+                    var blobStorage = storageAccount.CreateCloudBlobClient();
+                    CloudBlobContainer container = blobStorage.GetContainerReference("productimages");
+                    if (container.CreateIfNotExist())
+                    {
+                        // configure container for public access
+                        var permissions = container.GetPermissions();
+                        permissions.PublicAccess = BlobContainerPublicAccessType.Container;
+                        container.SetPermissions(permissions);
+                    }
+
+                    string uniqueBlobName = string.Format("productimages/image_{0}{1}",
+                                                                Guid.NewGuid().ToString(), Path.GetExtension(uploadedFile.FileName));
+                    CloudBlockBlob blob = blobStorage.GetBlockBlobReference(uniqueBlobName);
+                    blob.Properties.ContentType = uploadedFile.ContentType;
+                    blob.UploadFromStream(uploadedFile.InputStream);
+
+
+                    var urlstring = blob.Uri.ToString();
+
+                    var newGroupPhoto = new GroupPhoto()
+                    {
+                        GroupId = groupId,
+                        Url = urlstring
+                    };
+
+                    group.GroupPhotos.Add(newGroupPhoto);
+
+
+                    _applicationUnit.GroupRepository.Update(group);
+                    _applicationUnit.SaveChanges();
+
+                    return Json(new { succeeded = true, groupPhoto = new GroupPhotoViewModel{ Id = newGroupPhoto.Id, GroupId = groupId, Url = newGroupPhoto.Url} });
                 }
             }
             catch (Exception ex)

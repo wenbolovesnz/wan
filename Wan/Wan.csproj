@@ -272,6 +272,7 @@
     <Content Include="AppScripts\Controllers\Event.js" />
     <Content Include="AppScripts\Controllers\Events.js" />
     <Content Include="AppScripts\Controllers\GroupDetails.js" />
+    <Content Include="AppScripts\Controllers\GroupPhoto.js" />
     <Content Include="AppScripts\Controllers\Home.js" />
     <Content Include="AppScripts\Controllers\Members.js" />
     <Content Include="AppScripts\Controllers\MenuAfter.js" />
@@ -286,6 +287,7 @@
     <Content Include="AppScripts\startSignalR.js" />
     <Content Include="AppScripts\Templates\CreateGroup.html" />
     <Content Include="AppScripts\Templates\event.html" />
+    <Content Include="AppScripts\Templates\groupPhotoTab.htm" />
     <Content Include="AppScripts\Templates\NotificationMessages.html" />
     <Content Include="AppScripts\Templates\Directives\Uploader.html" />
     <Content Include="AppScripts\Templates\EventsTab.html" />

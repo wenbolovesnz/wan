@@ -1,0 +1,35 @@
+﻿
+
+<div class="row" data-ng-show="isCurrentUserManager">
+	<div class="col-sm-7">
+		<div class="col-sm-7"><label for="uploadInputElement">Upload photo (Max-size:500k)</label></div>
+		<div class="col-sm-5"><input type="file" id="uploadInputElement" name="uploadInputElement" /></div>
+		 
+	</div>
+	<div class="col-sm-3">
+		<input type="button" value="upload" class="btn btn-sm btn-danger" 
+			data-ng-disabled="uploadingOn" data-ng-click="uploadGroupPhoto()"/> 
+		<span class="error" data-ng-show="errorMsg != null">{{errorMsg}}</span>   
+		<a id="spinner" class="fa fa-spinner fa-spin" data-ng-show="uploadingOn"></a>
+	</div>	
+</div>
+
+<div class="row" style="padding: 5px;">
+	<div class="col-sm-3" data-ng-repeat="photo in group.groupPhotos">
+		<a href="{{photo.url}}" target="_blank" class="pull-left thumbnail">
+			<img class="media-object" alt="defaultIcona" 
+			     imageurl 
+			     fallbackiconurl="/Content/images/defaultUserIcon50x50.jpg"
+			     userdata="{{photo.url}}"
+			     sizedata="?width=150&height=150">
+		</a>
+		<div class="btn-group">
+		  <button type="button" class="btn btn-warning btn-sm">Actions</button>
+		  <button type="button" class="btn btn-warning btn-sm dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+		  <ul class="dropdown-menu">
+			<li><a href="javascript:void(0)" data-ng-click="removePhotoFromGroup(photo)">Remove</a></li>
+			<li><a href="javascript:void(0)" data-ng-click="setAsBackgroupImage(photo)">Set as background</a></li>
+		  </ul>
+		</div>
+	</div>
+</div>

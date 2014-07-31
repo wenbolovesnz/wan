@@ -54,6 +54,7 @@
     <Compile Include="Entities\Event.cs" />
     <Compile Include="Entities\EventMessage.cs" />
     <Compile Include="Entities\Group.cs" />
+    <Compile Include="Entities\GroupPhoto.cs" />
     <Compile Include="Entities\JoinGroupRequest.cs" />
     <Compile Include="Entities\Membership.cs" />
     <Compile Include="Entities\OAuthMembership.cs" />

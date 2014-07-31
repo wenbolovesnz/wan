@@ -53,6 +53,12 @@ namespace Wan.Services
                         AboutMe = u.AboutMe,
                         ProfileImage = u.ProfileImage,
                         IsGroupManager = group.UserGroupRoles.SingleOrDefault(ugr => ugr.UserId == u.Id && ugr.RoleId == (int)RoleTypes.GroupManager) != null
+                    }).ToList(),
+                    GroupPhotos = group.GroupPhotos.Select(g => new GroupPhotoViewModel()
+                    {
+                        Id = g.Id,
+                        Url = g.Url,
+                        GroupId = g.GroupId
                     }).ToList()
                 };
         }

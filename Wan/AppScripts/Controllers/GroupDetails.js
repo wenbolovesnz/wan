@@ -197,6 +197,8 @@ wan.controller('GroupDetailsCtrl',
                 array.splice(index, 1);
             }
         };
+
+
         
          
         //---event date

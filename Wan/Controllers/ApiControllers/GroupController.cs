@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Configuration;
 using System.IO;
 using System.Linq;
@@ -92,6 +93,7 @@ namespace Wan.Controllers.ApiControllers
 
                 this.updateGroupEvents(group, groupViewModel, currentUser);
                 this.updateGroupManagers(group, groupViewModel);
+                this.UpdateGroupPhotos(group, groupViewModel, currentUser);
             }
 
             if (group.Users.Count > groupViewModel.Users.Count && isCurrentUserManager)
@@ -110,6 +112,19 @@ namespace Wan.Controllers.ApiControllers
             return _modelFactoryService.Create(group);
         }
 
+        private void UpdateGroupPhotos(Group group, GroupViewModel groupViewModel, User currentUser)
+        {
+
+            if (group.GroupPhotos.Count > groupViewModel.GroupPhotos.Count)
+            {
+                var toRemove = group.GroupPhotos.Select(m => m.Id).Except(groupViewModel.GroupPhotos.Select(m => m.Id)).ToList();
+                foreach (var i in toRemove)
+                {
+                    var eventToRemove = group.GroupPhotos.Single(m => m.Id == i);
+                    group.GroupPhotos.Remove(eventToRemove);
+                }
+            }
+        }
         private void updateGroupEvents(Group group, GroupViewModel groupViewModel, User currentUser)
         {
             var eventToCreate = groupViewModel.Events.SingleOrDefault(m => m.Id == 0);
@@ -271,11 +286,13 @@ namespace Wan.Controllers.ApiControllers
         {
             Users = new List<UserViewModel>();
             Events = new List<EventViewModel>();
+            GroupPhotos = new List<GroupPhotoViewModel>();
         }
 
         public ICollection<UserViewModel> GroupManagers { get; set; } 
         public ICollection<UserViewModel> Users { get; set; }
         public ICollection<EventViewModel> Events { get; set; }
+        public ICollection<GroupPhotoViewModel> GroupPhotos { get; set; }
 
         public int Id { get; set; }
         public string GroupName { get; set; }
@@ -283,6 +300,17 @@ namespace Wan.Controllers.ApiControllers
         public int CreatedById { get; set; }
         public string Description { get; set; }
         public string GroupImage { get; set; }
+    }
 
+    public class GroupPhotoViewModel
+    {
+        public GroupPhotoViewModel()
+        {
+            
+        }
+
+        public int Id { get; set; }
+        public string Url { get; set; }
+        public int GroupId { get; set; }
     }
 }

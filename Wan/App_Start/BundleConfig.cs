@@ -39,6 +39,7 @@ namespace Wan
                                     "~/AppScripts/Controllers/Sponsor.js",
                                     "~/AppScripts/Controllers/User.js",
                                     "~/AppScripts/Controllers/Members.js",
+                                    "~/AppScripts/Controllers/GroupPhoto.js",
                                     "~/AppScripts/Controllers/NotificationMessages.js",
                                     "~/AppScripts/startSignalR.js",
                                     "~/Scripts/bootstrap.js",

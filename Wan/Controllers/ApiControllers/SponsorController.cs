@@ -102,9 +102,13 @@ namespace Wan.Controllers.ApiControllers
             var blobStorage = storageAccount.CreateCloudBlobClient();
             CloudBlobContainer container = blobStorage.GetContainerReference("productimages");
 
-            var imagesContainer = blobStorage.GetContainerReference("productimages");
-            var oldImageToDelete = imagesContainer.GetBlockBlobReference(sponsor.PhotoUrl);
-            oldImageToDelete.DeleteIfExists();
+            if (sponsor.PhotoUrl != null)
+            {
+                var imagesContainer = blobStorage.GetContainerReference("productimages");
+                var oldImageToDelete = imagesContainer.GetBlockBlobReference(sponsor.PhotoUrl);
+                oldImageToDelete.DeleteIfExists();    
+            }
+            
 
             _applicationUnit.SponsoRepository.Delete(sponsor);
             _applicationUnit.SaveChanges();

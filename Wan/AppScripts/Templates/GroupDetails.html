@@ -7,18 +7,6 @@
           <li data-ng-class="{active:eventsTab}"><a href="javascript:void(0)" data-ng-click="showEventsTab()">Events</a></li>
           <li data-ng-class="{active:sponsorsTab}"><a href="javascript:void(0)" data-ng-click="showSponsorsTab()">Sponsors</a></li>
           <li data-ng-class="{active:photosTab}"><a href="javascript:void(0)" data-ng-click="showPhotosTab()">Photos</a></li>
-          <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-              More <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-              <li><a href="#">Action</a></li>
-              <li><a href="#">Another action</a></li>
-              <li><a href="#">Something else here</a></li>
-              <li class="divider"></li>
-              <li><a href="#">Report this group</a></li>
-            </ul>
-          </li>
         </ul>
     </div>
     <div class="col-xs-3">
@@ -286,7 +274,8 @@
     </div>
 </div>
 <div class="row" data-ng-show="photosTab">
-    photos tab
+        <div data-ng-include="'AppScripts/Templates/groupPhotoTab.htm'" 
+         data-ng-controller="groupPhotoCtrl"></div>
 </div>
 
     
