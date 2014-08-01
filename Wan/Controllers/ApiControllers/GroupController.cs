@@ -120,8 +120,12 @@ namespace Wan.Controllers.ApiControllers
                 var toRemove = group.GroupPhotos.Select(m => m.Id).Except(groupViewModel.GroupPhotos.Select(m => m.Id)).ToList();
                 foreach (var i in toRemove)
                 {
-                    var eventToRemove = group.GroupPhotos.Single(m => m.Id == i);
-                    group.GroupPhotos.Remove(eventToRemove);
+                    var groupPhotoRemove = _applicationUnit.GroupPhotoRepository.GetByID(i);
+                    if (groupPhotoRemove.Url != null)
+                    {
+                        this.removeImageFromAzure(groupPhotoRemove.Url);
+                    }
+                    _applicationUnit.GroupPhotoRepository.Delete(groupPhotoRemove);
                 }
             }
         }
@@ -258,6 +262,16 @@ namespace Wan.Controllers.ApiControllers
             }
 
             return new { succeeded = false };
+        }
+
+        private void removeImageFromAzure(string imageUrl)
+        {
+
+            var storageAccount = CloudStorageAccount.Parse(ConfigurationManager.ConnectionStrings["StorageConnection"].ConnectionString);
+            var blobStorage = storageAccount.CreateCloudBlobClient();
+            var imagesContainer = blobStorage.GetContainerReference("productimages");
+            var oldImageToDelete = imagesContainer.GetBlockBlobReference(imageUrl);            
+            oldImageToDelete.DeleteIfExists();            
         }
 
     }

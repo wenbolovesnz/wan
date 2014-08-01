@@ -14,6 +14,7 @@ namespace FormBuilder.Data
         private IGenericRepository<Event> _eventRepository;
         private IGenericRepository<JoinGroupRequest> _joinGroupRequestRepository;
         private IGenericRepository<Sponsor> _sponsorRepository;
+        private IGenericRepository<GroupPhoto> _groupPhotoRepository;
 
         public ApplicationUnit(IGenericRepository<User> userRepository, 
                                IGenericRepository<Role> roleRepository,
@@ -21,6 +22,7 @@ namespace FormBuilder.Data
                                IGenericRepository<Event> eventRepository,
                                IGenericRepository<Sponsor> sponsorRepository,
                                IGenericRepository<JoinGroupRequest> joinGroupRequestRepository,
+                               IGenericRepository<GroupPhoto> groupPhotoRepository,
                                FormBuilderContext formBuilderContext)
         {
             _userRepository = userRepository;
@@ -29,7 +31,13 @@ namespace FormBuilder.Data
             _eventRepository = eventRepository;
             _sponsorRepository = sponsorRepository;
             _joinGroupRequestRepository = joinGroupRequestRepository;
+            _groupPhotoRepository = groupPhotoRepository;
             _context = formBuilderContext;
+        }
+
+        public IGenericRepository<GroupPhoto> GroupPhotoRepository
+        {
+            get { return this._groupPhotoRepository; }
         }
 
         public IGenericRepository<Sponsor> SponsoRepository
