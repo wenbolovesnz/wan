@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using FormBuilder.Business.Entities;
+using FormBuilder.Business.Entities.Enums;
 using FormBuilder.Data.Contracts;
 using WebMatrix.WebData;
 
@@ -32,6 +33,8 @@ namespace Wan.Controllers
                 ViewBag.NickName = currentUser.NickName;
                 ViewBag.CreatedDate = currentUser.CreatedDate;
                 ViewBag.UserImage = currentUser.ProfileImage ?? "/Content/images/defaultUserIcon.jpg";
+                ViewBag.IsAdmin = currentUser.Roles.SingleOrDefault(m => m.RoleId == (int) RoleTypes.GroupManager) !=
+                                  null;
             }               
             return View();
         }

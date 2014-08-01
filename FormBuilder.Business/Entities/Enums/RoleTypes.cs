@@ -8,6 +8,7 @@ namespace FormBuilder.Business.Entities.Enums
 {
     public enum RoleTypes
     {
-        GroupManager = 1
+        GroupManager = 1,
+        Admin = 2
     }
 }

@@ -142,6 +142,14 @@
     <Compile Include="Migrations\201408010505210_addedBackgroundImageForGroup.Designer.cs">
       <DependentUpon>201408010505210_addedBackgroundImageForGroup.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201408010933084_addAdurl.cs" />
+    <Compile Include="Migrations\201408010933084_addAdurl.Designer.cs">
+      <DependentUpon>201408010933084_addAdurl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201408011056546_adSiteUrl.cs" />
+    <Compile Include="Migrations\201408011056546_adSiteUrl.Designer.cs">
+      <DependentUpon>201408011056546_adSiteUrl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -227,6 +235,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201408010505210_addedBackgroundImageForGroup.resx">
       <DependentUpon>201408010505210_addedBackgroundImageForGroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408010933084_addAdurl.resx">
+      <DependentUpon>201408010933084_addAdurl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408011056546_adSiteUrl.resx">
+      <DependentUpon>201408011056546_adSiteUrl.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

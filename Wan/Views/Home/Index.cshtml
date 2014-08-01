@@ -37,7 +37,8 @@ else
                 userSerivce.createdDate = '@ViewBag.CreatedDate';
                 userSerivce.aboutMe = '@ViewBag.AboutMe';     
                 userSerivce.userImage = '@ViewBag.UserImage';     
-                userSerivce.messages = [];     
+            	userSerivce.messages = [];
+            	userSerivce.isAdmin = '@ViewBag.IsAdmin';     
             }
             
             angular.element(document.body).injector().get('docTitleService');

@@ -48,5 +48,7 @@ namespace FormBuilder.Business.Entities
         public string Description { get; set; }
         public int CreatedByUserId { get; set; }
 
+        public string AdUrl { get; set; }
+        public string AdSiteUrl { get; set; }
     }
 }

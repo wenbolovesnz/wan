@@ -6,8 +6,16 @@ wan.controller('EventCtrl',
         $scope.isCurrentUserManager = false;
         $scope.updating = false;
         $scope.isEdit = false;
-                
+        $scope.isAdmin = userService.isAdmin;
+
+        $scope.uploadingOn = false;
+        $scope.errorMsg = null;
+        
         $scope.event = datacontext.event().get({id: $routeParams.eventId}, function(result) {
+
+            $("#eventAd").attr("src", $scope.event.adUrl);
+
+
             $scope.isCurrentUserManager = _.find($scope.event.group.groupManagers, function (u) {
                                                     return u.id == userService.id;
             });
@@ -81,6 +89,38 @@ wan.controller('EventCtrl',
         $scope.cancelEdit = function() {
             $scope.isEdit = false;
         };
+
+        $scope.uploadEventAd = function () {
+            $scope.uploadingOn = true;
+
+            $.ajaxFileUpload(
+                {
+                    url: "Account/UploadEventAd",
+                    secureuri: false,
+                    fileElementId: "uploadInputElement",
+                    dataType: "html",
+                    data: {
+                        eventId: $scope.event.id,
+                        adSiteUrl: $scope.event.adSiteUrl
+                    },
+                    success: function (data, status) {
+                        if (data.succeeded) {
+                            $scope.event.adUrl = data.url;
+                            $("#eventAd").attr("src", $scope.event.adUrl);
+                        } else {
+                            $scope.errorMsg = "Error, your file type maybe not valid, please try again.";
+                        }
+                        $scope.uploadingOn = false;
+                        $scope.$apply();
+                    },
+                    error: function (data, status, e) {
+                        $scope.errorMsg = "Error, your file type maybe not valid, please try again.";
+                        $scope.uploadingOn = false;
+                        $scope.$apply();
+                    }
+                }
+            );
+        }
 
 
     }]);

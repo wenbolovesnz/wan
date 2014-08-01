@@ -41,6 +41,8 @@ namespace Wan.Controllers.ApiControllers
                 EventLocation = eventModel.EventLocation,
                 Name = eventModel.Name,
                 CreatedById = eventModel.CreatedByUserId,                
+                AdUrl = eventModel.AdUrl,
+                AdSiteUrl = eventModel.AdSiteUrl,
                 Sponsors = eventModel.Sponsors.Select(s => new SponsorViewModel()
                 {
                     Id = s.Id,
@@ -196,6 +198,8 @@ namespace Wan.Controllers.ApiControllers
         public IList<EventMessageViewModel> EventMessages { get; set; }
         public IList<SponsorViewModel> Sponsors { get; set; }
         public int CreatedById { get; set; }
+        public string AdUrl { get; set; }
+        public string AdSiteUrl { get; set; }
     }
 
     public class EventMessageViewModel

@@ -604,6 +604,76 @@ namespace Wan.Controllers
             return Json(new { succeeded = false });
         }
 
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public ActionResult UploadEventAd()
+        {
+            try
+            {
+                var uploadedFile = Request.Files["uploadInputElement"];
+                var xFileName = Request.Headers["X-File-Name"];
+                var formFilename = uploadedFile.FileName;
+                Stream inputStream = uploadedFile.InputStream;
+                var fileName = xFileName ?? formFilename;
+                int eventId;
+                int.TryParse(Request.Form["eventId"], out eventId);
+
+                string adSiteUrl = Request.Form["adSiteUrl"];
+
+                var eventDomain = _applicationUnit.EventRepository.GetByID(eventId);
+                var currentUser = _applicationUnit.UserRepository.GetByID(WebSecurity.CurrentUserId);
+                var contentType = Request.ContentType;
+                var fileValidationService = new FileValidationService();
+                var groupSecService = new GroupSecurityService();
+
+                if (fileValidationService.ValidateUpload(fileName) && Request.ContentLength < 550000)
+                {
+                    var storageAccount = CloudStorageAccount.Parse(ConfigurationManager.ConnectionStrings["StorageConnection"].ConnectionString);
+
+                    var blobStorage = storageAccount.CreateCloudBlobClient();
+                    CloudBlobContainer container = blobStorage.GetContainerReference("productimages");
+                    if (container.CreateIfNotExist())
+                    {
+                        // configure container for public access
+                        var permissions = container.GetPermissions();
+                        permissions.PublicAccess = BlobContainerPublicAccessType.Container;
+                        container.SetPermissions(permissions);
+                    }
+
+                    string uniqueBlobName = string.Format("productimages/image_{0}{1}",
+                                                                Guid.NewGuid().ToString(), Path.GetExtension(uploadedFile.FileName));
+                    CloudBlockBlob blob = blobStorage.GetBlockBlobReference(uniqueBlobName);
+                    blob.Properties.ContentType = uploadedFile.ContentType;
+                    blob.UploadFromStream(uploadedFile.InputStream);
+
+
+                    var urlstring = blob.Uri.ToString();
+
+                    if (eventDomain.AdUrl != null)
+                    {
+                        var imagesContainer = blobStorage.GetContainerReference("productimages");
+                        var oldImageToDelete = imagesContainer.GetBlockBlobReference(eventDomain.AdUrl);
+                        oldImageToDelete.DeleteIfExists();
+                    }
+
+                    eventDomain.AdUrl = urlstring;
+                    eventDomain.AdSiteUrl = adSiteUrl;
+                   
+                    _applicationUnit.EventRepository.Update(eventDomain);
+                    _applicationUnit.SaveChanges();
+
+                    return Json(new { succeeded = true, url = urlstring});
+                }
+            }
+            catch (Exception ex)
+            {
+                //log error todo
+                return Json(new { succeeded = false });
+            }
+
+            return Json(new { succeeded = false });
+        }
+
 
         [AllowAnonymous]
         public JsonResult GetUserImage()
