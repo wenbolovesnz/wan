@@ -61,6 +61,7 @@ namespace FormBuilder.Business.Entities
 
         public string GroupImage { get; set; }
         public string ContentType { get; set; }
+        public string BackgroundImage { get; set; }
 
 
 

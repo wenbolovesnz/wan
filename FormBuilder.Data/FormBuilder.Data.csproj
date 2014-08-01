@@ -138,6 +138,10 @@
     <Compile Include="Migrations\201407310925086_addedGroupPhoto.Designer.cs">
       <DependentUpon>201407310925086_addedGroupPhoto.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201408010505210_addedBackgroundImageForGroup.cs" />
+    <Compile Include="Migrations\201408010505210_addedBackgroundImageForGroup.Designer.cs">
+      <DependentUpon>201408010505210_addedBackgroundImageForGroup.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -220,6 +224,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201407310925086_addedGroupPhoto.resx">
       <DependentUpon>201407310925086_addedGroupPhoto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408010505210_addedBackgroundImageForGroup.resx">
+      <DependentUpon>201408010505210_addedBackgroundImageForGroup.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

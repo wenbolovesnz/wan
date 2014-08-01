@@ -24,8 +24,9 @@
             }
         };
 
-        $scope.setAsBackgroupImage = function () {
-
+        $scope.setAsBackgroupImage = function (photo) {
+            $scope.group.backgroundImage = photo.url;
+            $scope.group.$save();
         }
 
         $scope.uploadGroupPhoto = function () {

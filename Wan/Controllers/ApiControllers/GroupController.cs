@@ -90,6 +90,7 @@ namespace Wan.Controllers.ApiControllers
             {
                 group.GroupName = groupViewModel.GroupName;
                 group.Description = groupViewModel.Description;
+                group.BackgroundImage = groupViewModel.BackgroundImage;
 
                 this.updateGroupEvents(group, groupViewModel, currentUser);
                 this.updateGroupManagers(group, groupViewModel);
@@ -314,6 +315,7 @@ namespace Wan.Controllers.ApiControllers
         public int CreatedById { get; set; }
         public string Description { get; set; }
         public string GroupImage { get; set; }
+        public string BackgroundImage { get; set; }
     }
 
     public class GroupPhotoViewModel

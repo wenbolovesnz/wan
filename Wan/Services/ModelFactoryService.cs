@@ -23,6 +23,7 @@ namespace Wan.Services
                     Description = group.Description,
                     CreatedDate = group.CreatedDate,
                     GroupName = group.GroupName,
+                    BackgroundImage = group.BackgroundImage,                    
                     CreatedById = group.CreatedById,
                     Id = group.Id,
                     GroupImage = group.GroupImage ?? "/Content/images/defaultgroup.png",
