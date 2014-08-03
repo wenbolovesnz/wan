@@ -48,7 +48,7 @@ wan.controller('GroupDetailsCtrl',
         
         $scope.isUserInGroup = function (userName) {
             return _.find($scope.group.users, function (u) {
-                return u.userName == userName;
+                return u.userName.toLowerCase() == userName.toLowerCase();
             });
         };
 

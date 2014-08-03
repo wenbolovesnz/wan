@@ -33,7 +33,7 @@ namespace Wan.Controllers
                 ViewBag.NickName = currentUser.NickName;
                 ViewBag.CreatedDate = currentUser.CreatedDate;
                 ViewBag.UserImage = currentUser.ProfileImage ?? "/Content/images/defaultUserIcon.jpg";
-                ViewBag.IsAdmin = currentUser.Roles.SingleOrDefault(m => m.RoleId == (int) RoleTypes.GroupManager) !=
+                ViewBag.IsAdmin = currentUser.Roles.SingleOrDefault(m => m.RoleId == (int) RoleTypes.Admin) !=
                                   null;
             }               
             return View();

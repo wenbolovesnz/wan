@@ -120,6 +120,10 @@ wan.controller('EventCtrl',
                     }
                 }
             );
+        },
+
+        $scope.gotoAdSite = function(url){
+            window.open(url);
         }
 
 

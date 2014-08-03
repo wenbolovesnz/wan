@@ -1,9 +1,9 @@
 ﻿<h3 class="pull-left">Event Details</h3>
 <button type="button" style="margin-top: 10px;" class="btn btn-danger pull-right" data-ng-show="isCurrentUserManager" data-ng-click="showEdit()">Edit</button>
 <div class="clearfix"></div>
-<div class="row" data-ng-display="event.adUrl != null">
+<div class="row" data-ng-show="event.adSiteUrl">
 	<div class="col-sm-12">
-		<a href="{{event.adSiteUrl}}" target="_blank" class="thumbnail" style="text-align: center">
+		<a href="javascript:void(0)" class="thumbnail" style="text-align: center" data-ng-click="gotoAdSite(event.adSiteUrl)">
 			<img class="media-object" alt="loading..." id="eventAd" style="max-height: 150px;"
 			     imageurl 
 			     fallbackiconurl=""
@@ -13,7 +13,7 @@
 	</div>
 </div>
 
-<div class="row" data-ng-display="isAdmin">
+<div class="row" data-ng-show="isAdmin">
 	<div class="col-sm-7">
 		<div class="col-sm-7"><label for="uploadInputElement">Upload photo (Max-size:500k)</label></div>
 		<div class="col-sm-5"><input type="file" id="uploadInputElement" name="uploadInputElement" /></div>
@@ -27,7 +27,7 @@
 	</div>
 
 </div>
-<div class="row">
+<div class="row" data-ng-show="isAdmin">
 	Redirect Url: <input type="text" style="width: 200px;" data-ng-model="event.adSiteUrl"/>
 </div>	
 
