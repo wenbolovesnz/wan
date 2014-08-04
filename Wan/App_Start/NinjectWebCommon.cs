@@ -81,6 +81,7 @@ namespace Wan.App_Start
             kernel.Bind<IGenericRepository<Sponsor>>().To<GenericRepository<Sponsor>>().InRequestScope();
             kernel.Bind<IGenericRepository<JoinGroupRequest>>().To<GenericRepository<JoinGroupRequest>>().InRequestScope();
             kernel.Bind<IGenericRepository<GroupPhoto>>().To<GenericRepository<GroupPhoto>>().InRequestScope();
+            kernel.Bind<IGenericRepository<PersonalMessage>>().To<GenericRepository<PersonalMessage>>().InRequestScope();
         }        
     }
 }

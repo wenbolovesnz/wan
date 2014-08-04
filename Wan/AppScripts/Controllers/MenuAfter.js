@@ -23,6 +23,13 @@
         $http({ method: 'GET', url: '/Account/JoinGroupRequest' }).
               success(function (data, status, headers, config) {
                   $scope.user.messages = data.messages;
+
+                  datacontext.personalMessage().query(function (result) {
+                      _.each(result, function(a) {
+                          $scope.user.messages.push(a);
+                      });                      
+                  });
+
                   // this callback will be called asynchronously
                   // when the response is available
               }).
@@ -30,6 +37,8 @@
                   // called asynchronously if an error occurs
                   // or server returns response with an error status.
               });
+
+
 
         $scope.logout = function () {
             $http({ method: 'POST', url: '/Account/LogOff' }).success(function (data, status, headers, config) {

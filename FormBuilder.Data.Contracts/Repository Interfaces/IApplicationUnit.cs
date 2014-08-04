@@ -15,7 +15,8 @@ namespace FormBuilder.Data.Contracts
         IGenericRepository<Event>   EventRepository { get; }
         IGenericRepository<Sponsor> SponsoRepository { get; }
         IGenericRepository<JoinGroupRequest> JoinGroupRequestRepository { get; }
-        IGenericRepository<GroupPhoto> GroupPhotoRepository { get; } 
+        IGenericRepository<GroupPhoto> GroupPhotoRepository { get; }
+        IGenericRepository<PersonalMessage> PersonalMessageRepository{ get; } 
         void SaveChanges();
     }
 }

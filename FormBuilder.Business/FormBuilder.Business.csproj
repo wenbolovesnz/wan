@@ -58,6 +58,7 @@
     <Compile Include="Entities\JoinGroupRequest.cs" />
     <Compile Include="Entities\Membership.cs" />
     <Compile Include="Entities\OAuthMembership.cs" />
+    <Compile Include="Entities\PersonalMessage.cs" />
     <Compile Include="Entities\Sponsor.cs" />
     <Compile Include="Entities\UserGroupRole.cs" />
     <Compile Include="EntityConfigurations\GroupConfig.cs" />

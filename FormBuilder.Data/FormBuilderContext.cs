@@ -27,6 +27,7 @@ namespace FormBuilder.Data
         public DbSet<JoinGroupRequest> JoinGroupRequests { get; set; }
         public DbSet<Sponsor> Sponsors { get; set; }
         public DbSet<GroupPhoto> GroupPhotos { get; set; }
+        public DbSet<PersonalMessage> PersonalMessages { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

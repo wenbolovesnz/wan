@@ -41,6 +41,12 @@ wan.factory('datacontext',
             });
         }
 
+        function personalMessage() {
+            return $resource('api/PersonalMessage/:id', { id: '@id' }, {
+                update: { method: 'Post' }
+            });
+        }
+
         function event() {
             return $resource('api/Event/:id', { id: '@id' }, {
                 update: { method: 'Post' }
@@ -67,7 +73,8 @@ wan.factory('datacontext',
             updateGroup: updateGroup,
             events: events,
             event: event,
-            user:user,
+            user: user,
+            personalMessage: personalMessage,
             joinGroupRequest: joinGroupRequest
         };
 

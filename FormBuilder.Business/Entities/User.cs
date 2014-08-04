@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.ConstrainedExecution;
 using System.Text;
@@ -14,12 +15,14 @@ namespace FormBuilder.Business.Entities
 
         private ICollection<Group> _groups;
         private ICollection<Event> _events;
+        private ICollection<PersonalMessage> _personalMessages; 
 
         public User()
         {
             _roles = new List<Role>();
             _groups = new List<Group>();
             _events = new List<Event>();
+            _personalMessages = new List<PersonalMessage>();
         }
 
         public int Id { get; set; }
@@ -39,6 +42,12 @@ namespace FormBuilder.Business.Entities
         {
             get { return _events; }
             set { _events = value; }
+        }
+
+        public virtual ICollection<PersonalMessage> PersonalMessages
+        {
+            get { return _personalMessages; }
+            set { _personalMessages = value; }
         }
 
         public virtual ICollection<Role> Roles

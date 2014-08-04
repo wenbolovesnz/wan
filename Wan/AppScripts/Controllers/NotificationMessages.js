@@ -6,12 +6,43 @@ wan.controller('NotificationMessagesCtrl',
 
         $scope.processing = true;
         $scope.messages = [];
-        
+        $scope.personalMessages = [];
+
         datacontext.joinGroupRequest().query(function (result) {
-            userService.messages = result;
-            $scope.messages = userService.messages;
-            $scope.processing = false;
+            if (result.length > 0) {
+                userService.messages = result;
+                $scope.messages = userService.messages;
+            }
+            
+            datacontext.personalMessage().query(function (pmrs) {
+                if (pmrs.length > 0) {
+                    userService.personalMessages = pmrs;
+                    $scope.personalMessages = userService.personalMessages;
+                }
+                
+                $scope.processing = false;
+            });
+
         });
+
+
+        $scope.read = function (pm) {
+            $scope.processing = true;
+            pm.isRead = true;
+
+            pm.$update(function () {
+                $scope.processing = false;
+                removeItemFromArray(userService.personalMessages, pm);
+
+                var pmToRemove = _.find(userService.messages, function (m) {
+                    return m.content == pm.content;
+                });
+                if (pmToRemove) {
+                    removeItemFromArray(userService.messages, pmToRemove);
+                }
+                
+            });
+        };
 
         $scope.accept = function(message) {
             $scope.processing = true;

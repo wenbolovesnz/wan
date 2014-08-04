@@ -67,14 +67,13 @@ namespace Wan.Controllers.ApiControllers
         public JoinGroupRequestViewModel Update(int id, [FromBody] JoinGroupRequestViewModel joinGroupRequestViewModel)
         {
 
-            var joinGroupRequest = _applicationUnit.JoinGroupRequestRepository.Get(m => m.Id == id, null, "User").First();
+            var joinGroupRequest = _applicationUnit.JoinGroupRequestRepository.Get(m => m.Id == id, null, "User, Group").First();
             var group = _applicationUnit.GroupRepository.GetByID(joinGroupRequest.GroupId);
 
             if (group.UserGroupRoles.Select(m => m.UserId).Contains(WebSecurity.CurrentUserId))
             {
                 try
                 {
-
                     joinGroupRequest.IsApproved = joinGroupRequestViewModel.IsApproved;
                     joinGroupRequest.IsProcessed = true;
                     joinGroupRequest.DecisionDate = System.DateTime.Now;
@@ -90,6 +89,22 @@ namespace Wan.Controllers.ApiControllers
                     }
 
                     _applicationUnit.JoinGroupRequestRepository.Update(joinGroupRequest);
+
+
+                    string content = "";
+                    if (joinGroupRequest.IsApproved)
+                    {
+                        content = "Good news, your request to join group " + joinGroupRequest.Group.GroupName +
+                                  " was approved. Now you can join all the events in this group.";
+                    }
+                    else
+                    {
+                        content = "Sorry, your request to join group " + joinGroupRequest.Group.GroupName +
+                                  " was declined.";
+                    }
+
+                    PersonalMessageService.CreateMessageFor(joinGroupRequest.UserId, WebSecurity.CurrentUserId, content, _applicationUnit);
+
                     _applicationUnit.SaveChanges();
                 }
                 catch (Exception ex)

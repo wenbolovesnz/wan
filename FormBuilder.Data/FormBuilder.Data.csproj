@@ -150,6 +150,10 @@
     <Compile Include="Migrations\201408011056546_adSiteUrl.Designer.cs">
       <DependentUpon>201408011056546_adSiteUrl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201408040910404_addedPersonalMessage.cs" />
+    <Compile Include="Migrations\201408040910404_addedPersonalMessage.Designer.cs">
+      <DependentUpon>201408040910404_addedPersonalMessage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -241,6 +245,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201408011056546_adSiteUrl.resx">
       <DependentUpon>201408011056546_adSiteUrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408040910404_addedPersonalMessage.resx">
+      <DependentUpon>201408040910404_addedPersonalMessage.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

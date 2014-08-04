@@ -15,6 +15,7 @@ namespace FormBuilder.Data
         private IGenericRepository<JoinGroupRequest> _joinGroupRequestRepository;
         private IGenericRepository<Sponsor> _sponsorRepository;
         private IGenericRepository<GroupPhoto> _groupPhotoRepository;
+        private IGenericRepository<PersonalMessage> _personalMessageRepository; 
 
         public ApplicationUnit(IGenericRepository<User> userRepository, 
                                IGenericRepository<Role> roleRepository,
@@ -23,6 +24,7 @@ namespace FormBuilder.Data
                                IGenericRepository<Sponsor> sponsorRepository,
                                IGenericRepository<JoinGroupRequest> joinGroupRequestRepository,
                                IGenericRepository<GroupPhoto> groupPhotoRepository,
+                               IGenericRepository<PersonalMessage> personalMessageRepository,
                                FormBuilderContext formBuilderContext)
         {
             _userRepository = userRepository;
@@ -32,7 +34,13 @@ namespace FormBuilder.Data
             _sponsorRepository = sponsorRepository;
             _joinGroupRequestRepository = joinGroupRequestRepository;
             _groupPhotoRepository = groupPhotoRepository;
+            _personalMessageRepository = personalMessageRepository;
             _context = formBuilderContext;
+        }
+
+        public IGenericRepository<PersonalMessage> PersonalMessageRepository
+        {
+            get { return this._personalMessageRepository; }
         }
 
         public IGenericRepository<GroupPhoto> GroupPhotoRepository
