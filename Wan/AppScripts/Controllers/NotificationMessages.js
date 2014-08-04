@@ -4,12 +4,13 @@ wan.controller('NotificationMessagesCtrl',
     function ($scope, datacontext, $location, userService) {
 
 
-        $scope.processing = false;
+        $scope.processing = true;
         $scope.messages = [];
         
         datacontext.joinGroupRequest().query(function (result) {
             userService.messages = result;
             $scope.messages = userService.messages;
+            $scope.processing = false;
         });
 
         $scope.accept = function(message) {
