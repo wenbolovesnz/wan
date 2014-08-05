@@ -74,6 +74,7 @@ wan.controller('NotificationMessagesCtrl',
 
                     message.$update(function () {
                         $scope.processing = false;
+                        hub.server.sendPersonalMessage(message);
                         removeItemFromArray(userService.messages, message);
                     });
                 }
