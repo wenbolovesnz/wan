@@ -8,6 +8,10 @@
 
         };
 
+        $.connection.joinmeHub.client.newPersonalMessage = function (data) {
+
+        };
+
         $.connection.hub.logging = true;
         $.connection.hub.start();
     }, 1000);

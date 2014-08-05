@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using FormBuilder.Business.Entities;
 using FormBuilder.Data.Contracts;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
 using Wan.Controllers.ApiControllers;
+using Wan.Models;
 using WebMatrix.WebData;
 
 namespace Wan
@@ -47,6 +49,11 @@ namespace Wan
         public void SendGroupMessage(MessageData data)
         {
             Clients.Group(data.GroupName).newGroupMessage(data.SendName + ": " +data.Message);
+        }
+
+        public void SendPersonalMessage(JoinGroupRequestViewModel viewModel)
+        {
+            Clients.All.newPersonalMessage(viewModel);
         }
     }
 

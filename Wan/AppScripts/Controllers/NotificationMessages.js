@@ -1,7 +1,7 @@
 ﻿
 wan.controller('NotificationMessagesCtrl',
-    ['$scope', 'datacontext','$location','userService',
-    function ($scope, datacontext, $location, userService) {
+    ['$scope', 'datacontext','$location','userService', 'hub',
+    function ($scope, datacontext, $location, userService, hub) {
 
 
         $scope.processing = true;
@@ -11,9 +11,13 @@ wan.controller('NotificationMessagesCtrl',
         datacontext.joinGroupRequest().query(function (result) {
             if (result.length > 0) {
                 userService.messages = result;
-                $scope.messages = userService.messages;
+                
+            } else {
+                userService.messages = [];
             }
-            
+
+            $scope.messages = userService.messages;
+
             datacontext.personalMessage().query(function (pmrs) {
                 if (pmrs.length > 0) {
                     userService.personalMessages = pmrs;
@@ -51,6 +55,7 @@ wan.controller('NotificationMessagesCtrl',
             
             message.$update(function() {
                 $scope.processing = false;
+                hub.server.sendPersonalMessage(message);
                 removeItemFromArray(userService.messages, message);
             });
 

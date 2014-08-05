@@ -18,6 +18,13 @@
             }
         });
 
+        hub.on('newPersonalMessage', function (message) {
+                if (message.User.Id == userService.id) {
+                    userService.messages.push(message);
+                    $scope.$apply();
+                }                
+        });
+
         $scope.user = userService;
         
         $http({ method: 'GET', url: '/Account/JoinGroupRequest' }).
@@ -26,7 +33,7 @@
 
                   datacontext.personalMessage().query(function (result) {
                       _.each(result, function(a) {
-                          $scope.user.messages.push(a);
+                          $scope.user.personalMessages.push(a);
                       });                      
                   });
 

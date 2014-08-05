@@ -92,6 +92,7 @@ wan.factory('userService', [function () {
         createdDate: "",
         aboutMe: "",
         userImage: null,
+        personalMessages: [],
         
         isCurrentUserManager: function (username, users) {
             var managerRoleFound = _.find(users, function(user) {
